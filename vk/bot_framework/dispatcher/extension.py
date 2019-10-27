@@ -3,12 +3,17 @@ import typing
 from abc import ABC
 from abc import abstractmethod
 
+from vk.utils.mixins import MetaMixin
+
+if typing.TYPE_CHECKING:
+    from vk.bot_framework.dispatcher.dispatcher import Dispatcher
+
 T = typing.TypeVar("T")
 
 logger = logging.getLogger(__name__)
 
 
-class AbstractExtension(ABC):
+class AbstractExtension(ABC, MetaMixin):
     @abstractmethod
     async def get_events(self) -> typing.List:
         """
@@ -18,7 +23,7 @@ class AbstractExtension(ABC):
         pass
 
     @abstractmethod
-    async def run(self, dp):
+    async def run(self, dp: "Dispatcher"):
         """
         In endless cycle get events from self.get_events function
         and call dispatcher method dp._process_events.
@@ -26,6 +31,8 @@ class AbstractExtension(ABC):
         :return:
         """
         pass
+
+    start = run  # alias
 
 
 class BaseExtension(AbstractExtension, ABC):
@@ -41,9 +48,11 @@ class BaseExtension(AbstractExtension, ABC):
 
 class ExtensionsManager:
     def __init__(
-        self, dp, default_extensions: typing.Dict[str, typing.Type[BaseExtension]]
+        self,
+        dp: "Dispatcher",
+        default_extensions: typing.Dict[str, typing.Type[BaseExtension]],
     ):
-        self.dp = dp
+        self.dp: "Dispatcher" = dp
         self.extensions: typing.Dict[str, typing.Type[BaseExtension]] = {}
 
         self.extensions.update(default_extensions)

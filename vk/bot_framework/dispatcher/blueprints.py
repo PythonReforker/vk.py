@@ -31,9 +31,10 @@ from abc import abstractmethod
 
 from vk.bot_framework.dispatcher.rule import BaseRule
 from vk.types import BotEvent as Event
+from vk.utils.mixins import MetaMixin
 
 
-class HandlerInBlueprint(typing.NamedTuple):
+class HandlerInBlueprint(typing.NamedTuple, MetaMixin):
     coro: typing.Callable
     event_type: Event
     rules: typing.List[BaseRule]
@@ -41,7 +42,7 @@ class HandlerInBlueprint(typing.NamedTuple):
     meta: dict = {}
 
 
-class AbstractBlueprint(ABC):
+class AbstractBlueprint(ABC, MetaMixin):
     @abstractmethod
     def message_handler(
         self,
@@ -80,7 +81,6 @@ class Blueprint(AbstractBlueprint):
 
         self._name = "A yet another blueprint"
         self._description = "Hm..."
-        self._meta: dict = {}  # storage a any information here
 
     @property
     def handlers(self):
@@ -94,10 +94,6 @@ class Blueprint(AbstractBlueprint):
     def description(self) -> str:
         return self._description
 
-    @property
-    def meta(self) -> dict:
-        return self._meta
-
     @name.setter
     def name(self, new_name: str):
         self._name = new_name
@@ -105,10 +101,6 @@ class Blueprint(AbstractBlueprint):
     @description.setter
     def description(self, new_description: str):
         self._description = new_description
-
-    @meta.setter
-    def meta(self, new_meta: dict):
-        self._meta = new_meta
 
     def get_handler(self, handler_coro: typing.Callable):
         """

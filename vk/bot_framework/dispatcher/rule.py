@@ -1,12 +1,13 @@
 import logging
-import typing
 from abc import ABC
 from abc import abstractmethod
+
+from vk.utils.mixins import MetaMixin
 
 logger = logging.getLogger(__name__)
 
 
-class AbstractRule(ABC):
+class AbstractRule(ABC, MetaMixin):
     @abstractmethod
     async def check(self, *args):
         """
@@ -15,12 +16,9 @@ class AbstractRule(ABC):
         :param args:
         :return: True or False. If return 'True' - check next rules or execute handler
         """
-        pass
 
 
 class BaseRule(AbstractRule, ABC):
-    meta = None  # information about rule [special for third-party addons]
-
     async def __call__(self, event, data: dict) -> bool:
         logger.debug(f"Rule {self.__class__.__name__} succesfully called!")
         return await self.check(event, data)
