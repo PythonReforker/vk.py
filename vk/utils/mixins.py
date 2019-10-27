@@ -1,10 +1,9 @@
 """
 Author: https://github.com/aiogram/aiogram/blob/dev-2.x/aiogram/utils/mixins.py
 """
-
-from typing import TypeVar, Type
-
 import contextvars
+from typing import Type
+from typing import TypeVar
 
 T = TypeVar("T")
 
@@ -27,3 +26,19 @@ class ContextInstanceMixin:
                 f"Value should be instance of '{cls.__name__}' not '{type(value).__name__}'"
             )
         cls.__context_instance.set(value)
+
+
+class MetaMixin:
+
+    # default meta tags:
+    # name: str
+    # description: str
+    # deprecated: bool
+
+    # meta = {
+    # "name": "My object which contain meta variable",
+    # "description": "Oh... i don't know..",
+    # "deprecated": False,
+    # }
+
+    meta = None  # information about object special for third-party-addons.
