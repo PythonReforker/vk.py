@@ -9,7 +9,7 @@ class AbstractRule(ABC):
     @abstractmethod
     async def check(self, *args):
         """
-        This method will be called when rules check.
+        This method will call when rules check.
 
         :param args:
         :return: True or False. If return 'True' - check next rules or execute handler
@@ -27,10 +27,10 @@ class BaseRule(AbstractRule, ABC):
 
 class NamedRule(BaseRule, ABC):
     """
-    May be added to rules with RuleFactory and
-    called in handlers by unique key;
+    May be add to list rules with RuleFactory and
+    will call in handlers by unique key;
 
-    @dp.message_handler(unique_key = value)
+    >>> @dp.message_handler(unique_key = value)
 
     """
 
@@ -38,14 +38,23 @@ class NamedRule(BaseRule, ABC):
 
 
 class RuleFactory:
+    """
+    RuleFactory manage your rules.
+    """
+
     def __init__(self, config: dict):
         self.config = config  # dict of all known rules
 
     def setup(self, rule: NamedRule):
+        """
+        Register rule in factory.
+        :param rule:
+        :return:
+        """
         if not issubclass(rule, NamedRule):
             raise RuntimeError("Only NamedRules may be added in rule factory!")
 
-        if rule.key is None:
+        if rule.key is None or not isinstance(rule.key, str):
             raise RuntimeError("Unallowed key for rule")
 
         self.config.update({rule.key: rule})
