@@ -49,17 +49,17 @@ class VK(ContextInstanceMixin):
         :param AbstractEventLoop loop: asyncio event loop, uses in Task manager/dispatcher extensions/etc.
         :param ClientSession client: aiohttp client session
         """
-        self.access_token = access_token
-        self.loop = loop if loop is not None else asyncio.get_event_loop()
-        self.client = (
+        self.access_token: str = access_token
+        self.loop: asyncio.AbstractEventLoop = loop if loop is not None else asyncio.get_event_loop()
+        self.client: ClientSession = (
             client
             if client is not None and isinstance(client, ClientSession)
             else ClientSession(json_serialize=JSON_LIBRARY.dumps)
         )
 
-        self.error_dispatcher = APIErrorDispatcher(self)
+        self.error_dispatcher: APIErrorDispatcher = APIErrorDispatcher(self)
 
-        self.__api_object = self.__get_api()
+        self.__api_object: API = self.__get_api()
         VK.set_current(self)
 
     async def _api_request(
