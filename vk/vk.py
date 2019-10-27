@@ -142,6 +142,17 @@ class VK(ContextInstanceMixin):
     @classmethod
     @asynccontextmanager
     async def with_token(cls: T["VK"], access_token: str) -> "VK":
+        """
+        Access VKAPI in one `async with` block.
+
+        >>> async with VK.with_token("my_token") as vk:  # type: VK
+        >>>     result = await vk.api_request("status.get")
+        >>>     print(result)
+        >>>     print(vk.client.closed)  # False
+        >>> print(vk.client.closed)  # True
+        :param access_token:
+        :return:
+        """
         vk = cls(access_token=access_token)
         yield vk
         await vk.close()
