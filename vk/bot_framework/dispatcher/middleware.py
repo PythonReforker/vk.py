@@ -4,6 +4,7 @@ from abc import ABC
 from abc import abstractmethod
 
 from .handler import SkipHandler
+from vk.utils.mixins import MetaMixin
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +48,7 @@ class MiddlewareManager:
             await middleware.post_process_event()
 
 
-class AbstractMiddleware(ABC):
+class AbstractMiddleware(ABC, MetaMixin):
     @abstractmethod
     async def pre_process_event(self, event, data: dict) -> dict:
         """
@@ -68,8 +69,6 @@ class AbstractMiddleware(ABC):
 
 
 class BaseMiddleware(AbstractMiddleware, ABC):
-    meta = None
-
     def __init__(self):
         self._manager = None
         self._configured = False
