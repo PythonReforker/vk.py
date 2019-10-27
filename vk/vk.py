@@ -29,6 +29,8 @@ try:
 except ImportError:
     uvloop = None
 
+T = typing.TypeVar("T")
+
 
 class VK(ContextInstanceMixin):
     """
@@ -139,7 +141,7 @@ class VK(ContextInstanceMixin):
 
     @classmethod
     @asynccontextmanager
-    async def with_token(cls, access_token: str):
+    async def with_token(cls: T["VK"], access_token: str) -> "VK":
         vk = cls(access_token=access_token)
         yield vk
         await vk.close()
@@ -153,5 +155,10 @@ class VK(ContextInstanceMixin):
             await self.client.close()
 
     def __del__(self):
-        self.loop.create_task(self.close())
-        self.loop.close()
+        """
+        Will call when python interpreter will try free memory.
+        :return:
+        """
+        if not self.loop.is_closed():
+            self.loop.create_task(self.close())
+            self.loop.close()
