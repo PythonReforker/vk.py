@@ -70,8 +70,7 @@ class AbstractMiddleware(ABC, MetaMixin):
 
 class BaseMiddleware(AbstractMiddleware, ABC):
     def __init__(self):
-        self._manager = None
-        self._configured = False
+        self._configured: bool = False
 
     def is_configured(self) -> bool:
         return self._configured
