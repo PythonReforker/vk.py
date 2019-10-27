@@ -1,5 +1,6 @@
 """
-Easy to learn, fast to code, built on vk.py.
+VK bot framework, easy to learn, fast to code, built on vk.py.
+Designed specially for heavy loads.
 """
 from .dispatcher import Dispatcher
 from .dispatcher.handler import SkipHandler
