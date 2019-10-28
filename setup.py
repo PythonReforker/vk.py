@@ -1,6 +1,6 @@
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
@@ -26,5 +26,5 @@ setuptools.setup(
             "uvkpy @ https://github.com/prostomarkeloff/uvkpy/archive/master.zip"
         ],
     },
-    install_requires=["aiohttp", "pydantic", "watchgod", "async-generator"],
+    install_requires=["aiohttp", "pydantic", "watchgod", 'async-generator;python_version<"3.7"', 'contextvars;python_version<"3.7"'],
 )
