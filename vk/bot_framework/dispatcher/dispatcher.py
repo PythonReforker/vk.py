@@ -316,7 +316,7 @@ class Dispatcher(ContextInstanceMixin):
                             obj, data
                         )  # if execute hanlder func
                         # return non-False value, other handlers doesn`t be executed.
-                        if result:
+                        if result is not False:
                             logger.debug(
                                 f"Event handler ({handler.handler.__name__}) successfully executed. Other "
                                 f"handlers doesn`t be executed..."

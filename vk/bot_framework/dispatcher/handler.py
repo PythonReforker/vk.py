@@ -25,10 +25,11 @@ class BaseHandler(abc.ABC, MetaMixin):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    async def execute_handler(self, *args):
+    async def execute_handler(self, *args) -> typing.Union[typing.Any, bool]:
         """
         Execute handler (after handler rules.)
         args - (event, data)
+        If return False - check next handlers.
         """
 
 
@@ -84,15 +85,13 @@ class Handler(BaseHandler):
                     result = await rule(*args)
                 if not result:
                     _execute = False
-                    break
+                    return False
                 if isinstance(result, dict):
                     args[1].update(result)
                     data_.set(args[1])
                 _execute = True
 
             if _execute:
-                await self.handler(*args)
-                return True
+                return await self.handler(*args)
         else:
-            await self.handler(*args)
-            return True
+            return await self.handler(*args)
