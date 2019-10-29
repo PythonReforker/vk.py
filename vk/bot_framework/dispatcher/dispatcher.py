@@ -308,8 +308,12 @@ class Dispatcher(ContextInstanceMixin):
                     handler.event_type.value == ev.type
                 ):  # if hanlder type is equal event pydantic model.
                     try:
+                        if ev.type == "message_new":
+                            obj = ev.object.message
+                        else:
+                            obj = ev.object
                         result = await handler.execute_handler(
-                            ev.object, data
+                            obj, data
                         )  # if execute hanlder func
                         # return non-False value, other handlers doesn`t be executed.
                         if result:
