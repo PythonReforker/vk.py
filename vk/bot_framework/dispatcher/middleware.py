@@ -33,6 +33,9 @@ class MiddlewareManager:
         _skip_handler = False
         for middleware in self.middlewares:
             try:
+                has = getattr(middleware, "pre_process_event", None)
+                if has is None:
+                    continue
                 data = await middleware.pre_process_event(event, data)
             except SkipHandler:
                 logger.debug(
@@ -43,13 +46,30 @@ class MiddlewareManager:
 
         return _skip_handler, data
 
-    async def trigger_post_process_middlewares(self):
+    async def trigger_post_process_middlewares(self, result: typing.Any):
+        """
+
+        :param result: result of handler work
+        :return:
+        """
         for middleware in self.middlewares:
-            await middleware.post_process_event()
+            has = getattr(middleware, "post_process_event", None)
+            if has is None:
+                continue
+            try:
+                await middleware.post_process_event(result)
+            except SkipHandler:
+                logger.debug(
+                    f"Middleware {middleware.__class__.__name__} skip handler!"
+                )
+                break  # skip other middlewares when middleware skip handler
 
 
 class AbstractMiddleware(ABC, MetaMixin):
-    @abstractmethod
+    possible_hooks = ["pre_process_event", "post_process_event"]
+
+    # you should override hooks.
+
     async def pre_process_event(self, event, data: dict) -> dict:
         """
         Called before checking filters and execute handler
@@ -59,8 +79,7 @@ class AbstractMiddleware(ABC, MetaMixin):
         """
         pass
 
-    @abstractmethod
-    async def post_process_event(self) -> None:
+    async def post_process_event(self, result: typing.Any) -> None:
         """
         Called after handler
         :return:

@@ -294,6 +294,7 @@ class Dispatcher(ContextInstanceMixin):
         # returns service value '_skip_handler' and data variable (check upper).
 
         data_.set(data)
+        result = False
 
         logger.debug(f"Pre-process middlewares return this data: {data}")
         logger.debug(f"Pre-process middlewares result of skip_handler: {_skip_handler}")
@@ -326,8 +327,8 @@ class Dispatcher(ContextInstanceMixin):
                         logger.exception(
                             f"Error in handler ({handler.handler.__name__}):"
                         )
-
-        await self._middleware_manager.trigger_post_process_middlewares()
+        if not _skip_handler and result is not False:
+            await self._middleware_manager.trigger_post_process_middlewares(result)
         # trigger post_process_event funcs in middlewares.
 
     async def _process_events(self, events: typing.List[dict]):
