@@ -141,7 +141,7 @@ class VK(ContextInstanceMixin):
 
     @classmethod
     @asynccontextmanager
-    async def with_token(cls: T["VK"], access_token: str) -> "VK":
+    async def with_token(cls: T, access_token: str) -> "VK":
         """
         Access VKAPI in one `async with` block.
 
