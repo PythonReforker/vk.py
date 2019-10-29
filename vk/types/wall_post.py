@@ -1,8 +1,11 @@
-from .base import BaseModel
-from .attachments import Like, Repost, Attachments, Geo
+import typing
 
 from .additional import PostSource
-import typing
+from .attachments import Attachment
+from .attachments import Geo
+from .attachments import Like
+from .attachments import Repost
+from .base import BaseModel
 
 # https://vk.com/dev/objects/post
 
@@ -28,7 +31,7 @@ class WallPost(BaseModel):
     reposts: Repost = None
     post_type: str = None
     post_source: PostSource = None
-    attachments: Attachments = None
+    attachments: typing.List[Attachment] = None
     geo: Geo = None
     signer_id: int = None
     copy_history: typing.Any = None
