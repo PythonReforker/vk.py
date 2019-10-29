@@ -1,16 +1,15 @@
 from enum import Enum
-from vk.types.base import BaseModel
-from .events_list import Event as events
-from . import events_objects as EventsObjects
-
-from vk.types.message import Message
-from vk.types.attachments import Photo
-from vk.types.attachments import Audio
-from vk.types.attachments import Video
-
-from vk.types.wall_post import WallPost
 
 import pydantic
+
+from . import events_objects as EventsObjects
+from .events_list import Event as events
+from vk.types.attachments import Audio
+from vk.types.attachments import Photo
+from vk.types.attachments import Video
+from vk.types.base import BaseModel
+from vk.types.message import Message
+from vk.types.wall_post import WallPost
 
 # https://vk.com/dev/groups_events
 
@@ -22,7 +21,7 @@ class BaseEvent(BaseModel):
 
 class MessageNew(BaseEvent):
     type: str = None
-    object: Message = None
+    object: EventsObjects.MessageNew = None
 
 
 class MessageReply(MessageNew):

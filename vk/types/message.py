@@ -49,6 +49,7 @@ class Message(BaseModel):
     action: MessageAction = None
     fwd_messages: typing.List["Message"] = []
     reply_message: "Message" = None
+    is_cropped: bool = None
 
     @staticmethod
     def _separate_message(text: str) -> list:

@@ -1,14 +1,20 @@
-from vk.types.base import BaseModel
-
-from vk.types.wall_comment import WallComment
-from vk.types.attachments.topic import TopicComment
-
-from vk.types.additional import JoinType, BlockReason, AdminLevel
-from vk.types.attachments import Photo
-
 import typing
-
 from enum import Enum
+
+from vk.types.additional import AdminLevel
+from vk.types.additional import BlockReason
+from vk.types.additional import JoinType
+from vk.types.attachments import Photo
+from vk.types.attachments.topic import TopicComment
+from vk.types.base import BaseModel
+from vk.types.client_info import ClientInfo
+from vk.types.message import Message
+from vk.types.wall_comment import WallComment
+
+
+class MessageNew(BaseModel):
+    message: Message = None
+    client_info: ClientInfo = None
 
 
 class MessageAllow(BaseModel):

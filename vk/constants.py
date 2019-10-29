@@ -4,7 +4,7 @@ A file which contains all project constants.
 from vk.utils.json import AbstractJsonLibrary
 from vk.utils.json import JsonLibrary
 
-API_VERSION: str = "5.101"  # current api version https://vk.com/dev/versions
+API_VERSION: str = "5.103"  # current api version https://vk.com/dev/versions
 API_LINK: str = "https://api.vk.com/method/"  # link to access API
 
 try:
