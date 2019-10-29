@@ -26,14 +26,18 @@ class ButtonType(Enum):
 
 
 class Keyboard:
-    def __init__(self, one_time: bool):
+    def __init__(self, one_time: bool, inline: bool = False):
         """
 
         :param one_time:
         """
         self.one_time = one_time
         self.buttons = [[]]
-        self.keyboard = {"one_time": one_time, "buttons": self.buttons}
+        self.keyboard = {
+            "one_time": one_time,
+            "buttons": self.buttons,
+            "inline": inline,
+        }
 
     @staticmethod
     def generate_payload(payload: dict) -> str:
