@@ -127,7 +127,7 @@ class Keyboard:
 
         self._add_button(action)
 
-    def add_vkapps_button(self, app_id: int, owner_id: int, payload: dict = None):
+    def add_vkapps_button(self, app_id: int, owner_id: int, label: str, payload: dict = None):
         """
 
         :param app_id:
@@ -143,6 +143,7 @@ class Keyboard:
                 "app_id": app_id,
                 "owner_id": owner_id,
                 "payload": payload,
+                "label": label,
             }
         }
 
