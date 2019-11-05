@@ -60,9 +60,8 @@ class VK(ContextInstanceMixin):
         )
 
         self.error_dispatcher: APIErrorDispatcher = APIErrorDispatcher(self)
-
-        self.__api_object: API = self.__get_api()
-        VK.set_current(self)
+        self.__api_object = self.__get_api()
+        self.set_current(self)
 
     async def _api_request(
         self,
