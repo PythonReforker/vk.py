@@ -2,6 +2,7 @@ import logging
 
 from ..dispatcher.handler import SkipHandler
 from ..dispatcher.middleware import BaseMiddleware
+from vk import types
 
 logger = logging.getLogger(__name__)
 
@@ -17,13 +18,10 @@ class OnlyMessagesMiddleware(BaseMiddleware):
         "deprecated": False,
     }
 
-    async def pre_process_event(self, event, data: dict) -> dict:
-        if event["type"] != "message_new":
-            logger.info("New message! Handlers don`t skipped.")
+    async def pre_process_event(self, event: types.MessageNew, data: dict) -> dict:
+        if event.type == "message_new":
+            logger.info("New message! Handlers will not be skipped.")
             return data
         else:
-            logger.info("Not message. Handlers skipped.")
+            logger.info("Not message. Handlers will be skipped.")
             raise SkipHandler()
-
-    async def post_process_event(self) -> None:
-        pass

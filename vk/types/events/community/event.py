@@ -17,6 +17,7 @@ from vk.types.wall_post import WallPost
 class BaseEvent(BaseModel):
     group_id: int = None
     type: Enum = None
+    object: BaseModel
 
 
 class MessageNew(BaseEvent):

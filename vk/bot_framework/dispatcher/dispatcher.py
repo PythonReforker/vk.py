@@ -287,6 +287,7 @@ class Dispatcher(ContextInstanceMixin):
         """
         data = {}  # dict for transfer data from middlewares to handlers and filters.
         # examples/bot_framework/simple_middleware.py
+        event = get_event_object(event)  # get event pydantic model.
 
         _skip_handler, data = await self._middleware_manager.trigger_pre_process_middlewares(
             event, data
@@ -303,16 +304,15 @@ class Dispatcher(ContextInstanceMixin):
             not _skip_handler
         ):  # if middlewares don`t skip this handler, dispatcher be check
             # rules and execute handlers.
-            ev = get_event_object(event)  # get event pydantic model.
             for handler in self._handlers:  # check handlers
                 if (
-                    handler.event_type.value == ev.type
+                    handler.event_type.value == event.type
                 ):  # if hanlder type is equal event pydantic model.
                     try:
-                        if ev.type == "message_new":
-                            obj = ev.object.message
+                        if event.type == "message_new":
+                            obj = event.object.message
                         else:
-                            obj = ev.object
+                            obj = event.object
                         result = await handler.execute_handler(
                             obj, data
                         )  # if execute hanlder func

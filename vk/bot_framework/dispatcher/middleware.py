@@ -3,6 +3,7 @@ import typing
 from abc import ABC
 
 from .handler import SkipHandler
+from vk.types import BaseEvent
 from vk.utils.mixins import MetaMixin
 
 logger = logging.getLogger(__name__)
@@ -31,7 +32,7 @@ class MiddlewareManager:
         self.middlewares.append(middleware)
         logger.info(f"Middleware '{middleware.__class__.__name__}' successfully added!")
 
-    async def trigger_pre_process_middlewares(self, event, data: dict):
+    async def trigger_pre_process_middlewares(self, event: BaseEvent, data: dict):
         _skip_handler = False
         for middleware in self.middlewares:
             try:
@@ -72,7 +73,7 @@ class AbstractMiddleware(ABC, MetaMixin):
 
     # you should override hooks.
 
-    async def pre_process_event(self, event, data: dict) -> dict:
+    async def pre_process_event(self, event: BaseEvent, data: dict) -> dict:
         """
         Called before checking filters and execute handler
         :param event:
