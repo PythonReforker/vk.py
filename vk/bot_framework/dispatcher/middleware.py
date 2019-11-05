@@ -1,20 +1,22 @@
 import logging
 import typing
 from abc import ABC
-from abc import abstractmethod
 
 from .handler import SkipHandler
 from vk.utils.mixins import MetaMixin
 
 logger = logging.getLogger(__name__)
 
+if typing.TYPE_CHECKING:
+    from .dispatcher import Dispatcher
+
 
 class MiddlewareManager:
-    def __init__(self, dispatcher):
-        self.dp = dispatcher
+    def __init__(self, dispatcher: "Dispatcher"):
+        self.dp: "Dispatcher" = dispatcher
         self.middlewares: typing.List[BaseMiddleware] = []
 
-    def setup(self, middleware):
+    def setup(self, middleware: "BaseMiddleware"):
         if not isinstance(middleware, BaseMiddleware):
             raise RuntimeError("Middleware must be only instance of 'BaseMiddleware")
 
