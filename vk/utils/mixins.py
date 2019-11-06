@@ -41,4 +41,4 @@ class MetaMixin:
     # "deprecated": False,
     # }
 
-    meta = None  # information about object special for third-party-addons.
+    meta: dict = {}  # information about object special for third-party-addons.
