@@ -76,6 +76,7 @@ class AbstractMiddleware(ABC, MetaMixin):
     async def pre_process_event(self, event: BaseEvent, data: dict) -> dict:
         """
         Called before checking filters and execute handler
+        :param self:
         :param event:
         :param data:
         :return: data

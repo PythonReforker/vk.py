@@ -32,6 +32,8 @@ class AbstractExtension(ABC, MetaMixin):
         """
         pass
 
+    start = run  # alias
+
 
 class BaseExtension(AbstractExtension, ABC):
     """
