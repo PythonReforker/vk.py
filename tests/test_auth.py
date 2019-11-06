@@ -1,9 +1,6 @@
-import sys
-
-sys.path.append("..")
-
 import pytest
-from vk import VK, exceptions
+
+from vk import VK
 
 
 @pytest.mark.asyncio
@@ -13,8 +10,7 @@ async def bad_auth(bad_token: str):
     return vk
 
 
-@pytest.mark.xfail(raises=exceptions.APIException)
 @pytest.mark.asyncio
 async def test_auth():
-    vk = await bad_auth("bad_token")
-
+    with pytest.xfail():
+        vk = await bad_auth("bad_token")
