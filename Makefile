@@ -14,8 +14,6 @@ black:
 lint:
 	flake8 vk
 
-delete-unused-vars:
-	autoflake --in-place --remove-unused-variables -r vk
 
 reorder-imports:
 	reorder-python-imports --application-directories=vk
