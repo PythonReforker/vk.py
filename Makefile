@@ -14,7 +14,7 @@ black:
 lint:
 	flake8 vk
 
-delete-unused-imports:
+delete-unused-vars:
 	autoflake --in-place --remove-unused-variables -r vk
 
 reorder-imports:
