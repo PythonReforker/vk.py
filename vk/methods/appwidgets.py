@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import appwidgets as m
 
-import typing
-from typing import Union
-
 
 class AppWidgets(BaseMethod):
     async def update(self, code: str = None, type: str = None):

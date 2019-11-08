@@ -1,3 +1,4 @@
+fail_fast: true
 repos:
   -   repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v2.3.0
@@ -16,3 +17,11 @@ repos:
       rev: v1.11.1
       hooks:
         -   id: pyupgrade
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: flake8
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.4.2
+    hooks:
+      - id: python-use-type-annotations

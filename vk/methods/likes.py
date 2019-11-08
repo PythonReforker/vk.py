@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import likes as m
 
-import typing
-from typing import Union
-
 
 class Likes(BaseMethod):
     async def add(
@@ -27,7 +24,9 @@ class Likes(BaseMethod):
         r = await self.api_request(method, params)
         return m.Add(**r)
 
-    async def delete(self, type: str = None, owner_id: int = None, item_id: int = None):
+    async def delete(
+        self, type: str = None, owner_id: int = None, item_id: int = None
+    ):
         """
         Deletes the specified object from the 'Likes' list of the current user.
         :param type: Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion, 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed

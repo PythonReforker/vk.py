@@ -65,7 +65,10 @@ class Keyboard:
         current_row.append(action)
 
     def add_text_button(
-        self, text: str, color: ButtonColor = ButtonColor.PRIMARY, payload: dict = None
+        self,
+        text: str,
+        color: ButtonColor = ButtonColor.PRIMARY,
+        payload: dict = None,
     ):
         """
 
@@ -108,7 +111,9 @@ class Keyboard:
 
         payload = self.generate_payload(payload)
 
-        action = {"action": {"type": ButtonType.LOCATION.value, "payload": payload}}
+        action = {
+            "action": {"type": ButtonType.LOCATION.value, "payload": payload}
+        }
 
         self._add_button(action)
 
@@ -122,12 +127,18 @@ class Keyboard:
         payload = self.generate_payload(payload)
 
         action = {
-            "action": {"type": ButtonType.VKPAY.value, "payload": payload, "hash": hash}
+            "action": {
+                "type": ButtonType.VKPAY.value,
+                "payload": payload,
+                "hash": hash,
+            }
         }
 
         self._add_button(action)
 
-    def add_vkapps_button(self, app_id: int, owner_id: int, label: str, payload: dict = None):
+    def add_vkapps_button(
+        self, app_id: int, owner_id: int, label: str, payload: dict = None
+    ):
         """
 
         :param app_id:

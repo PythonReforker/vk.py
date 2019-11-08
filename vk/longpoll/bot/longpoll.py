@@ -39,7 +39,11 @@ class BotLongPoll(mixins.ContextInstanceMixin):
     async def _prepare_longpoll(self):
         await self.vk.api_request(
             "groups.setLongPollSettings",
-            {"group_id": self.group_id, "enabled": 1, "api_version": API_VERSION},
+            {
+                "group_id": self.group_id,
+                "enabled": 1,
+                "api_version": API_VERSION,
+            },
         )
         await self._update_polling()
 
@@ -93,7 +97,9 @@ class BotLongPoll(mixins.ContextInstanceMixin):
 
             # Handle errors from vkontakte
             if updates.get("failed"):
-                logger.debug(f"Longpolling responded with failed: {updates['failed']}")
+                logger.debug(
+                    f"Longpolling responded with failed: {updates['failed']}"
+                )
 
                 if updates["failed"] == 1:
                     self.ts: str = updates["ts"]

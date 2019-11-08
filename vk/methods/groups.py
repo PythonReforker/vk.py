@@ -1,8 +1,7 @@
+from typing import Union
+
 from .base import BaseMethod
 from vk.types.responses import groups as m
-
-import typing
-from typing import Union
 
 
 class Groups(BaseMethod):
@@ -66,7 +65,9 @@ class Groups(BaseMethod):
         r = await self.api_request(method, params)
         return m.AddCallbackServer(**r)
 
-    async def add_link(self, group_id: int = None, link: str = None, text: str = None):
+    async def add_link(
+        self, group_id: int = None, link: str = None, text: str = None
+    ):
         """
         Allows to add a link to the community.
         :param group_id: Community ID.
@@ -141,7 +142,9 @@ class Groups(BaseMethod):
         r = await self.api_request(method, params)
         return m.Create(**r)
 
-    async def delete_callback_server(self, group_id: int = None, server_id: int = None):
+    async def delete_callback_server(
+        self, group_id: int = None, server_id: int = None
+    ):
         """
 
         :param group_id:
@@ -504,7 +507,9 @@ class Groups(BaseMethod):
         r = await self.api_request(method, params)
         return m.GetCallbackConfirmationCode(**r)
 
-    async def get_callback_servers(self, group_id: int = None, server_ids: list = None):
+    async def get_callback_servers(
+        self, group_id: int = None, server_ids: list = None
+    ):
         """
 
         :param group_id:
@@ -517,7 +522,9 @@ class Groups(BaseMethod):
         r = await self.api_request(method, params)
         return m.GetCallbackServers(**r)
 
-    async def get_callback_settings(self, group_id: int = None, server_id: int = None):
+    async def get_callback_settings(
+        self, group_id: int = None, server_id: int = None
+    ):
         """
         Returns [vk.com/dev/callback_api|Callback API] notifications settings.
         :param group_id: Community ID.
@@ -530,7 +537,9 @@ class Groups(BaseMethod):
         r = await self.api_request(method, params)
         return m.GetCallbackSettings(**r)
 
-    async def get_catalog(self, category_id: int = None, subcategory_id: int = None):
+    async def get_catalog(
+        self, category_id: int = None, subcategory_id: int = None
+    ):
         """
         Returns communities list for a catalog category.
         :param category_id: Category id received from [vk.com/dev/groups.getCatalogInfo|groups.getCatalogInfo].
@@ -543,7 +552,9 @@ class Groups(BaseMethod):
         r = await self.api_request(method, params)
         return m.GetCatalog(**r)
 
-    async def get_catalog_info(self, extended: bool = None, subcategories: bool = None):
+    async def get_catalog_info(
+        self, extended: bool = None, subcategories: bool = None
+    ):
         """
         Returns categories list for communities catalog
         :param extended: 1 – to return communities count and three communities for preview. By default: 0.

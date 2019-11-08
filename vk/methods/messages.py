@@ -1,4 +1,3 @@
-import typing
 from typing import Union
 
 from .base import BaseMethod
@@ -19,7 +18,9 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.AddChatUser(**r)
 
-    async def allow_messages_from_group(self, group_id: int = None, key: str = None):
+    async def allow_messages_from_group(
+        self, group_id: int = None, key: str = None
+    ):
         """
         Allows sending messages from community to the current user.
         :param group_id: Group ID.
@@ -66,7 +67,9 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.Delete(**r)
 
-    async def delete_chat_photo(self, chat_id: int = None, group_id: int = None):
+    async def delete_chat_photo(
+        self, chat_id: int = None, group_id: int = None
+    ):
         """
         Deletes a chat's cover picture.
         :param chat_id: Chat ID.
@@ -407,7 +410,10 @@ class Messages(BaseMethod):
         return m.GetLongPollHistory(**r)
 
     async def get_long_poll_server(
-        self, need_pts: bool = None, group_id: int = None, lp_version: int = None
+        self,
+        need_pts: bool = None,
+        group_id: int = None,
+        lp_version: int = None,
     ):
         """
         Returns data required for connection to a Long Poll server.
@@ -465,7 +471,9 @@ class Messages(BaseMethod):
         r = await self.api_request(method, params)
         return m.MarkAsAnsweredConversation(**r)
 
-    async def mark_as_important(self, message_ids: list = None, important: int = None):
+    async def mark_as_important(
+        self, message_ids: list = None, important: int = None
+    ):
         """
         Marks and unmarks messages as important (starred).
         :param message_ids: IDs of messages to mark as important.

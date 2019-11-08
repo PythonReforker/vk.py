@@ -74,7 +74,9 @@ class TaskManager:
             self.tasks.append(task)
             logger.info(f"Task {task.__name__} successfully added!")
         else:
-            raise RuntimeError("Unexpected task. Tasks may be only coroutine functions")
+            raise RuntimeError(
+                "Unexpected task. Tasks may be only coroutine functions"
+            )
 
     def run_task(self, task: typing.Callable):
         """

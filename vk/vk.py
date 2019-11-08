@@ -86,13 +86,19 @@ class VK(ContextInstanceMixin):
 
         params.update({"v": API_VERSION, "access_token": self.access_token})
         logger.debug(f"Params to send: {params}")
-        async with self.client.post(API_LINK + method_name, data=params) as response:
+        async with self.client.post(
+            API_LINK + method_name, data=params
+        ) as response:
             json: typing.Dict[str, typing.Any] = await response.json(
                 loads=JSON_LIBRARY.loads
             )
-            logger.debug(f"Method {method_name} called. Response from API: {json}")
+            logger.debug(
+                f"Method {method_name} called. Response from API: {json}"
+            )
             if "error" in json:
-                return await self.error_dispatcher.error_handle(json, ignore_errors)
+                return await self.error_dispatcher.error_handle(
+                    json, ignore_errors
+                )
 
             if _raw_mode:
                 return json
@@ -100,7 +106,10 @@ class VK(ContextInstanceMixin):
             return json["response"]
 
     async def api_request(
-        self, method_name: str, params: dict = None, ignore_errors: bool = False
+        self,
+        method_name: str,
+        params: dict = None,
+        ignore_errors: bool = False,
     ) -> dict:
         """
         Send api request to VK server
@@ -144,7 +153,8 @@ class VK(ContextInstanceMixin):
         """
         Access VKAPI in one `async with` block.
 
-        >>> async with VK.with_token("my_token") as vk:  # type: VK
+        >>> vk: VK
+        >>> async with VK.with_token("my_token") as vk:
         >>>     result = await vk.api_request("status.get")
         >>>     print(result)
         >>>     print(vk.client.closed)  # False

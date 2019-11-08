@@ -36,7 +36,9 @@ class Validator(ContextInstanceMixin):
         """
         have_answer = self.validators_answers["valid_vk_group_id"]
         try:
-            result = await self.vk.api_request("groups.getById", {"group_id": arg})
+            result = await self.vk.api_request(
+                "groups.getById", {"group_id": arg}
+            )
         except APIException:
             if have_answer:
                 await message.answer(have_answer)

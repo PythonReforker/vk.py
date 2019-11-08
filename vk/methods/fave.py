@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import fave as m
 
-import typing
-from typing import Union
-
 
 class Fave(BaseMethod):
     async def add_article(self, url: str = None):
@@ -188,7 +185,9 @@ class Fave(BaseMethod):
         r = await self.api_request(method, params)
         return m.MarkSeen(**r)
 
-    async def remove_article(self, owner_id: int = None, article_id: int = None):
+    async def remove_article(
+        self, owner_id: int = None, article_id: int = None
+    ):
         """
 
         :param owner_id:
@@ -318,7 +317,9 @@ class Fave(BaseMethod):
         r = await self.api_request(method, params)
         return m.SetTags(**r)
 
-    async def track_page_interaction(self, user_id: int = None, group_id: int = None):
+    async def track_page_interaction(
+        self, user_id: int = None, group_id: int = None
+    ):
         """
 
         :param user_id:

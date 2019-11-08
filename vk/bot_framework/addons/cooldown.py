@@ -61,14 +61,18 @@ class Cooldown(ContextInstanceMixin):
 
                 message: Message = args[0]
                 if not isinstance(message, Message):
-                    raise RuntimeError("Cooldown supports only message hanlders")
+                    raise RuntimeError(
+                        "Cooldown supports only message hanlders"
+                    )
                 if for_specify_user:
                     cooldown_name = f"__coro_tocooldown:{func.__name__}:user:{message.from_id}_{message.peer_id}__"
                 else:
                     cooldown_name = f"__coro_tocooldown:{func.__name__}__"
                 have_cooldown = await storage.exists(cooldown_name)
                 if have_cooldown:
-                    cd = round((await storage.get(cooldown_name)) - time.time(), 3)
+                    cd = round(
+                        (await storage.get(cooldown_name)) - time.time(), 3
+                    )
                     answer = cooldown_message.format(cooldown=cd)
                     await message.answer(answer)
 

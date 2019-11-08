@@ -129,7 +129,9 @@ class ChatAction(NamedRule):
         if message.action:
             action = Action(message.action.type)
             result = action is self.action
-            logger.debug(f"Processing action of message. Action in message: {action}")
+            logger.debug(
+                f"Processing action of message. Action in message: {action}"
+            )
             logger.debug(f"Result of ChatAction rule: {result}")
             return result
 
@@ -308,7 +310,9 @@ class WithReplyMessage(NamedRule):
         self.with_reply_message: bool = with_reply_message
 
     async def check(self, message: types.Message, data: dict):
-        logger.debug(f"Result of WithReplyMessage rule: {bool(message.reply_message)}")
+        logger.debug(
+            f"Result of WithReplyMessage rule: {bool(message.reply_message)}"
+        )
         return bool(message.reply_message)
 
 
@@ -324,7 +328,9 @@ class WithFwdMessages(NamedRule):
         self.with_reply_message: bool = with_fwd_messages
 
     async def check(self, message: types.Message, data: dict):
-        logger.debug(f"Result of WithFwdMessages rule: {bool(message.fwd_messages)}")
+        logger.debug(
+            f"Result of WithFwdMessages rule: {bool(message.fwd_messages)}"
+        )
         return bool(message.fwd_messages)
 
 
@@ -356,7 +362,9 @@ class Regex(NamedRule):
     }
 
     def __init__(self, pattern: str):
-        self.pattern: typing.Pattern = re.compile(pattern, re.IGNORECASE | re.MULTILINE)
+        self.pattern: typing.Pattern = re.compile(
+            pattern, re.IGNORECASE | re.MULTILINE
+        )
 
     async def check(self, message: types.Message, data: dict):
         msg = message.text.lower()

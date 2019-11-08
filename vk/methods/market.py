@@ -1,8 +1,7 @@
+from typing import Union
+
 from .base import BaseMethod
 from vk.types.responses import market as m
-
-import typing
-from typing import Union
 
 
 class Market(BaseMethod):
@@ -131,7 +130,9 @@ class Market(BaseMethod):
         r = await self.api_request(method, params)
         return m.DeleteAlbum(**r)
 
-    async def delete_comment(self, owner_id: int = None, comment_id: int = None):
+    async def delete_comment(
+        self, owner_id: int = None, comment_id: int = None
+    ):
         """
         Deletes an item's comment
         :param owner_id: identifier of an item owner community, "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
@@ -244,7 +245,9 @@ class Market(BaseMethod):
         r = await self.api_request(method, params)
         return m.Get(**r)
 
-    async def get_album_by_id(self, owner_id: int = None, album_ids: list = None):
+    async def get_album_by_id(
+        self, owner_id: int = None, album_ids: list = None
+    ):
         """
         Returns items album's data
         :param owner_id: identifier of an album owner community, "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "
@@ -435,7 +438,9 @@ class Market(BaseMethod):
         r = await self.api_request(method, params)
         return m.Restore(**r)
 
-    async def restore_comment(self, owner_id: int = None, comment_id: int = None):
+    async def restore_comment(
+        self, owner_id: int = None, comment_id: int = None
+    ):
         """
         Restores a recently deleted comment
         :param owner_id: identifier of an item owner community, "Note that community id in the 'owner_id' parameter should be negative number. For example 'owner_id'=-1 matches the [vk.com/apiclub|VK API] community "

@@ -41,7 +41,9 @@ class APIErrorDispatcher:
             APIErrorHandler(6, self._to_many_requests_handler)
         )  # standart to many request handler
 
-    async def _to_many_requests_handler(self, error: typing.Dict) -> typing.Dict:
+    async def _to_many_requests_handler(
+        self, error: typing.Dict
+    ) -> typing.Dict:
         logger.debug("To many requests error handle..")
         await asyncio.sleep(0.34)
         params = {}
@@ -55,7 +57,9 @@ class APIErrorDispatcher:
 
             params.update({key: value})
 
-        return await self.vk.api_request(method_name=method_name, params=params)
+        return await self.vk.api_request(
+            method_name=method_name, params=params
+        )
 
     def error_handler(self, error_code: int):
         def decorator(coro: typing.Callable):

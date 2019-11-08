@@ -131,13 +131,17 @@ class Blueprint(AbstractBlueprint):
             }
             if handler.coro.__doc__:  # or set description in docstring
                 meta["description"] = handler.coro.__doc__.strip()
-            handler.meta.update({k: v for k, v in meta.items() if v is not None})
+            handler.meta.update(
+                {k: v for k, v in meta.items() if v is not None}
+            )
 
         return decorator
 
     def message_handler(
         self,
-        *rules: typing.Tuple[typing.Type[BaseRule], typing.Callable, typing.Awaitable],
+        *rules: typing.Tuple[
+            typing.Type[BaseRule], typing.Callable, typing.Awaitable
+        ],
         **named_rules: typing.Dict[str, typing.Any],
     ):
         """
@@ -156,7 +160,9 @@ class Blueprint(AbstractBlueprint):
             named_rules.update(self.default_named_rules)
 
             self.handlers.append(
-                HandlerInBlueprint(coro, Event.MESSAGE_NEW, rules, named_rules, {})
+                HandlerInBlueprint(
+                    coro, Event.MESSAGE_NEW, rules, named_rules, {}
+                )
             )
             return coro
 

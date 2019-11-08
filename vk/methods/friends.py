@@ -1,12 +1,11 @@
 from .base import BaseMethod
 from vk.types.responses import friends as m
 
-import typing
-from typing import Union
-
 
 class Friends(BaseMethod):
-    async def add(self, user_id: int = None, text: str = None, follow: bool = None):
+    async def add(
+        self, user_id: int = None, text: str = None, follow: bool = None
+    ):
         """
         Approves or creates a friend request.
         :param user_id: ID of the user whose friend request will be approved or to whom a friend request will be sent.

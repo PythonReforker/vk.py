@@ -18,7 +18,9 @@ class OnlyMessagesMiddleware(BaseMiddleware):
         "deprecated": False,
     }
 
-    async def pre_process_event(self, event: types.MessageNew, data: dict) -> dict:
+    async def pre_process_event(
+        self, event: types.MessageNew, data: dict
+    ) -> dict:
         if event.type == "message_new":
             logger.info("New message! Handlers will not be skipped.")
             return data

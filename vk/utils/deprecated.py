@@ -36,7 +36,8 @@ def deprecated(reason, stacklevel=2) -> Callable:
             @functools.wraps(func)
             def wrapper(*args, **kwargs):
                 warn_deprecated(
-                    msg.format(name=func.__name__, reason=reason), stacklevel=stacklevel
+                    msg.format(name=func.__name__, reason=reason),
+                    stacklevel=stacklevel,
                 )
                 warnings.simplefilter("default", DeprecationWarning)
                 return func(*args, **kwargs)
@@ -64,7 +65,9 @@ def deprecated(reason, stacklevel=2) -> Callable:
 
         @functools.wraps(func1)
         def wrapper1(*args, **kwargs):
-            warn_deprecated(msg1.format(name=func1.__name__), stacklevel=stacklevel)
+            warn_deprecated(
+                msg1.format(name=func1.__name__), stacklevel=stacklevel
+            )
             return func1(*args, **kwargs)
 
         return wrapper1

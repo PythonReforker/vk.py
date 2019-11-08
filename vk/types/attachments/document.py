@@ -1,10 +1,10 @@
-from ..base import BaseModel
 from enum import IntEnum
 
+from ..base import BaseModel
 from vk.types.additional import PhotoSizes
-from vk.types.attachments import Graffiti, AudioMsg
+from vk.types.attachments import AudioMsg
+from vk.types.attachments import Graffiti
 
-import typing
 
 # https://vk.com/dev/objects/doc
 

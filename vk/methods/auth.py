@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import auth as m
 
-import typing
-from typing import Union
-
 
 class Auth(BaseMethod):
     async def check_phone(

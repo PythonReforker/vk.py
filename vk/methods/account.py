@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import account as m
 
-import typing
-from typing import Union
-
 
 class Account(BaseMethod):
     async def ban(self, owner_id: int = None):
@@ -295,7 +292,9 @@ class Account(BaseMethod):
         r = await self.api_request(method, params)
         return m.Unban(**r)
 
-    async def unregister_device(self, device_id: str = None, sandbox: bool = None):
+    async def unregister_device(
+        self, device_id: str = None, sandbox: bool = None
+    ):
         """
         Unsubscribes a device from push notifications.
         :param device_id: Unique device ID.

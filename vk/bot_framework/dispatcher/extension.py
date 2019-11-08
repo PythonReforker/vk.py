@@ -20,7 +20,6 @@ class AbstractExtension(ABC, MetaMixin):
         Get events from any resource and returns list of events.
         :return: list of coming events.
         """
-        pass
 
     @abstractmethod
     async def run(self, dp: "Dispatcher"):
@@ -30,7 +29,6 @@ class AbstractExtension(ABC, MetaMixin):
         :param dp: dispatcher
         :return:
         """
-        pass
 
 
 class BaseExtension(AbstractExtension, ABC):

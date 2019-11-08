@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import board as m
 
-import typing
-from typing import Union
-
 
 class Board(BaseMethod):
     async def add_topic(
@@ -70,7 +67,10 @@ class Board(BaseMethod):
         return m.CreateComment(**r)
 
     async def delete_comment(
-        self, group_id: int = None, topic_id: int = None, comment_id: int = None
+        self,
+        group_id: int = None,
+        topic_id: int = None,
+        comment_id: int = None,
     ):
         """
         Deletes a comment on a topic on a community's discussion board.
@@ -222,7 +222,10 @@ class Board(BaseMethod):
         return m.OpenTopic(**r)
 
     async def restore_comment(
-        self, group_id: int = None, topic_id: int = None, comment_id: int = None
+        self,
+        group_id: int = None,
+        topic_id: int = None,
+        comment_id: int = None,
     ):
         """
         Restores a comment deleted from a topic on a community's discussion board.

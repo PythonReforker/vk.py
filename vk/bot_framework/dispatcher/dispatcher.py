@@ -39,7 +39,9 @@ class Dispatcher(ContextInstanceMixin):
             self, default_extensions()
         )
 
-        self._storage: typing.Optional[AbstractStorage, AbstractAsyncStorage] = None
+        self._storage: typing.Optional[
+            AbstractStorage, AbstractAsyncStorage
+        ] = None
 
         self._registered_blueprints: typing.List[Blueprint] = []
 
@@ -102,7 +104,9 @@ class Dispatcher(ContextInstanceMixin):
         return self._storage
 
     @storage.setter
-    def storage(self, storage: typing.Union[AbstractAsyncStorage, AbstractStorage]):
+    def storage(
+        self, storage: typing.Union[AbstractAsyncStorage, AbstractStorage]
+    ):
         """
         Set storage in dispatcher.
         :param storage:
@@ -142,9 +146,13 @@ class Dispatcher(ContextInstanceMixin):
         :return:
         """
         self._handlers.append(handler)
-        logger.debug(f"Handler '{handler.handler.__name__}' successfully added!")
+        logger.debug(
+            f"Handler '{handler.handler.__name__}' successfully added!"
+        )
 
-    def register_message_handler(self, coro: typing.Callable, rules: typing.List):
+    def register_message_handler(
+        self, coro: typing.Callable, rules: typing.List
+    ):
         """
         Register message handler
 
@@ -160,7 +168,9 @@ class Dispatcher(ContextInstanceMixin):
 
     def message_handler(
         self,
-        *rules: typing.Tuple[typing.Type[BaseRule], typing.Callable, typing.Awaitable],
+        *rules: typing.Tuple[
+            typing.Type[BaseRule], typing.Callable, typing.Awaitable
+        ],
         **named_rules: typing.Dict[str, typing.Any],
     ):
         """
@@ -212,7 +222,9 @@ class Dispatcher(ContextInstanceMixin):
         def decorator(coro: typing.Callable):
             nonlocal named_rules
             named_rules = self._rule_factory.get_rules(named_rules)
-            self.register_event_handler(coro, event_type, named_rules + list(rules))
+            self.register_event_handler(
+                coro, event_type, named_rules + list(rules)
+            )
             return coro
 
         return decorator
@@ -285,7 +297,9 @@ class Dispatcher(ContextInstanceMixin):
         :param event: 1 event coming from extensions/vk
         :return:
         """
-        data = {}  # dict for transfer data from middlewares to handlers and filters.
+        data = (
+            {}
+        )  # dict for transfer data from middlewares to handlers and filters.
         # examples/bot_framework/simple_middleware.py
         event = get_event_object(event)  # get event pydantic model.
 
@@ -298,7 +312,9 @@ class Dispatcher(ContextInstanceMixin):
         result = False
 
         logger.debug(f"Pre-process middlewares return this data: {data}")
-        logger.debug(f"Pre-process middlewares result of skip_handler: {_skip_handler}")
+        logger.debug(
+            f"Pre-process middlewares result of skip_handler: {_skip_handler}"
+        )
 
         if (
             not _skip_handler
@@ -328,7 +344,9 @@ class Dispatcher(ContextInstanceMixin):
                             f"Error in handler ({handler.handler.__name__}):"
                         )
         if not _skip_handler and result is not False:
-            await self._middleware_manager.trigger_post_process_middlewares(result)
+            await self._middleware_manager.trigger_post_process_middlewares(
+                result
+            )
         # trigger post_process_event funcs in middlewares.
 
     async def _process_events(self, events: typing.List[dict]):

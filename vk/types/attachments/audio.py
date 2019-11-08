@@ -1,8 +1,6 @@
 from ..base import BaseModel
 from vk.types.additional import AudioGenres
 
-import typing
-
 
 # https://vk.com/dev/objects/audio
 

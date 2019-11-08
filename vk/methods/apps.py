@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import apps as m
 
-import typing
-from typing import Union
-
 
 class Apps(BaseMethod):
     async def delete_app_requests(self,):

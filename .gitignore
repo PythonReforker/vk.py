@@ -8,6 +8,7 @@ __pycache__/
 
 .vscode
 .idea
+poetry.lock
 
 # Distribution / packaging
 .Python

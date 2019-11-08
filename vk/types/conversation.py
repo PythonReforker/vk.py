@@ -1,5 +1,4 @@
 import typing
-from enum import Enum
 
 from .attachments import Photo
 from .base import BaseModel

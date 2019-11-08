@@ -22,7 +22,9 @@ if not (ujson or orjson):
 else:
     json = None
 
-_JSONLIB: AbstractJsonLibrary = [lib for lib in [orjson, ujson, json] if lib][0]  # noqa
+_JSONLIB: AbstractJsonLibrary = [lib for lib in [orjson, ujson, json] if lib][
+    0
+]  # noqa
 JSON_LIBRARY = JsonLibrary(_JSONLIB)
 
 

@@ -57,7 +57,9 @@ class RedisStorage(AbstractAsyncExpiredStorage):
             return default
         return value.decode()
 
-    async def update(self, key: typing.AnyStr, value: typing.Any, expire=0, pexpire=0):
+    async def update(
+        self, key: typing.AnyStr, value: typing.Any, expire=0, pexpire=0
+    ):
         if not self.connection:
             await self.create_connection()
         await self.place(key, value, expire, pexpire)

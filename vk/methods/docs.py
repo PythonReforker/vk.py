@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import docs as m
 
-import typing
-from typing import Union
-
 
 class Docs(BaseMethod):
     async def add(
@@ -89,7 +86,9 @@ class Docs(BaseMethod):
         r = await self.api_request(method, params)
         return m.GetById(**r)
 
-    async def get_messages_upload_server(self, type: str = None, peer_id: int = None):
+    async def get_messages_upload_server(
+        self, type: str = None, peer_id: int = None
+    ):
         """
         Returns the server address for document upload.
         :param type: Document type.
@@ -138,7 +137,9 @@ class Docs(BaseMethod):
         r = await self.api_request(method, params)
         return m.GetWallUploadServer(**r)
 
-    async def save(self, file: str = None, title: str = None, tags: str = None):
+    async def save(
+        self, file: str = None, title: str = None, tags: str = None
+    ):
         """
         Saves a document after [vk.com/dev/upload_files_2|uploading it to a server].
         :param file: This parameter is returned when the file is [vk.com/dev/upload_files_2|uploaded to the server].

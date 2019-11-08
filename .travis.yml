@@ -5,14 +5,6 @@ python:
 - '3.7'
 - 3.7-dev
 install:
-- pip install -r requirements.txt
-deploy:
-  provider: pypi
-  user: prostomarkeloff
-  password:
-    secure: a+IsTftp2h8KjiI6hrsrE25UPCnsv5v3ra0+3Q9QnhkRRN8qr8hyWIWKF3xVnbbx5KLKpYZ8hOY7+w+Lhzc1d5YXDJKtJcPWbGBmgA69suAdYpybwlEr92rELt3BtTUDTbmujEV6k3hvu4TsXzHH0fRQIgk6PLKBZ65JeGU3A0xFYTP5T/erufDyKsE6UPKkJhu27m0bhs6qtnuCNoffVGh0886dbR+iE3cqYicho1WY8HW4TrcXFYRvZ3MU2O6yDR9M+QMv7k1u/e9fpPiXdzvnG3KCiVqXNPoHkLRxFCNgOT1o3MZjyaZDPzi6SQpAYovrbqU+Xv7MHjM3RgcRQPJJjJHmyxt8w/tIoEm9UKygfunTwerIx2VQdXNl9c3v63svuUk45yj6MFnnfG/aGWMDWozFlqfFemnskqu7D/tLmY2xZptKl9p1vac2vpmvx8HplRodBpHsAifcTs67Ei23xPHfZuWnu8IblxY67nx/lVuZiCTmxJ2QlR10nCAtseWkgcPqMWVWFSnFEy1xCJr+y7Z0flITSOV02WAn+UDgRKB9DVahZKfQUJggRtabBKtlz3FA47mJ5CoDv7eeEk8kHcau7wv+5oZ9ryI4wok5/Bh7Ya3zc+qRaf+dIY4C1AXyeBXMxzJg6MR+RqjpEWnRqLTv9DoIteTTNnBUPTE=
-  on:
-    branch: master
-    tags: true
+- make install
 script:
-- echo "all works!"
+- make test

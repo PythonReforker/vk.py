@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import database as m
 
-import typing
-from typing import Union
-
 
 class Database(BaseMethod):
     async def get_chairs(
@@ -175,7 +172,11 @@ class Database(BaseMethod):
         return m.GetSchoolClasses(**r)
 
     async def get_schools(
-        self, q: str = None, city_id: int = None, offset: int = None, count: int = None
+        self,
+        q: str = None,
+        city_id: int = None,
+        offset: int = None,
+        count: int = None,
     ):
         """
         Returns a list of schools.

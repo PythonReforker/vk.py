@@ -1,9 +1,6 @@
 from .base import BaseMethod
 from vk.types.responses import leads as m
 
-import typing
-from typing import Union
-
 
 class Leads(BaseMethod):
     async def check_user(

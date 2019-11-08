@@ -28,16 +28,6 @@ In requirements.txt:
 https://github.com/prostomarkeloff/vk.py/archive/master.zip
 ```
 
-Fast version with uvloop and ujson (only for *nix like OS):
-```sh
-pip install https://github.com/prostomarkeloff/vk.py/archive/master.zip#egg=vk.py[fast]
-```
-
-With **ultra** handlers:
-```sh
-pip install https://github.com/prostomarkeloff/vk.py/archive/master.zip#egg=vk.py[ultra]
-```
-More about it: [click](https://github.com/prostomarkeloff/uvkpy)
 
 ## Usage
 

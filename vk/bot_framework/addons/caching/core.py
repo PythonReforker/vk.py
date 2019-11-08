@@ -27,7 +27,9 @@ def cached_handler(
         async def wrapped(*args, **kwargs):
             message: Message = args[0]
             if not isinstance(message, Message):
-                raise RuntimeError("Now caching only message handlers is supported.")
+                raise RuntimeError(
+                    "Now caching only message handlers is supported."
+                )
             if for_specify_user:
                 cache_name = f"__coro_tocache:{func.__name__}:user:{message.from_id}_{message.peer_id}__"
             else:
@@ -37,7 +39,9 @@ def cached_handler(
                 cache = await storage.get(cache_name)
                 cache = JSON_LIBRARY.loads(cache)
                 params: dict = cache["method_params"]
-                params.update({"peer_id": message.peer_id, "from_id": message.from_id})
+                params.update(
+                    {"peer_id": message.peer_id, "from_id": message.from_id}
+                )
                 return await Dispatcher.get_current().vk.api_request(
                     cache["method_name"], params
                 )
@@ -49,7 +53,9 @@ def cached_handler(
                     )
                 try:
                     await storage.place(
-                        cache_name, JSON_LIBRARY.dumps(result.dict()), expire=expire
+                        cache_name,
+                        JSON_LIBRARY.dumps(result.dict()),
+                        expire=expire,
                     )
                 except RuntimeError:
                     pass

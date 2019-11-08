@@ -59,7 +59,9 @@ class Message(BaseModel):
             in_bytes = text
         to_send: list = []
         if len(in_bytes) > 4096:
-            chunks = [in_bytes[x : x + 4096] for x in range(0, len(in_bytes), 4096)]
+            chunks = [
+                in_bytes[x : x + 4096] for x in range(0, len(in_bytes), 4096)
+            ]
             [to_send.append(chunk.decode()) for chunk in chunks]
 
         return to_send
@@ -74,7 +76,11 @@ class Message(BaseModel):
         return sended
 
     async def reply(
-        self, message: str, attachment: str = None, keyboard: dict = None, **kwargs
+        self,
+        message: str,
+        attachment: str = None,
+        keyboard: dict = None,
+        **kwargs,
     ):
         """
         Answer to message with reply.
@@ -96,11 +102,15 @@ class Message(BaseModel):
             reply_to=self.id,
             keyboard=keyboard,
             random_id=0,
-            **kwargs
+            **kwargs,
         )
 
     async def answer(
-        self, message: str, attachment: str = None, keyboard: dict = None, **kwargs
+        self,
+        message: str,
+        attachment: str = None,
+        keyboard: dict = None,
+        **kwargs,
     ):
         """
         Answer to message without reply.
@@ -121,11 +131,15 @@ class Message(BaseModel):
             attachment=attachment,
             keyboard=keyboard,
             random_id=0,
-            **kwargs
+            **kwargs,
         )
 
     async def cached_answer(
-        self, message: str, attachment: str = None, keyboard: dict = None, **kwargs
+        self,
+        message: str,
+        attachment: str = None,
+        keyboard: dict = None,
+        **kwargs,
     ):
         from vk.bot_framework.addons.caching import CachedResponse
 
@@ -142,7 +156,7 @@ class Message(BaseModel):
             attachment=attachment,
             keyboard=keyboard,
             random_id=0,
-            **kwargs
+            **kwargs,
         )
         resp = CachedResponse(
             method_name="messages.send",

@@ -19,7 +19,9 @@ class MiddlewareManager:
 
     def setup(self, middleware: "BaseMiddleware"):
         if not isinstance(middleware, BaseMiddleware):
-            raise RuntimeError("Middleware must be only instance of 'BaseMiddleware")
+            raise RuntimeError(
+                "Middleware must be only instance of 'BaseMiddleware"
+            )
 
         if middleware.is_configured():
             raise RuntimeError("Middleware already configured!")
@@ -30,9 +32,13 @@ class MiddlewareManager:
             )
 
         self.middlewares.append(middleware)
-        logger.info(f"Middleware '{middleware.__class__.__name__}' successfully added!")
+        logger.info(
+            f"Middleware '{middleware.__class__.__name__}' successfully added!"
+        )
 
-    async def trigger_pre_process_middlewares(self, event: BaseEvent, data: dict):
+    async def trigger_pre_process_middlewares(
+        self, event: BaseEvent, data: dict
+    ):
         _skip_handler = False
         for middleware in self.middlewares:
             try:
@@ -81,14 +87,12 @@ class AbstractMiddleware(ABC, MetaMixin):
         :param data:
         :return: data
         """
-        pass
 
     async def post_process_event(self, result: typing.Any) -> None:
         """
         Called after handler
         :return:
         """
-        pass
 
 
 class BaseMiddleware(AbstractMiddleware, ABC):

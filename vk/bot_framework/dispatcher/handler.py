@@ -38,12 +38,13 @@ class SkipHandler(Exception):
     Raise this when you want skip handlers.
     """
 
-    pass
-
 
 class Handler(BaseHandler):
     def __init__(
-        self, event_type: Event, handler: typing.Callable, rules: typing.List[BaseRule]
+        self,
+        event_type: Event,
+        handler: typing.Callable,
+        rules: typing.List[BaseRule],
     ):
         """
 

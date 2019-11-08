@@ -1,11 +1,16 @@
-from .others import SimpleResponse
-from ..base import BaseModel
-
-from ..additional import ActiveOffer, Sex, BdateVisiblity, Country, City, NameRequest
-from ..user import User, UserRelation
-from ..community import Community
-
 import typing
+
+from ..additional import ActiveOffer
+from ..additional import BdateVisiblity
+from ..additional import City
+from ..additional import Country
+from ..additional import NameRequest
+from ..additional import Sex
+from ..base import BaseModel
+from ..community import Community
+from ..user import User
+from ..user import UserRelation
+from .others import SimpleResponse
 
 
 class Ban(SimpleResponse):

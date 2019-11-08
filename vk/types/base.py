@@ -13,7 +13,10 @@ class BaseModel(pydantic.BaseModel, ContextInstanceMixin):
 
     def __repr__(self):
         args = ", ".join(
-            [f"{key}={value}" for key, value in self.dict(skip_defaults=True).items()]
+            [
+                f"{key}={value}"
+                for key, value in self.dict(skip_defaults=True).items()
+            ]
         )
         return "{}({})".format(self.__class__.__name__, args)
 
