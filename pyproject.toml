@@ -29,6 +29,7 @@ pre-commit = {version = "^1.20", allows-prereleases = true}
 reorder-python-imports = "^1.8"
 mkdocs = "^1.0"
 mkdocs-material = "^4.4"
+pytest-asyncio = "^0.10.0"
 
 [tool.black]
 line-length = 79
