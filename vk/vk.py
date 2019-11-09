@@ -43,6 +43,7 @@ class VK(ContextInstanceMixin):
         *,
         loop: AbstractEventLoop = None,
         client: ClientSession = None,
+        change_vk_context_object=None,
     ):
 
         """
@@ -50,6 +51,7 @@ class VK(ContextInstanceMixin):
         :param str access_token: access token of VK user/community for access to VK methods.
         :param AbstractEventLoop loop: asyncio event loop, uses in Task manager/dispatcher extensions/etc.
         :param ClientSession client: aiohttp client session
+        :param change_vk_context_object: change context of VK object (if is None then we change it, else - no).
         """
         self.access_token: str = access_token
         self.loop: asyncio.AbstractEventLoop = loop if loop is not None else asyncio.get_event_loop()
@@ -61,7 +63,8 @@ class VK(ContextInstanceMixin):
 
         self.error_dispatcher: APIErrorDispatcher = APIErrorDispatcher(self)
         self.__api_object = self.__get_api()
-        self.set_current(self)
+        if change_vk_context_object is None:
+            self.set_current(self)
 
     async def _api_request(
         self,
@@ -162,7 +165,7 @@ class VK(ContextInstanceMixin):
         :param access_token:
         :return:
         """
-        vk = cls(access_token=access_token)
+        vk = cls(access_token=access_token, change_vk_context_object=False)
         yield vk
         await vk.close()
 
