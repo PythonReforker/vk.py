@@ -62,7 +62,9 @@ class GetByConversationMessageId(BaseModel):
 
 
 class GetById(BaseModel):
-    response: GetByConversationMessageIdResponse = None
+    response: typing.Union[
+        GetByConversationMessageIdResponse, typing.List[GetByConversationMessageId]
+    ] = None
 
 
 class GetChat(BaseModel):
