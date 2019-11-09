@@ -10,6 +10,7 @@ from vk import types
 from vk.constants import JSON_LIBRARY
 from vk.types.message import Action
 
+
 logger = logging.getLogger(__name__)
 
 """
