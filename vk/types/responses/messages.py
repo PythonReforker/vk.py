@@ -105,9 +105,14 @@ class GetConversationMembers(BaseModel):
     response: GetConversationMembersResponse = None
 
 
+class GetConversationsItem(BaseModel):
+    conversation: Conversation = None
+    last_message: Message = None
+
+
 class GetConversationsResponse(BaseModel):
     count: int = None
-    items: typing.Any = None
+    items: typing.List[GetConversationsItem] = None
     unread_count: int = None
     profiles: typing.List[User] = None
     groups: typing.List[Community] = None
