@@ -16,7 +16,7 @@
 
 
 ## WARNING
-This version of library won't be compatible with newer (1.0.0), if you wonna start new project, please use `dev` branch for it.
+This version of library won't be compatible with newer (1.0.0), if you wanna start new project, please use `dev` branch for it.
 
 ## Install
 
