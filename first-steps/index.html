@@ -1,0 +1,576 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+    
+    
+      
+        <title>First steps - VK.PY - Modern VKAPI library for Python.</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="VK.PY - Modern VKAPI library for Python." class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              VK.PY - Modern VKAPI library for Python.
+            </span>
+            <span class="md-header-nav__topic">
+              
+                First steps
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/prostomarkeloff/vk.py/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    prostomarkeloff/vk.py
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="VK.PY - Modern VKAPI library for Python." class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    VK.PY - Modern VKAPI library for Python.
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/prostomarkeloff/vk.py/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    prostomarkeloff/vk.py
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Get started" class="md-nav__link">
+      Get started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        First steps
+      </label>
+    
+    <a href="./" title="First steps" class="md-nav__link md-nav__link--active">
+      First steps
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vk" class="md-nav__link">
+    Объект VK
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    Запросы к API
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Работа с ошибками
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    Помимо всего прочего
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vk" class="md-nav__link">
+    Объект VK
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    Запросы к API
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    Работа с ошибками
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    Помимо всего прочего
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/prostomarkeloff/vk.py/edit/master/docs/first-steps.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="_1">Первые шаги</h1>
+<p>В данной части документации будут описаны базовые методы работы с библиотекой (а также некоторые характерные особенности, о которых желательно знать при работе с vk.py).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Данная версия документации актуальна только для версии 1.0.0.</p>
+</div>
+<h2 id="vk">Объект VK</h2>
+<div class="codehilite"><pre><span></span><span class="c1"># project/main.py</span>
+
+<span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
+
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="s2">&quot;my-super-token&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Во-первых, <code>VK</code> это так называемый <code>объект с контекстом</code>. Это значит что однажды проинициализровав его, мы сможем получить его где угодно.
+Большинство методов в библиотеке используют эту особенность, поэтому не приходится лишний раз передавать объект <code>VK</code>.</p>
+<div class="codehilite"><pre><span></span><span class="c1"># project/sub.py</span>
+<span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
+
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="o">.</span><span class="n">get_current</span><span class="p">()</span>  <span class="c1"># ВАЖНО: для того чтобы получить объект из контекста, код который </span>
+<span class="c1"># инициализирует объект должен быть исполнен раньше, чем тот, который пытается его получить.</span>
+</pre></div>
+
+
+<p>Лучше всего использовать это в таком виде:</p>
+<div class="codehilite"><pre><span></span><span class="c1"># project/sub2.py</span>
+<span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
+
+<span class="k">class</span> <span class="nc">ClassWhichWorksWithAPI</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vk</span><span class="p">:</span> <span class="n">VK</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vk</span> <span class="o">=</span> <span class="n">vk</span> <span class="ow">or</span> <span class="n">VK</span><span class="o">.</span><span class="n">get_current</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vk</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Please, configure `VK` object for working with this class.&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Большинство объект в библиотеке являются объектами контекста (например все типы из <code>vk/types</code>!)</p>
+</div>
+<h3 id="api">Запросы к API</h3>
+<p>Исполнять запросы к API можно двумя (на самом деле 3-мя) способами. Рассмотрим оба.</p>
+<p>Первый, и наверно самый простой метод:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
+
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="s2">&quot;my-super-token&quot;</span><span class="p">)</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">print_status</span><span class="p">():</span>
+    <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">await</span> <span class="n">vk</span><span class="o">.</span><span class="n">api_request</span><span class="p">(</span><span class="s2">&quot;status.get&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; {&#39;text&#39;: &#39;hello there!&#39;} or your status...</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">asyncio</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">print_status</span><span class="p">())</span>
+</pre></div>
+
+
+<p>В данном случае мы получаем простой ответ в виде словаря.</p>
+<p>Есть другой, вероятно, более удобный, но пока он не доступен для работы со всеми методами.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
+
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="s2">&quot;my-super-token&quot;</span><span class="p">)</span>
+<span class="n">my_id</span> <span class="o">=</span> <span class="mi">123</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">vk</span><span class="o">.</span><span class="n">get_api</span><span class="p">()</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">print_result_of_message_send</span><span class="p">(</span><span class="n">peer_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">api</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">peer_id</span><span class="o">=</span><span class="n">peer_id</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Hello!&quot;</span><span class="p">,</span> <span class="n">random_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; response=1 (or not 1)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">asyncio</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">print_result_of_message_send</span><span class="p">(</span><span class="n">my_id</span><span class="p">))</span>
+</pre></div>
+
+
+<p>В чём преимущество данного подхода? Вам возвращаются готовые объекты, с которыми Ваш редактор будет работать намного лучше, чем с "сырыми" словарями.
+Помимо всего прочего, все доступные методы полностью типизированы, Вы будете знать все доступные параметры.</p>
+<p>Ну и давайте я всё-таки расскажу Вам о 3-ьем методе:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
+
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="s2">&quot;my-super-token&quot;</span><span class="p">)</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">print_status</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">vk</span><span class="o">.</span><span class="n">execute_api_request</span><span class="p">(</span><span class="s2">&quot;return API.status.get();&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="c1"># &gt;&gt;&gt; {&#39;text&#39;: &#39;i wanna die...&#39;}</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">asyncio</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">print_status</span><span class="p">())</span>
+</pre></div>
+
+
+<h3 id="_2">Работа с ошибками</h3>
+<p>Эту тему я считаю довольно важной, ибо часто при работе с API VK мы сталкиваемся с ошибками, и их нам нужно как-то обрабатывать.
+Здесь я постараюсь показать Вам почему такая обработка ошибок проще и лучше чем обычные <code>try-except</code> по всему коду.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Даже если при вызове метода "выпадет" ошибка, наш бот все равно продолжит работу.</p>
+</div>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk.exceptions</span> <span class="kn">import</span> <span class="n">APIException</span>
+<span class="c1"># some code...</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">await</span> <span class="n">api</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">remove_chat_user</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">APIException</span><span class="p">:</span>
+    <span class="n">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="s2">&quot;Oops, something went wrong...&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Хорошо, это довольно приемлимый код, скажу больше - так и надо делать. Но в <code>vk.py</code> мы можем упростить даже эту задачу.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
+<span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">types</span>
+
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="s2">&quot;my-super-token&quot;</span><span class="p">)</span>
+
+<span class="nd">@vk.error_dispatcher.error_handler</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># if I&#39;m not mistaken..</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">error_handler</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">Message</span><span class="o">.</span><span class="n">get_current</span><span class="p">()</span>  <span class="c1"># context object!</span>
+    <span class="n">await</span> <span class="n">message</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span><span class="s2">&quot;Oops, something went wrong...&quot;</span><span class="p">)</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">handler_in_bot</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+    <span class="n">await</span> <span class="n">api</span><span class="o">.</span><span class="n">messages</span><span class="o">.</span><span class="n">remove_chat_user</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>  <span class="c1"># if error will occur, our handler handle it.</span>
+</pre></div>
+
+
+<h3 id="_3">Помимо всего прочего</h3>
+<p>Также, мы можем создавать объект <code>VK</code> "на лету" (ну, или не совсем).
+Это может помочь если например нам нужно авторизоваться с помощью неизвестного токена, полученого из какого-либо источника:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">VK</span><span class="o">.</span><span class="n">with_token</span><span class="p">(</span><span class="s2">&quot;some-token&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vk</span><span class="p">:</span>  <span class="c1"># VK context object won&#39;t be changed!</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">vk</span><span class="o">.</span><span class="n">api_request</span><span class="p">(</span><span class="s2">&quot;status.get&quot;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Get started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Get started
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
