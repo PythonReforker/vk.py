@@ -390,7 +390,7 @@
 <div class="codehilite"><pre><span></span><span class="c1"># project/sub.py</span>
 <span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
 
-<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="o">.</span><span class="n">get_current</span><span class="p">()</span>  <span class="c1"># ВАЖНО: для того чтобы получить объект из контекста, код который </span>
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="o">.</span><span class="n">get_current</span><span class="p">()</span>  <span class="c1"># ВАЖНО: для того чтобы получить объект из контекста, код который</span>
 <span class="c1"># инициализирует объект должен быть исполнен раньше, чем тот, который пытается его получить.</span>
 </pre></div>
 
@@ -452,7 +452,7 @@
 
 <p>В чём преимущество данного подхода? Вам возвращаются готовые объекты, с которыми Ваш редактор будет работать намного лучше, чем с "сырыми" словарями.
 Помимо всего прочего, все доступные методы полностью типизированы, Вы будете знать все доступные параметры.</p>
-<p>Ну и давайте я всё-таки расскажу Вам о 3-ьем методе:</p>
+<p>Ну и давайте я всё-таки расскажу Вам о 3-ем методе:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
 
 <span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="s2">&quot;my-super-token&quot;</span><span class="p">)</span>
