@@ -140,6 +140,7 @@ vk = VK("my-super-token")
 async def error_handler(error: dict):
     message = types.Message.get_current()  # context object!
     await message.answer("Oops, something went wrong...")
+    raise RuntimeError("Can't remove user in chat")  # so that we won't return control to handler (and won't get any undefined behaviour)
 
 async def handler_in_bot(...):
     await api.messages.remove_chat_user(...)  # if error will occur, our handler handle it.
