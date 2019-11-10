@@ -9,11 +9,12 @@ logger = logging.getLogger(__name__)
 
 class AbstractRule(ABC, MetaMixin):
     @abstractmethod
-    async def check(self, *args):
+    async def check(self, event, data: dict):
         """
         This method will call when rules check.
 
-        :param args:
+        :param data:
+        :param event:
         :return: True or False. If return 'True' - check next rules or execute handler
         """
 
@@ -34,6 +35,10 @@ class NamedRule(BaseRule, ABC):
     """
 
     key = None  # unique value for access to rule in handlers.
+    required = False  # include to all handlers rules.
+    default = (
+        None
+    )  # default value for rule (needed if included as default rule (standart - None)
 
 
 class RuleFactory:
@@ -77,5 +82,16 @@ class RuleFactory:
                 continue
             else:
                 raise RuntimeError(f"Unknown rule passed: {key}")
-
+        # include required rules
+        k: str
+        v: NamedRule
+        for k, v in self.config.items():
+            if v.required:
+                this_rule_not_included = True
+                for rule in rules:
+                    if isinstance(rule, v):
+                        this_rule_not_included = False
+                        break
+                if this_rule_not_included:
+                    rules.append(v(v.default))
         return rules
