@@ -48,6 +48,7 @@ def default_rules() -> dict:
         WithFwdMessages,
         CountFwdMessages,
         Regex,
+        VBML,
     )
 
     _default_rules: dict = {
@@ -65,6 +66,7 @@ def default_rules() -> dict:
         "with_fwd_messages": WithFwdMessages,
         "count_fwd_messages": CountFwdMessages,
         "regex": Regex,
+        "vbml": VBML,
     }
     return _default_rules
 

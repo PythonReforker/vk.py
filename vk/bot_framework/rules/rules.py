@@ -10,6 +10,10 @@ from vk import types
 from vk.constants import JSON_LIBRARY
 from vk.types.message import Action
 
+try:
+    import vbml
+except ImportError:
+    vbml = None
 
 logger = logging.getLogger(__name__)
 
@@ -373,3 +377,27 @@ class Regex(NamedRule):
         logger.debug(f"Processing text of message. Text in message: {msg}")
         logger.debug(f"Result of Regex rule: {result}")
         return result
+
+
+class VBML(NamedRule):
+    key = "vbml"
+
+    def __init__(self, pattern: typing.Union[vbml.Pattern, str]):
+        if isinstance(pattern, str):
+            self.pattern = vbml.Patcher.get_current(no_error=False).pattern(
+                pattern
+            )
+        elif isinstance(pattern, vbml.Pattern):
+            self.pattern = pattern
+
+        self._patcher = vbml.Patcher.get_current(no_error=False)
+
+    async def check(self, message: types.Message, data: dict):
+        result = await self._patcher.check_async(message.text, self.pattern)
+        if result is None:
+            return
+        local_data = {}
+        for k, v in result.items():
+            local_data[k] = v
+
+        return local_data
