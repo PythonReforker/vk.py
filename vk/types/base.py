@@ -8,6 +8,10 @@ class BaseModel(pydantic.BaseModel, ContextInstanceMixin):
         allow_mutation = False
         use_enum_values = True
 
+    def __init__(self, *args, **kwargs):
+        super(BaseModel, self).__init__(*args, **kwargs)
+        self.set_current(self)
+
     def __str__(self):
         return str(self.dict(skip_defaults=True))
 
