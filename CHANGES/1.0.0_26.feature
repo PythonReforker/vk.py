@@ -1,0 +1,1 @@
+VBML included to standart rules
