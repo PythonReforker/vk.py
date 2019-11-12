@@ -1,1 +1,1 @@
-Added possible to create rules which will be included to all handlers
+Added possibility to create rules which will be included to all handlers

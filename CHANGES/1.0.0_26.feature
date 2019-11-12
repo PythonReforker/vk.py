@@ -1,1 +1,1 @@
-VBML included to standart rules
+VBML included to standard rules
