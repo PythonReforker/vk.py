@@ -67,6 +67,7 @@ Example of use bot framework, with docker integration [click](https://github.com
     * Blueprints
     * Cooldowns
     * FSM (WIP)
+- Python -> VKScript converter (WIP). [try it](./vk/utils/vkscript)
 
 ## Alternatives
 
