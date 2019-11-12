@@ -1,10 +1,18 @@
 import ast
+import functools
 import inspect
 import types
 
-from vk import VK
 from vk.utils.vkscript.converter import Scope
 from vk.utils.vkscript.converter import VKScriptConverter
+
+
+# import once
+@functools.lru_cache()
+def _get_vk() -> "VK":
+    from vk import VK
+
+    return VK
 
 
 def execute(func: types.FunctionType):
@@ -50,7 +58,7 @@ class Execute:
         return await self.execute(*args, **kwargs)
 
     async def execute(self, *args, **kwargs):
-        vk = VK.get_current()
+        vk = _get_vk().get_current()
         code = self.build(*args, **kwargs)
         response = await vk.api_request("execute", {"code": code})
         return response
