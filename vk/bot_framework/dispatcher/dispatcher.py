@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import typing
 
@@ -31,7 +32,9 @@ class Dispatcher(ContextInstanceMixin):
 
     def __init__(self, vk: VK, group_id: int = None):
         self._vk: VK = vk
-        self._group_id: int = group_id or self.get_group_id()
+        self._group_id: int = group_id or asyncio.run_coroutine_threadsafe(
+            self.get_group_id(), vk.loop
+        ).result()
         self._handlers: typing.List[BaseHandler] = []
 
         self._middleware_manager: MiddlewareManager = MiddlewareManager(self)
