@@ -1,13 +1,13 @@
-import dataclasses
 import typing
+
+import pydantic
 
 from vk.utils.mixins import ContextInstanceMixin
 
 
-@dataclasses.dataclass
-class Scope:
-    locals: list = dataclasses.field(default_factory=list)
-    globals: dict = dataclasses.field(default_factory=dict)
+class Scope(pydantic.BaseModel):
+    locals: list = []
+    globals: dict = {}
 
 
 class VKScriptConverter(ContextInstanceMixin):
