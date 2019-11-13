@@ -4,8 +4,7 @@
 
 # Welcome to vk.py 👋
 
-![Version](https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fprostomarkeloff%2Fvk.py.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fprostomarkeloff%2Fvk.py?ref=badge_shield)
-](https://github.com/prostomarkeloff/vk.py/blob/master/LICENSE) [![Twitter: prostomarkeloff](https://img.shields.io/twitter/follow/prostomarkeloff.svg?style=social)](https://twitter.com/prostomarkeloff)
+![Version](https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/prostomarkeloff/vk.py/blob/master/LICENSE) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fprostomarkeloff%2Fvk.py.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fprostomarkeloff%2Fvk.py?ref=badge_shield) [![Twitter: prostomarkeloff](https://img.shields.io/twitter/follow/prostomarkeloff.svg?style=social)](https://twitter.com/prostomarkeloff)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/prostomarkeloff/vk.py?utm_source=github.com&utm_medium=referral&utm_content=prostomarkeloff/vk.py&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/prostomarkeloff/vk.py.svg?branch=master)](https://travis-ci.org/prostomarkeloff/vk.py)
 
