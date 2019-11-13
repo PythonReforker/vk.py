@@ -16,6 +16,7 @@ from vk import VK
 from vk.bot_framework.dispatcher import data_
 from vk.constants import default_extensions
 from vk.constants import default_rules
+from vk.exceptions.errors import APIException
 from vk.types import BotEvent as Event
 from vk.utils import ContextInstanceMixin
 from vk.utils import time_logging
@@ -28,9 +29,9 @@ class Dispatcher(ContextInstanceMixin):
 
     handler_class = Handler
 
-    def __init__(self, vk: VK, group_id: int):
+    def __init__(self, vk: VK, group_id: int = None):
         self._vk: VK = vk
-        self._group_id: int = group_id
+        self._group_id: int = group_id or self.get_group_id()
         self._handlers: typing.List[BaseHandler] = []
 
         self._middleware_manager: MiddlewareManager = MiddlewareManager(self)
@@ -46,6 +47,15 @@ class Dispatcher(ContextInstanceMixin):
         self._registered_blueprints: typing.List[Blueprint] = []
 
         self.set_current(self)
+
+    async def get_group_id(self) -> int:
+        try:
+            result = await self.vk.api_request(
+                "groups.getById", ignore_errors=True
+            )
+            return result[0]["id"]
+        except APIException:
+            raise TypeError(f"group_id must be specified for user tokens")
 
     @property
     def handlers(self) -> typing.List[BaseHandler]:
