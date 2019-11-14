@@ -39,7 +39,12 @@ class Dispatcher(ContextInstanceMixin):
     handler_class = Handler
 
     @deleted_argument("group_id", "1.0.0")
-    def __init__(self, vk: VK):
+    def __init__(self, vk: VK, group_id: int = None):
+        if group_id:
+            raise DeprecationWarning(
+                "Argument 'group_id' deprecated and removed in vk.py 1.0.0"
+            )
+
         self._vk: VK = vk
         self._handlers: typing.List[BaseHandler] = []
 
@@ -84,9 +89,9 @@ class Dispatcher(ContextInstanceMixin):
         return self._registered_blueprints
 
     @property
-    @deprecated("Argument `group_id` deleted from `Dispatcher` class.")
+    @deprecated("Argument `group_id` deprecated")
     def group_id(self):
-        pass
+        return
 
     @property
     def vk(self):
