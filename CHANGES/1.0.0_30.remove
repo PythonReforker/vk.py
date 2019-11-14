@@ -1,0 +1,2 @@
+Dispatcher doesn't accept the `group_id` argument.
+Method `run_polling` accepts new argument `group_id` needed for `polling` extension.
