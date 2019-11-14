@@ -22,6 +22,7 @@ from vk.utils import ContextInstanceMixin
 from vk.utils import time_logging
 from vk.utils.deprecated import deprecated
 from vk.utils.deprecated import deprecated_argument
+from vk.utils.deprecated import warn_deprecated
 from vk.utils.get_event import get_event_object
 
 logger = logging.getLogger(__name__)
@@ -41,7 +42,7 @@ class Dispatcher(ContextInstanceMixin):
     @deprecated_argument("group_id", "1.0.0")
     def __init__(self, vk: VK, group_id: int = None):
         if group_id:
-            raise DeprecationWarning(
+            warn_deprecated(
                 "Argument 'group_id' deprecated and removed in vk.py 1.0.0"
             )
 
