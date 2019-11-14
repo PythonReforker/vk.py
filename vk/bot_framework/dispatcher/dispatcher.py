@@ -20,8 +20,8 @@ from vk.exceptions.errors import APIException
 from vk.types import BotEvent as Event
 from vk.utils import ContextInstanceMixin
 from vk.utils import time_logging
-from vk.utils.deprecated import deleted_argument
 from vk.utils.deprecated import deprecated
+from vk.utils.deprecated import deprecated_argument
 from vk.utils.get_event import get_event_object
 
 logger = logging.getLogger(__name__)
@@ -38,7 +38,7 @@ async def get_group_id(vk: VK):
 class Dispatcher(ContextInstanceMixin):
     handler_class = Handler
 
-    @deleted_argument("group_id", "1.0.0")
+    @deprecated_argument("group_id", "1.0.0")
     def __init__(self, vk: VK, group_id: int = None):
         if group_id:
             raise DeprecationWarning(
