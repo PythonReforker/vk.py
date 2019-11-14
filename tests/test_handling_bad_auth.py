@@ -1,12 +1,10 @@
-import asyncio
-
 import pytest
 
 from vk import VK
 
 
-def add_error_handler(vk):
-    vk.error_dispatcher.register_error_handler(5, error_handler)
+def add_error_handler(vk_obj):
+    vk_obj.error_dispatcher.register_error_handler(5, error_handler)
     return None
 
 

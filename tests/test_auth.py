@@ -13,4 +13,4 @@ async def bad_auth(bad_token: str):
 @pytest.mark.asyncio
 async def test_auth():
     with pytest.xfail():
-        vk = await bad_auth("bad_token")
+        await bad_auth("bad_token")

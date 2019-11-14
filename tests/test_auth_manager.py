@@ -3,7 +3,7 @@ from vk.utils.auth_manager import AppSecret
 from vk.utils.auth_manager import AuthManager
 
 
-def test_auth_manager():
+def test_auth_manager(vk_login, vk_password):
     manager = AuthManager("fake-login", "fake-password")
     assert manager.password == "fake-password"
     assert manager.login == "fake-login"
@@ -15,3 +15,8 @@ def test_auth_manager():
     assert another_manager.login == "fake-login"
     assert another_manager.app_id == 123
     assert another_manager.client_secret == "123456"
+
+    if vk_login and vk_password:
+        truthy_manager = AuthManager(vk_login, vk_password)
+        token = truthy_manager.get_token()
+        assert token
