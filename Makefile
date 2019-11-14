@@ -9,7 +9,6 @@ install:
 
 black:
 	black vk/
-	black tests
 
 lint:
 	flake8 vk
