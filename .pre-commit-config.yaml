@@ -17,7 +17,3 @@ repos:
       rev: v1.11.1
       hooks:
         -   id: pyupgrade
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.4.2
-    hooks:
-      - id: python-use-type-annotations
