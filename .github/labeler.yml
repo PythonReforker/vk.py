@@ -1,0 +1,15 @@
+# Add 'repo' label to any root file changes
+repo:
+  - ./*
+
+documentation:
+  - docs/
+  - mkdocs.yml
+
+cfg-change:
+  - pyproject.toml
+  - .travis.yml
+  - Makefile
+  - mkdocs.yml
+  - .gitignore
+  - requirements.txt
