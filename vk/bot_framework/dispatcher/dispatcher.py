@@ -1,4 +1,3 @@
-import asyncio
 import logging
 import typing
 
@@ -21,20 +20,27 @@ from vk.exceptions.errors import APIException
 from vk.types import BotEvent as Event
 from vk.utils import ContextInstanceMixin
 from vk.utils import time_logging
+from vk.utils.deprecated import deleted_argument
+from vk.utils.deprecated import deprecated
 from vk.utils.get_event import get_event_object
 
 logger = logging.getLogger(__name__)
 
 
-class Dispatcher(ContextInstanceMixin):
+async def get_group_id(vk: VK):
+    try:
+        result = await vk.api_request("groups.getById", ignore_errors=True)
+        return result[0]["id"]
+    except APIException:
+        raise TypeError(f"group_id must be specified for user tokens")
 
+
+class Dispatcher(ContextInstanceMixin):
     handler_class = Handler
 
-    def __init__(self, vk: VK, group_id: int = None):
+    @deleted_argument("group_id", "1.0.0")
+    def __init__(self, vk: VK):
         self._vk: VK = vk
-        self._group_id: int = group_id or asyncio.run_coroutine_threadsafe(
-            self.get_group_id(), vk.loop
-        ).result()
         self._handlers: typing.List[BaseHandler] = []
 
         self._middleware_manager: MiddlewareManager = MiddlewareManager(self)
@@ -50,15 +56,6 @@ class Dispatcher(ContextInstanceMixin):
         self._registered_blueprints: typing.List[Blueprint] = []
 
         self.set_current(self)
-
-    async def get_group_id(self) -> int:
-        try:
-            result = await self.vk.api_request(
-                "groups.getById", ignore_errors=True
-            )
-            return result[0]["id"]
-        except APIException:
-            raise TypeError(f"group_id must be specified for user tokens")
 
     @property
     def handlers(self) -> typing.List[BaseHandler]:
@@ -87,12 +84,9 @@ class Dispatcher(ContextInstanceMixin):
         return self._registered_blueprints
 
     @property
+    @deprecated("Argument `group_id` deleted from `Dispatcher` class.")
     def group_id(self):
-        """
-        Returns a group id.
-        :return:
-        """
-        return self._group_id
+        pass
 
     @property
     def vk(self):
@@ -372,5 +366,9 @@ class Dispatcher(ContextInstanceMixin):
             logger.debug(f"Start processing event with type '{event['type']}'")
             self.vk.loop.create_task(self._process_event(event))
 
-    def run_polling(self):
+    def run_polling(self, group_id: int = None):
+        if not group_id:
+            raise TypeError(
+                "Group id isn't specified. Use `get_group_id` function for gather it."
+            )
         self.run_extension("polling", group_id=self.group_id, vk=self.vk)

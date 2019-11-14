@@ -136,3 +136,36 @@ def renamed_argument(
         return wrapped
 
     return decorator
+
+
+def deleted_argument(name: str, until_version: str, stacklevel: int = 3):
+    def decorator(func):
+        if asyncio.iscoroutinefunction(func):
+
+            @functools.wraps(func)
+            async def wrapped(*args, **kwargs):
+                if name in kwargs:
+                    warn_deprecated(
+                        f"In coroutine '{func.__name__}' found deleted argument '{name}'."
+                        f"It's unavailable since vk.py {until_version}",
+                        stacklevel=stacklevel,
+                    )
+                    kwargs.pop(name)
+                return await func(*args, **kwargs)
+
+        else:
+
+            @functools.wraps(func)
+            def wrapped(*args, **kwargs):
+                if name in kwargs:
+                    warn_deprecated(
+                        f"In function '{func.__name__}' found deleted argument '{name}'."
+                        f"It's unavailable since vk.py {until_version}",
+                        stacklevel=stacklevel,
+                    )
+                    kwargs.pop(name)
+                return func(*args, **kwargs)
+
+        return wrapped
+
+    return decorator
