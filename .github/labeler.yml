@@ -2,6 +2,9 @@
 repo:
   - ./*
 
+need-docs:
+  - vk/*
+
 documentation:
   - docs/
   - mkdocs.yml
