@@ -17,15 +17,12 @@
 
 ## Install
 
+Install package from PyPi: (current version is 1 aplha of 1.0.0)
+
 ```sh
-pip install https://github.com/prostomarkeloff/vk.py/archive/master.zip --upgrade
+pip install vk.py
 ```
 
-In requirements.txt:
-```sh
-# some stuff
-https://github.com/prostomarkeloff/vk.py/archive/master.zip
-```
 
 
 ## Usage
