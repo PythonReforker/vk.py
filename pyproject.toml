@@ -7,10 +7,14 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/prostomarkeloff/vk.py"
 repository = "https://github.com/prostomarkeloff/vk.py"
-keywords = ["vk-api", "asyncio", "vkbot", "vkapi", "vk-bot"]
+keywords = ["vk-api", "asyncio", "vkbot", "vk", "vk-bot"]
 classifiers = [
-    "Topic :: Software Development :: Build Tools",
+    "Framework :: AsyncIO",
+    "Environment :: Web Environment",
+    "Development Status :: 3 - Alpha",
+    "Topic :: Software Development",
     "Topic :: Software Development :: Libraries :: Python Modules",
+    "Intended Audience :: Developers",
     "Operating System :: OS Independent",
 ]
 packages = [
