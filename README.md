@@ -17,7 +17,7 @@
 
 ## Install
 
-Install package from PyPi: (current version is 1 aplha of 1.0.0)
+Install package from PyPi: (current version is 1 alpha of 1.0.0)
 
 ```sh
 pip install vk.py==1.0.0a1 -U
