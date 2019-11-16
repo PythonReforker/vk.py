@@ -276,6 +276,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    FAQ
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#author" class="md-nav__link">
     Author
   </a>
@@ -319,10 +326,58 @@
       
 
 
-  <li class="md-nav__item">
-    <a href="first-steps/" title="First steps" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
       First steps
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        First steps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="install/" title="Install" class="md-nav__link">
+      Install
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="first-steps-vk/" title="First steps VK" class="md-nav__link">
+      First steps VK
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="first-steps-background/" title="Background task" class="md-nav__link">
+      Background task
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -382,6 +437,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    FAQ
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#author" class="md-nav__link">
     Author
   </a>
@@ -430,32 +492,30 @@
                 
                 <p><img alt="vk.py" src="https://user-images.githubusercontent.com/28061158/63603699-cd51b980-c5d2-11e9-8a8f-06e1eef20afe.jpg" /></p>
 <h1 id="welcome-to-vkpy">Welcome to vk.py 👋</h1>
-<p><img alt="Version" src="https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000" /> <a href="https://twitter.com/prostomarkeloff"><img alt="Twitter: prostomarkeloff" src="https://img.shields.io/twitter/follow/prostomarkeloff.svg?style=social" /></a>
+<p><img alt="Version" src="https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000" /> <a href="https://github.com/prostomarkeloff/vk.py/blob/master/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /> </a> <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fprostomarkeloff%2Fvk.py?ref=badge_shield"><img alt="FOSSA Status" src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fprostomarkeloff%2Fvk.py.svg?type=shield" /></a>
 <a href="https://app.codacy.com/app/prostomarkeloff/vk.py?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=prostomarkeloff/vk.py&amp;utm_campaign=Badge_Grade_Dashboard"><img alt="Codacy Badge" src="https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5" /></a>
 <a href="https://travis-ci.org/prostomarkeloff/vk.py"><img alt="Build Status" src="https://travis-ci.org/prostomarkeloff/vk.py.svg?branch=master" /></a></p>
 <blockquote>
-<p>Fastest, scalable, fully asynchronous.</p>
+<p>Extremely-fast, easy-to-use, ready for production. The asyncio based library for Python and Humans written to be efficient and reliable.</p>
 </blockquote>
-<h3 id="homepage">🏠 <a href="https://github.com/prostomarkeloff/vk.py">Homepage</a></h3>
+<h3 id="homepage">🏠 <a href="github.com/prostomarkeloff/vk.py">Homepage</a></h3>
 <h2 id="install">Install</h2>
-<div class="codehilite"><pre><span></span>pip install https://github.com/prostomarkeloff/vk.py/archive/master.zip --upgrade
+<p>Install package from PyPi: (current version is the 2nd alpha of 1.0.0)</p>
+<div class="codehilite"><pre><span></span>pip install vk.py<span class="o">==</span><span class="m">1</span>.0.0a2 -U
 </pre></div>
 
 
-<p>In requirements.txt:</p>
-<div class="codehilite"><pre><span></span><span class="c1"># some stuff</span>
-https://github.com/prostomarkeloff/vk.py/archive/master.zip
-</pre></div>
-
-
+<p>Warning: this version really unstable and not recommended to use in production.</p>
 <h2 id="usage">Usage</h2>
 <p>A simple example</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
 <span class="kn">from</span> <span class="nn">vk.utils.task_manager</span> <span class="kn">import</span> <span class="n">TaskManager</span>
+<span class="kn">from</span> <span class="nn">vk.utils.auth_manager</span> <span class="kn">import</span> <span class="n">AuthManager</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
-<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="n">access_token</span><span class="o">=&lt;</span><span class="n">TOKEN</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="s2">&quot;7999123456&quot;</span><span class="p">,</span> <span class="s2">&quot;my-password&quot;</span><span class="p">)</span>
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="n">access_token</span><span class="o">=</span><span class="n">auth</span><span class="o">.</span><span class="n">get_token</span><span class="p">())</span>
 
 <span class="n">async</span> <span class="k">def</span> <span class="nf">status_get</span><span class="p">():</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">await</span> <span class="n">vk</span><span class="o">.</span><span class="n">api_request</span><span class="p">(</span><span class="s2">&quot;status.get&quot;</span><span class="p">)</span>
@@ -468,8 +528,7 @@ https://github.com/prostomarkeloff/vk.py/archive/master.zip
 </pre></div>
 
 
-<p>You can find more examples <a href="https://github.com/prostomarkeloff/vk.py/tree/master/examples">here</a></p>
-<p>Example of use bot framework, with docker integration <a href="https://github.com/prostomarkeloff/vkpy-exam-bot">click</a></p>
+<p>You can find more examples <a href="./examples">here</a>.</p>
 <h2 id="features">Features</h2>
 <ul>
 <li>Rich high-level API.</li>
@@ -484,30 +543,34 @@ https://github.com/prostomarkeloff/vk.py/archive/master.zip
 <li>FSM (WIP)</li>
 </ul>
 </li>
+<li>Python -&gt; VKScript converter (WIP). <a href="./vk/utils/vkscript">try it</a></li>
 </ul>
 <h2 id="alternatives">Alternatives</h2>
 <ul>
 <li>Kutana. Bot engine for creating Telegram and VK bots</li>
-<li>VKBottle. Bot framework for VK bot development.</li>
 <li>VK_API. A simple library for accessing VK API.</li>
 </ul>
 <p>And many other libraries...</p>
+<h2 id="faq">FAQ</h2>
+<p>This is only bot library? - No, this library could be used for acessing userapi or botapi without any troubles.</p>
+<p>Where i can find the docs? - <a href="https://prostomarkeloff.github.io/vk.py">Check it</a>.</p>
+<p>How to use it? - You may check docs or see our <a href="./examples">examples</a>.</p>
+<p>Why do you do it? - We are interesting to create the most used and easy-to-use library for Python.</p>
+<p>When <code>1.0.0</code> will be released? - We don't know. We hope that it's moment will come to us ASAP. However, you can see current issues and help us.</p>
 <h2 id="author">Author</h2>
 <p>👤 <strong>prostomarkeloff</strong></p>
 <ul>
-<li>Twitter: <a href="https://twitter.com/prostomarkeloff">@prostomarkeloff</a></li>
 <li>Github: <a href="https://github.com/prostomarkeloff">@prostomarkeloff</a></li>
 </ul>
 <h2 id="contributing">🤝 Contributing</h2>
-<p>Contributions, issues and feature requests are welcome!<br />Feel free to check <a href="https://github.com/prostomarkeloff/vk.py/issues">issues page</a>.</p>
+<p>Contributions, issues and feature requests are welcome!<br />Feel free to check <a href="https://github.com/prostomarkeloff/vk.py/issues">issues page</a>.
+Also you can check your <a href="./CONTRIBUTING.md">contributors guide</a>.</p>
+<p><a href="./CONTRIBUTORS.txt">Our contributors</a>.</p>
 <h2 id="show-your-support">Show your support</h2>
 <p>Give a ⭐️ if this project helped you!</p>
 <h2 id="license">📝 License</h2>
 <p>Copyright © 2019 <a href="https://github.com/prostomarkeloff">prostomarkeloff</a>.<br />
 This project is <a href="https://github.com/prostomarkeloff/vk.py/blob/master/LICENSE">MIT</a> licensed.</p>
-<hr />
-<p><em>This README was generated with ❤️ by <a href="https://github.com/kefranabg/readme-md-generator">readme-md-generator</a></em></p>
-<p><a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fprostomarkeloff%2Fvk.py?ref=badge_large"><img alt="FOSSA Status" src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fprostomarkeloff%2Fvk.py.svg?type=large" /></a></p>
                 
                   
                 
@@ -529,13 +592,13 @@ This project is <a href="https://github.com/prostomarkeloff/vk.py/blob/master/LI
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="first-steps/" title="First steps" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="install/" title="Install" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                First steps
+                Install
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
