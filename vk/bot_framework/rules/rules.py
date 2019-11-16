@@ -382,7 +382,7 @@ class Regex(NamedRule):
 class VBML(NamedRule):
     key = "vbml"
 
-    def __init__(self, pattern: typing.Union[vbml.Pattern, str]):
+    def __init__(self, pattern: typing.Union["vbml.Pattern", str]):
         if isinstance(pattern, str):
             self.pattern = vbml.Patcher.get_current(no_error=False).pattern(
                 pattern

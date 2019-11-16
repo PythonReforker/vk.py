@@ -377,4 +377,4 @@ class Dispatcher(ContextInstanceMixin):
             raise TypeError(
                 "Group id isn't specified. Use `get_group_id` function for gather it."
             )
-        self.run_extension("polling", group_id=self.group_id, vk=self.vk)
+        self.run_extension("polling", group_id=group_id, vk=self.vk)

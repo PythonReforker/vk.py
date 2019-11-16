@@ -3,6 +3,7 @@ VK bot framework, easy to learn, fast to code, built on vk.py.
 Designed specially for heavy loads.
 """
 from .dispatcher import Dispatcher
+from .dispatcher.dispatcher import get_group_id
 from .dispatcher.handler import SkipHandler
 from .dispatcher.storage import Storage
 from .middlewares.middlewares import BaseMiddleware
