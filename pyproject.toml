@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "vk.py"
 version = "1.0.0a2"
-description = "Extremely-fast Python 3.6+ toolkit for create applications work`s with VKAPI. Has bot framework out of-the-box."
+description = "Extremely-fast, easy-to-use, ready for production. The asyncio based library for Python and Humans written to be efficient and reliable."
 authors = ["prostomarkeloff"]
 license = "MIT"
 readme = "README.md"
