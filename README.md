@@ -78,7 +78,7 @@ And many other libraries...
 
 ## FAQ
 
-This is only bot library? - No, this library could be used for acessing userapi or botapi with any troubles.
+This is only bot library? - No, this library could be used for acessing userapi or botapi without any troubles.
 
 Where i can find the docs? - [Check it](https://prostomarkeloff.github.io/vk.py).
 
