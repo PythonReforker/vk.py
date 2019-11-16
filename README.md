@@ -79,9 +79,13 @@ And many other libraries...
 ## FAQ
 
 This is only bot library? - No, this library could be used for acessing userapi or botapi with any troubles.
+
 Where i can find the docs? - [Check it](https://prostomarkeloff.github.io/vk.py).
+
 How to use it? - You may check docs or see our [examples](./examples).
+
 Why do you do it? - We are interesting to create the most used and easy-to-use library for Python.
+
 When `1.0.0` will be released? - We don't know. We hope that it's moment will come to us ASAP. However, you can see current issues and help us.
 
 ## Author
