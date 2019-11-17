@@ -3,6 +3,7 @@ from enum import auto
 from enum import Enum
 
 import urllib3
+from aiohttp import ClientSession
 
 from vk.constants import API_VERSION
 from vk.constants import JSON_LIBRARY
@@ -42,6 +43,7 @@ class AuthManager(ContextInstanceMixin):
         client_secret: typing.Union[str, AppSecret] = AppSecret.ANDROID,
     ):
         self._client = urllib3.PoolManager(headers={"User-Agent": USER_AGENT})
+        self._async_client = ClientSession(headers={"User-Agent": USER_AGENT})
         if isinstance(app_id, AppID):
             app_id = app_id.value
         if isinstance(client_secret, AppSecret):
@@ -53,6 +55,9 @@ class AuthManager(ContextInstanceMixin):
 
     def get_token(self):
         return self._auth()
+
+    async def get_token_async(self):
+        return await self._auth_async()
 
     def _auth(self) -> str:
         fields = {
@@ -76,6 +81,28 @@ class AuthManager(ContextInstanceMixin):
                         continue
                     return result["access_token"]
 
+    async def _auth_async(self) -> str:
+        fields = {
+            "grant_type": "client_credentials",
+            "client_id": self.app_id,
+            "client_secret": self.client_secret,
+            "username": self.login,
+            "password": self.password,
+            "2fa_supported": 1,
+            "v": API_VERSION,
+        }
+        json = await self._make_request_async(fields)
+        validate_info = self._validate_response(json)
+        if validate_info.status:
+            return json["access_token"]
+        else:
+            if validate_info.action is ResponseErrorAction.NEED_VALIDATION:
+                while True:
+                    result = await self._process_need_validation_async(json)
+                    if "access_token" not in result:
+                        continue
+                    return result["access_token"]
+
     def _process_need_validation(self, json: dict):
         """
         :param json:
@@ -94,6 +121,22 @@ class AuthManager(ContextInstanceMixin):
             "code": code,
         }
         json = self._make_request(fields)
+        return json
+
+    async def _process_need_validation_async(self, json: dict):
+        await self._make_request_async({}, url=json["redirect_uri"])
+        code = self.error_need_validation()
+        fields = {
+            "grant_type": "client_credentials",
+            "client_id": self.app_id,
+            "client_secret": self.client_secret,
+            "username": self.login,
+            "password": self.password,
+            "2fa_supported": 1,
+            "v": API_VERSION,
+            "code": code,
+        }
+        json = await self._make_request_async(fields)
         return json
 
     def _validate_response(self, response: dict):
@@ -119,6 +162,21 @@ class AuthManager(ContextInstanceMixin):
         """
         code = input("Enter the code which you will receive: ")
         return int(code.strip())
+
+    async def _make_request_async(
+        self, fields: dict, method: str = "GET", url: str = AUTH_URL
+    ):
+        async with self._async_client.request(
+            method=method, url=url, params=fields
+        ) as resp:
+            try:
+                json = await resp.json()
+            except Exception:  # noqa TODO: rework
+                json = {}
+        return json
+
+    async def close_async(self):
+        await self._async_client.close()
 
     def _make_request(
         self, fields: dict, method: str = "GET", url: str = AUTH_URL
