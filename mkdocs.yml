@@ -2,9 +2,10 @@ site_name: VK.PY - Modern VKAPI library for Python.
 nav:
   - Get started: index.md
   - First steps:
-      - Install: install.md
-      - First steps VK: first-steps-vk.md
-      - Background task: first-steps-background.md
+      - Install: first-steps/install.md
+      - First steps VK: first-steps/vk.md
+      - Background task: first-steps/background.md
+      - Auth: first-steps/auth.md
 theme:
   name: 'material'
 markdown_extensions:
