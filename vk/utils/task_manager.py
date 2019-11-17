@@ -44,7 +44,7 @@ class TaskManager:
             if auto_reload:
                 self.loop.create_task(_auto_reload())
 
-            [self.loop.create_task(task()) for task in self.tasks]
+            [self.loop.create_task(task) for task in self.tasks]
 
             logger.info("Loop started!")
             self.loop.run_forever()
@@ -62,7 +62,7 @@ class TaskManager:
         """
         self.loop.close()
 
-    def add_task(self, task: typing.Callable):
+    def add_task(self, task: typing.Union[typing.Coroutine, typing.Callable]):
         """
 
         Add task to loop when loop don`t started.
@@ -71,8 +71,10 @@ class TaskManager:
         :return:
         """
         if asyncio.iscoroutinefunction(task):
-            self.tasks.append(task)
+            self.tasks.append(task())
             logger.info(f"Task {task.__name__} successfully added!")
+        elif asyncio.iscoroutine(task):
+            self.tasks.append(task)
         else:
             raise RuntimeError(
                 "Unexpected task. Tasks may be only coroutine functions"
