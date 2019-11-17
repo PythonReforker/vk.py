@@ -31,21 +31,21 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="/assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
-        <title>VK.PY - Modern VKAPI library for Python.</title>
+        <title>Auth - VK.PY - Modern VKAPI library for Python.</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
       
       
     
     
-      <script src="/assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
@@ -54,7 +54,7 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="/assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
     
     
@@ -77,12 +77,16 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#_1" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="/." title="VK.PY - Modern VKAPI library for Python." class="md-header-nav__button md-logo">
+        <a href="../.." title="VK.PY - Modern VKAPI library for Python." class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -99,7 +103,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                
+                Auth
               
             </span>
           
@@ -174,7 +178,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="/." title="VK.PY - Modern VKAPI library for Python." class="md-nav__button md-logo">
+    <a href="../.." title="VK.PY - Modern VKAPI library for Python." class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
@@ -210,7 +214,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/." title="Get started" class="md-nav__link">
+    <a href="../.." title="Get started" class="md-nav__link">
       Get started
     </a>
   </li>
@@ -220,10 +224,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       First steps
@@ -241,7 +247,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/first-steps/install/" title="Install" class="md-nav__link">
+    <a href="../install/" title="Install" class="md-nav__link">
       Install
     </a>
   </li>
@@ -253,7 +259,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/first-steps/vk/" title="First steps VK" class="md-nav__link">
+    <a href="../vk/" title="First steps VK" class="md-nav__link">
       First steps VK
     </a>
   </li>
@@ -265,7 +271,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/first-steps/background/" title="Background task" class="md-nav__link">
+    <a href="../background/" title="Background task" class="md-nav__link">
       Background task
     </a>
   </li>
@@ -275,11 +281,65 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="/first-steps/auth/" title="Auth" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Auth
+      </label>
+    
+    <a href="./" title="Auth" class="md-nav__link md-nav__link--active">
       Auth
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Авторизация
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    С помощью токена
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    С помощью логина и пароля
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -295,12 +355,93 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    Авторизация
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    С помощью токена
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    С помощью логина и пароля
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
-  <h1>404 - Not found</h1>
+                
+                  <a href="https://github.com/prostomarkeloff/vk.py/edit/master/docs/first-steps/auth.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Auth</h1>
+                
+                <h2 id="_1">Авторизация</h2>
+<p>На данный момент библиотека поддерживает 2 метода авторизации: с помощью токена и с помощью логина и пароля.</p>
+<h3 id="_2">С помощью токена</h3>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
 
+<span class="n">my_awesome_token</span> <span class="o">=</span> <span class="s2">&quot;&lt;Some token..&gt;&quot;</span>
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="n">my_awesome_token</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="_3">С помощью логина и пароля</h3>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">vk</span> <span class="kn">import</span> <span class="n">VK</span>
+<span class="kn">from</span> <span class="nn">vk.utils.auth_manager</span> <span class="kn">import</span> <span class="n">AuthManager</span>
+
+<span class="c1"># Синхронно:</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="s2">&quot;7999123456&quot;</span><span class="p">,</span> <span class="s2">&quot;my-password&quot;</span><span class="p">)</span>
+<span class="n">token</span> <span class="o">=</span> <span class="n">auth</span><span class="o">.</span><span class="n">get_token</span><span class="p">()</span>
+<span class="n">vk</span> <span class="o">=</span> <span class="n">VK</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+<span class="c1"># Асинхронно:</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">get_token_of_user</span><span class="p">(</span><span class="n">user_login</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user_password</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">auth</span> <span class="o">=</span> <span class="n">AuthManager</span><span class="p">(</span><span class="n">user_login</span><span class="p">,</span> <span class="n">user_password</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">await</span> <span class="n">auth</span><span class="o">.</span><span class="n">get_token_async</span><span class="p">()</span>
+</pre></div>
+                
+                  
+                
+              
               
                 
 
@@ -313,6 +454,27 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../background/" title="Background task" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Background task
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -331,9 +493,9 @@
       
     </div>
     
-      <script src="/assets/javascripts/application.ac79c3b0.js"></script>
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"/"}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
     
   </body>
