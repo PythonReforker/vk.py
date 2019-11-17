@@ -7,6 +7,7 @@ from aiohttp import ClientSession
 
 from vk.constants import API_VERSION
 from vk.constants import JSON_LIBRARY
+from vk.constants import JSONDecodeError
 from vk.utils.mixins import ContextInstanceMixin
 
 
@@ -171,7 +172,7 @@ class AuthManager(ContextInstanceMixin):
         ) as resp:
             try:
                 json = await resp.json()
-            except Exception:  # noqa TODO: rework
+            except JSONDecodeError:
                 json = {}
         return json
 
@@ -194,6 +195,6 @@ class AuthManager(ContextInstanceMixin):
         try:
             json = JSON_LIBRARY.loads(response.data.decode("utf-8"))
         # TODO: add universal exception for json validation error.
-        except Exception:  # noqa
+        except JSONDecodeError:
             json = {}
         return json

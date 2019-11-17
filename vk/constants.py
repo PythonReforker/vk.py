@@ -9,23 +9,40 @@ API_LINK: str = "https://api.vk.com/method/"  # link to access API
 
 try:
     import orjson  # noqa
+    from orjson import JSONDecodeError as _JSONDecodeError_orjson
 except ImportError:
     orjson = None
+    _JSONDecodeError_orjson = None
 
 try:
     import ujson  # noqa
+
+    _JSONDecodeError_ujson = ValueError
 except ImportError:
     ujson = None
+    _JSONDecodeError_ujson = None
 
 if not (ujson or orjson):
     import json
+    from json import JSONDecodeError as _JSONDecodeError_json
 else:
     json = None
+    _JSONDecodeError_json = None
+
+_json_decode_errors = [
+    _JSONDecodeError_json,
+    _JSONDecodeError_orjson,
+    _JSONDecodeError_ujson,
+]
 
 _JSONLIB: AbstractJsonLibrary = [lib for lib in [orjson, ujson, json] if lib][
     0
 ]  # noqa
 JSON_LIBRARY = JsonLibrary(_JSONLIB)
+del _JSONLIB
+
+JSONDecodeError = tuple([error for error in _json_decode_errors if error])
+del _json_decode_errors
 
 
 def default_rules() -> dict:
