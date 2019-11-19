@@ -85,4 +85,4 @@ class APIErrorDispatcher:
                     return await handler.execute(error)
 
         msg: str = error["error_msg"]
-        raise APIException(f"[{code}] {msg}")
+        raise APIException(code, msg)
