@@ -17,10 +17,10 @@
 
 ## Install
 
-Install package from PyPi: (current version is the 3rd alpha of 1.0.0)
+Install package from PyPi: (current version is 4 alpha of 1.0.0)
 
 ```sh
-pip install vk.py==1.0.0a3 -U
+pip install vk.py==1.0.0a4 -U
 ```
 
 Warning: this version really unstable and not recommended to use in production.

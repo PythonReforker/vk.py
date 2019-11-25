@@ -12,10 +12,12 @@ except ImportError:
     from async_generator import asynccontextmanager
 
 from aiohttp import ClientSession
+from aiohttp import ClientError
 
 from vk.constants import API_LINK
 from vk.constants import API_VERSION
 from vk.constants import JSON_LIBRARY
+from vk.constants import JSONDecodeError
 from vk.exceptions import APIErrorDispatcher
 from vk.methods import API
 from vk.utils import ContextInstanceMixin
@@ -30,6 +32,10 @@ except ImportError:
     uvloop = None
 
 T = typing.TypeVar("T")
+
+
+class HTTPException(ClientError):  # TODO: move to vk/exceptions
+    pass
 
 
 class VK(ContextInstanceMixin):
@@ -92,9 +98,14 @@ class VK(ContextInstanceMixin):
         async with self.client.post(
             API_LINK + method_name, data=params
         ) as response:
-            json: typing.Dict[str, typing.Any] = await response.json(
-                loads=JSON_LIBRARY.loads
-            )
+            try:
+                json: typing.Dict[str, typing.Any] = await response.json(
+                    loads=JSON_LIBRARY.loads
+                )
+            except JSONDecodeError:
+                logger.error("Some exception occured.. Can't load json.")
+                text = await response.text()
+                raise HTTPException(text)
             logger.debug(
                 f"Method {method_name} called. Response from API: {json}"
             )
