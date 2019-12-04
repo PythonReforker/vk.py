@@ -7,7 +7,7 @@ class Database(BaseMethod):
         self, faculty_id: int = None, offset: int = None, count: int = None
     ):
         """
-        Returns list of chairs on a specified faculty.
+        Return list of chairs on a specified faculty.
         :param faculty_id: id of the faculty to get chairs from
         :param offset: offset required to get a certain subset of chairs
         :param count: amount of chairs to get
@@ -29,7 +29,7 @@ class Database(BaseMethod):
         count: int = None,
     ):
         """
-        Returns a list of cities.
+        Return a list of cities.
         :param country_id: Country ID.
         :param region_id: Region ID.
         :param q: Search query.
@@ -46,7 +46,7 @@ class Database(BaseMethod):
 
     async def get_cities_by_id(self, city_ids: list = None):
         """
-        Returns information about cities by their IDs.
+        Return information about cities by their IDs.
         :param city_ids: City IDs.
 
 
@@ -64,7 +64,7 @@ class Database(BaseMethod):
         count: int = None,
     ):
         """
-        Returns a list of countries.
+        Return a list of countries.
         :param need_all: '1' — to return a full list of all countries, '0' — to return a list of countries near the current user's country (default).
         :param code: Country codes in [vk.com/dev/country_codes|ISO 3166-1 alpha-2] standard.
         :param offset: Offset needed to return a specific subset of countries.
@@ -79,7 +79,7 @@ class Database(BaseMethod):
 
     async def get_countries_by_id(self, country_ids: list = None):
         """
-        Returns information about countries by their IDs.
+        Return information about countries by their IDs.
         :param country_ids: Country IDs.
 
 
@@ -93,7 +93,7 @@ class Database(BaseMethod):
         self, university_id: int = None, offset: int = None, count: int = None
     ):
         """
-        Returns a list of faculties (i.e., university departments).
+        Return a list of faculties (i.e., university departments).
         :param university_id: University ID.
         :param offset: Offset needed to return a specific subset of faculties.
         :param count: Number of faculties to return.
@@ -146,7 +146,7 @@ class Database(BaseMethod):
         count: int = None,
     ):
         """
-        Returns a list of regions.
+        Return a list of regions.
         :param country_id: Country ID, received in [vk.com/dev/database.getCountries|database.getCountries] method.
         :param q: Search query.
         :param offset: Offset needed to return specific subset of regions.
@@ -161,7 +161,7 @@ class Database(BaseMethod):
 
     async def get_school_classes(self, country_id: int = None):
         """
-        Returns a list of school classes specified for the country.
+        Return a list of school classes specified for the country.
         :param country_id: Country ID.
 
 
@@ -179,7 +179,7 @@ class Database(BaseMethod):
         count: int = None,
     ):
         """
-        Returns a list of schools.
+        Return a list of schools.
         :param q: Search query.
         :param city_id: City ID.
         :param offset: Offset needed to return a specific subset of schools.
@@ -201,7 +201,7 @@ class Database(BaseMethod):
         count: int = None,
     ):
         """
-        Returns a list of higher education institutions.
+        Return a list of higher education institutions.
         :param q: Search query.
         :param country_id: Country ID.
         :param city_id: City ID.

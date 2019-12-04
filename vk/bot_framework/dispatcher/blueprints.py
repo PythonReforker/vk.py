@@ -1,7 +1,7 @@
 """
-A simple abstraction for build largest bots and sharing rules beetwen handlers.
+A simple abstraction to build the largest bots and sharing rules between handlers.
 
-Example usecase:
+Example usage:
 
     You have a simple bot with admin and user commands[handlers],
     what to limit access to admin commands[handlers] you create a simple rule[named rule, rule] for passing him
@@ -14,15 +14,15 @@ Example usecase:
 
     repeatedly. We appreciate your time and we create blueprints for this simple cases.
 
-    But! If you have a largest bot with a lof of handlers, you need a simple, and more powerful
-    tool for register handlers.
-    Blueprints registering looks like that:
+    But! If you have the largest bot in the world with lots of handlers, you need a simple, and more powerful
+    tool to register handlers.
+    Blueprint registering looks like that:
 
     .. code-block:: python3
         blueprint = Blueprint(...)
         dp.setup_blueprint(blueprint)
 
-    It`s easy!
+    It's easy!
 
 """
 import typing
@@ -50,7 +50,7 @@ class AbstractBlueprint(ABC, MetaMixin):
         **named_rules: typing.Dict[str, typing.Any],
     ):
         """
-        Register a message handler in blueprint.
+        Register a message handler by the blueprint.
         :param rules:
         :param named_rules:
         :return:
@@ -64,7 +64,7 @@ class AbstractBlueprint(ABC, MetaMixin):
         **named_rules: typing.Dict[str, typing.Any],
     ):
         """
-        Register a event handler in blueprint.
+        Register an event handler by the blueprint.
         :param event_type:
         :param rules:
         :param named_rules:
@@ -104,7 +104,7 @@ class Blueprint(AbstractBlueprint):
 
     def get_handler(self, handler_coro: typing.Callable):
         """
-        Get handler object by handler coroutine.
+        Get handler object by the handler coroutine.
         :param handler_coro:
         :return:
         """
@@ -129,7 +129,7 @@ class Blueprint(AbstractBlueprint):
                 "deprecated": deprecated,
                 **other_meta,
             }
-            if handler.coro.__doc__:  # or set description in docstring
+            if handler.coro.__doc__:  # or match description in docstring
                 meta["description"] = handler.coro.__doc__.strip()
             handler.meta.update(
                 {k: v for k, v in meta.items() if v is not None}
@@ -145,7 +145,7 @@ class Blueprint(AbstractBlueprint):
         **named_rules: typing.Dict[str, typing.Any],
     ):
         """
-        Register message handler with decorator.
+        Register message handler by the decorator.
 
         :param rules: other user rules
         :param named_rules: other user named rules

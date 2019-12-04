@@ -1,4 +1,4 @@
 """
-A place for useful addons.
+Useful addons place.
 """
 from . import caching

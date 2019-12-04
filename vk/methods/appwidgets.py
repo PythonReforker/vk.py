@@ -5,7 +5,7 @@ from vk.types.responses import appwidgets as m
 class AppWidgets(BaseMethod):
     async def update(self, code: str = None, type: str = None):
         """
-        Allows to update community app widget
+        Allow to update community app widget
         :param code:
         :param type:
 

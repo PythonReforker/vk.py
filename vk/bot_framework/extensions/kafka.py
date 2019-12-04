@@ -48,5 +48,5 @@ class Kafka(BaseExtension):
                 else:
                     dp._process_events([events])
         finally:
-            # Will leave consumer group; perform autocommit if enabled.
+            # Leave consumer group; perform autocommit if it is enabled.
             await self.consumer.stop()

@@ -166,7 +166,7 @@ class DataCheck(NamedRule):
 
 class MessageCountArgs(NamedRule):
     """
-    Get args and return result of equeal len(args) and passed args.
+    Get args and return result of equal len(args) and passed args.
     """
 
     key = "count_args"

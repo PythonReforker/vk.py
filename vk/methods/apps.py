@@ -5,7 +5,7 @@ from vk.types.responses import apps as m
 class Apps(BaseMethod):
     async def delete_app_requests(self,):
         """
-        Deletes all request notifications from the current app.
+        Delete all request notifications from the current app.
 
 
         """
@@ -25,7 +25,7 @@ class Apps(BaseMethod):
         name_case: str = None,
     ):
         """
-        Returns applications data.
+        Return applications data.
         :param app_id: Application ID
         :param app_ids: List of application ID
         :param platform: platform. Possible values: *'ios' — iOS,, *'android' — Android,, *'winphone' — Windows Phone,, *'web' — приложения на vk.com. By default: 'web'.
@@ -56,7 +56,7 @@ class Apps(BaseMethod):
         filter: str = None,
     ):
         """
-        Returns a list of applications (apps) available to users in the App Catalog.
+        Return a list of applications (apps) available to users in the App Catalog.
         :param sort: Sort order: 'popular_today' — popular for one day (default), 'visitors' — by visitors number , 'create_date' — by creation date, 'growth_rate' — by growth rate, 'popular_week' — popular for one week
         :param offset: Offset required to return a specific subset of apps.
         :param count: Number of apps to return.
@@ -85,7 +85,7 @@ class Apps(BaseMethod):
         fields: list = None,
     ):
         """
-        Creates friends list for requests and invites in current app.
+        Create friends list for requests and invites in current app.
         :param extended:
         :param count: List size.
         :param offset:
@@ -103,7 +103,7 @@ class Apps(BaseMethod):
         self, type: str = None, global_: bool = None, extended: bool = None
     ):
         """
-        Returns players rating in the game.
+        Return players rating in the game.
         :param type: Leaderboard type. Possible values: *'level' — by level,, *'points' — by mission points,, *'score' — by score ().
         :param global_: Rating type. Possible values: *'1' — global rating among all players,, *'0' — rating among user friends.
         :param extended: 1 — to return additional info about users
@@ -117,7 +117,7 @@ class Apps(BaseMethod):
 
     async def get_scopes(self, type: str = None):
         """
-        Returns scopes for auth
+        Return scopes for auth
         :param type:
 
 
@@ -129,7 +129,7 @@ class Apps(BaseMethod):
 
     async def get_score(self, user_id: int = None):
         """
-        Returns user score in app
+        Return user score in app
         :param user_id:
 
 
@@ -149,7 +149,7 @@ class Apps(BaseMethod):
         separate: bool = None,
     ):
         """
-        Sends a request to another user in an app that uses VK authorization.
+        Send a request to the another user in the app that uses VK authorization.
         :param user_id: id of the user to send a request
         :param text: request text
         :param type: request type. Values: 'invite' – if the request is sent to a user who does not have the app installed,, 'request' – if a user has already installed the app

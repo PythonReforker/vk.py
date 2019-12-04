@@ -1,4 +1,4 @@
 """
-Validators for messages arguments.
+Validators for message arguments.
 """
 from .validators import Validator

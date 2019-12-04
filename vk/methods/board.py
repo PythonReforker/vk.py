@@ -12,7 +12,7 @@ class Board(BaseMethod):
         attachments: list = None,
     ):
         """
-        Creates a new topic on a community's discussion board.
+        Create a new topic in the community's discussion board.
         :param group_id: ID of the community that owns the discussion board.
         :param title: Topic title.
         :param text: Text of the topic.
@@ -28,7 +28,7 @@ class Board(BaseMethod):
 
     async def close_topic(self, group_id: int = None, topic_id: int = None):
         """
-        Closes a topic on a community's discussion board so that comments cannot be posted.
+        Close a topic in the community's discussion board so that comments cannot be posted.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
 
@@ -73,7 +73,7 @@ class Board(BaseMethod):
         comment_id: int = None,
     ):
         """
-        Deletes a comment on a topic on a community's discussion board.
+        Delete a comment on a topic on a community's discussion board.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
         :param comment_id: Comment ID.
@@ -87,7 +87,7 @@ class Board(BaseMethod):
 
     async def delete_topic(self, group_id: int = None, topic_id: int = None):
         """
-        Deletes a topic from a community's discussion board.
+        Delete a topic from the community's discussion board.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
 
@@ -107,7 +107,7 @@ class Board(BaseMethod):
         attachments: list = None,
     ):
         """
-        Edits a comment on a topic on a community's discussion board.
+        Edit a comment in a topic in the community's discussion board.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
         :param comment_id: ID of the comment on the topic.
@@ -125,7 +125,7 @@ class Board(BaseMethod):
         self, group_id: int = None, topic_id: int = None, title: str = None
     ):
         """
-        Edits the title of a topic on a community's discussion board.
+        Edit the title of a topic in the community's discussion board.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
         :param title: New title of the topic.
@@ -139,7 +139,7 @@ class Board(BaseMethod):
 
     async def fix_topic(self, group_id: int = None, topic_id: int = None):
         """
-        Pins a topic (fixes its place) to the top of a community's discussion board.
+        Pin a topic (fix its place) to the top of a community's discussion board.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
 
@@ -162,7 +162,7 @@ class Board(BaseMethod):
         sort: str = None,
     ):
         """
-        Returns a list of comments on a topic on a community's discussion board.
+        Return a list of comments in the topic.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
         :param need_likes: '1' — to return the 'likes' field, '0' — not to return the 'likes' field (default)
@@ -191,7 +191,7 @@ class Board(BaseMethod):
         preview_length: int = None,
     ):
         """
-        Returns a list of topics on a community's discussion board.
+        Return a list of topics in the community's discussion board.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_ids: IDs of topics to be returned (100 maximum). By default, all topics are returned. If this parameter is set, the 'order', 'offset', and 'count' parameters are ignored.
         :param order: Sort order: '1' — by date updated in reverse chronological order. '2' — by date created in reverse chronological order. '-1' — by date updated in chronological order. '-2' — by date created in chronological order. If no sort order is specified, topics are returned in the order specified by the group administrator. Pinned topics are returned first, regardless of the sorting.
@@ -210,7 +210,7 @@ class Board(BaseMethod):
 
     async def open_topic(self, group_id: int = None, topic_id: int = None):
         """
-        Re-opens a previously closed topic on a community's discussion board.
+        Re-open a previously closed topic.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
 
@@ -228,7 +228,7 @@ class Board(BaseMethod):
         comment_id: int = None,
     ):
         """
-        Restores a comment deleted from a topic on a community's discussion board.
+        Restore a comment deleted from the topic.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
         :param comment_id: Comment ID.
@@ -242,7 +242,7 @@ class Board(BaseMethod):
 
     async def unfix_topic(self, group_id: int = None, topic_id: int = None):
         """
-        Unpins a pinned topic from the top of a community's discussion board.
+        Unpin a topic from the top of the community's discussion board.
         :param group_id: ID of the community that owns the discussion board.
         :param topic_id: Topic ID.
 

@@ -17,7 +17,7 @@ class Fave(BaseMethod):
 
     async def add_link(self, link: str = None):
         """
-        Adds a link to user faves.
+        Add a link to the user faves.
         :param link: Link URL.
 
 

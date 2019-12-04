@@ -69,7 +69,7 @@ class Groups(BaseMethod):
         self, group_id: int = None, link: str = None, text: str = None
     ):
         """
-        Allows to add a link to the community.
+        Allow to add a link to the community.
         :param group_id: Community ID.
         :param link: Link URL.
         :param text: Description text for the link.
@@ -83,7 +83,7 @@ class Groups(BaseMethod):
 
     async def approve_request(self, group_id: int = None, user_id: int = None):
         """
-        Allows to approve join request to the community.
+        Allow to approve join request to the community.
         :param group_id: Community ID.
         :param user_id: User ID.
 
@@ -128,7 +128,7 @@ class Groups(BaseMethod):
         subtype: int = None,
     ):
         """
-        Creates a new community.
+        Create a new community.
         :param title: Community title.
         :param description: Community description (ignored for 'type' = 'public').
         :param type: Community type. Possible values: *'group' – group,, *'event' – event,, *'public' – public page
@@ -159,7 +159,7 @@ class Groups(BaseMethod):
 
     async def delete_link(self, group_id: int = None, link_id: int = None):
         """
-        Allows to delete a link from the community.
+        Allow to delete a link from the community.
         :param group_id: Community ID.
         :param link_id: Link ID.
 
@@ -231,7 +231,7 @@ class Groups(BaseMethod):
         city: int = None,
     ):
         """
-        Edits a community.
+        Edit a community.
         :param group_id: Community ID.
         :param title: Community title.
         :param description: Community description.
@@ -376,7 +376,7 @@ class Groups(BaseMethod):
         contact_email: str = None,
     ):
         """
-        Allows to add, remove or edit the community manager.
+        Allow to add, remove or edit the community manager.
         :param group_id: Community ID.
         :param user_id: User ID.
         :param role: Manager role. Possible values: *'moderator',, *'editor',, *'administrator'.
@@ -414,7 +414,7 @@ class Groups(BaseMethod):
         count: int = None,
     ):
         """
-        Returns a list of the communities to which a user belongs.
+        Return a list of the communities to which a user belongs.
         :param user_id: User ID.
         :param extended: '1' — to return complete information about a user's communities, '0' — to return a list of community IDs without any additional fields (default),
         :param filter: Types of communities to return: 'admin' — to return communities administered by the user , 'editor' — to return communities where the user is an administrator or editor, 'moder' — to return communities where the user is an administrator, editor, or moderator, 'groups' — to return only groups, 'publics' — to return only public pages, 'events' — to return only events
@@ -440,7 +440,7 @@ class Groups(BaseMethod):
         fields: list = None,
     ):
         """
-        Returns a list of community addresses.
+        Return a list of community addresses.
         :param group_id: ID or screen name of the community.
         :param address_ids:
         :param latitude: Latitude of  the user geo position.
@@ -465,7 +465,7 @@ class Groups(BaseMethod):
         owner_id: int = None,
     ):
         """
-        Returns a list of users on a community blacklist.
+        Return a list of users on a community blacklist.
         :param group_id: Community ID.
         :param offset: Offset needed to return a specific subset of users.
         :param count: Number of users to return.
@@ -483,7 +483,7 @@ class Groups(BaseMethod):
         self, group_ids: list = None, group_id: str = None, fields: list = None
     ):
         """
-        Returns information about communities by their IDs.
+        Return information about communities by their IDs.
         :param group_ids: IDs or screen names of communities.
         :param group_id: ID or screen name of the community.
         :param fields: Group fields to return.
@@ -497,7 +497,7 @@ class Groups(BaseMethod):
 
     async def get_callback_confirmation_code(self, group_id: int = None):
         """
-        Returns Callback API confirmation code for the community.
+        Return Callback API confirmation code for the community.
         :param group_id: Community ID.
 
 
@@ -526,7 +526,7 @@ class Groups(BaseMethod):
         self, group_id: int = None, server_id: int = None
     ):
         """
-        Returns [vk.com/dev/callback_api|Callback API] notifications settings.
+        Return [vk.com/dev/callback_api|Callback API] notifications settings.
         :param group_id: Community ID.
         :param server_id: Server ID.
 
@@ -541,7 +541,7 @@ class Groups(BaseMethod):
         self, category_id: int = None, subcategory_id: int = None
     ):
         """
-        Returns communities list for a catalog category.
+        Return communities list for a catalog category.
         :param category_id: Category id received from [vk.com/dev/groups.getCatalogInfo|groups.getCatalogInfo].
         :param subcategory_id: Subcategory id received from [vk.com/dev/groups.getCatalogInfo|groups.getCatalogInfo].
 
@@ -556,7 +556,7 @@ class Groups(BaseMethod):
         self, extended: bool = None, subcategories: bool = None
     ):
         """
-        Returns categories list for communities catalog
+        Return categories list for communities catalog
         :param extended: 1 – to return communities count and three communities for preview. By default: 0.
         :param subcategories: 1 – to return subcategories info. By default: 0.
 
@@ -576,7 +576,7 @@ class Groups(BaseMethod):
         name_case: str = None,
     ):
         """
-        Returns invited users list of a community
+        Return invited users list of a community
         :param group_id: Group ID to return invited users for.
         :param offset: Offset needed to return a specific subset of results.
         :param count: Number of results to return.
@@ -594,7 +594,7 @@ class Groups(BaseMethod):
         self, offset: int = None, count: int = None, extended: bool = None
     ):
         """
-        Returns a list of invitations to join communities and events.
+        Return a list of invitations to join communities and events.
         :param offset: Offset needed to return a specific subset of invitations.
         :param count: Number of invitations to return.
         :param extended: '1' — to return additional [vk.com/dev/fields_groups|fields] for communities..
@@ -608,7 +608,7 @@ class Groups(BaseMethod):
 
     async def get_long_poll_server(self, group_id: int = None):
         """
-        Returns the data needed to query a Long Poll server for events
+        Return the data needed to query a Long Poll server for events
         :param group_id: Community ID
 
 
@@ -620,7 +620,7 @@ class Groups(BaseMethod):
 
     async def get_long_poll_settings(self, group_id: int = None):
         """
-        Returns Long Poll notification settings
+        Return Long Poll notification settings
         :param group_id: Community ID.
 
 
@@ -640,7 +640,7 @@ class Groups(BaseMethod):
         filter: str = None,
     ):
         """
-        Returns a list of community members.
+        Return a list of community members.
         :param group_id: ID or screen name of the community.
         :param sort: Sort order. Available values: 'id_asc', 'id_desc', 'time_asc', 'time_desc'. 'time_asc' and 'time_desc' are availavle only if the method is called by the group's 'moderator'.
         :param offset: Offset needed to return a specific subset of community members.
@@ -663,7 +663,7 @@ class Groups(BaseMethod):
         fields: list = None,
     ):
         """
-        Returns a list of requests to the community.
+        Return a list of requests to the community.
         :param group_id: Community ID.
         :param offset: Offset needed to return a specific subset of results.
         :param count: Number of results to return.
@@ -678,7 +678,7 @@ class Groups(BaseMethod):
 
     async def get_settings(self, group_id: int = None):
         """
-        Returns community settings.
+        Return community settings.
         :param group_id: Community ID.
 
 
@@ -720,7 +720,7 @@ class Groups(BaseMethod):
         extended: bool = None,
     ):
         """
-        Returns information specifying whether a user is a member of a community.
+        Return information specifying whether a user is a member of a community.
         :param group_id: ID or screen name of the community.
         :param user_id: User ID.
         :param user_ids: User IDs.
@@ -760,7 +760,7 @@ class Groups(BaseMethod):
 
     async def remove_user(self, group_id: int = None, user_id: int = None):
         """
-        Removes a user from the community.
+        Remove a user from the community.
         :param group_id: Community ID.
         :param user_id: User ID.
 
@@ -775,7 +775,7 @@ class Groups(BaseMethod):
         self, group_id: int = None, link_id: int = None, after: int = None
     ):
         """
-        Allows to reorder links in the community.
+        Allow to reorder links in the community.
         :param group_id: Community ID.
         :param link_id: Link ID.
         :param after: ID of the link after which to place the link with 'link_id'.
@@ -800,7 +800,7 @@ class Groups(BaseMethod):
         count: int = None,
     ):
         """
-        Returns a list of communities matching the search criteria.
+        Return a list of communities matching the search criteria.
         :param q: Search query string.
         :param type: Community type. Possible values: 'group, page, event.'
         :param country_id: Country ID.
@@ -963,7 +963,7 @@ class Groups(BaseMethod):
         user_unblock: bool = None,
     ):
         """
-        Sets Long Poll notification settings
+        Set Long Poll notification settings
         :param group_id: Community ID.
         :param enabled: Sets whether Long Poll is enabled ('0' — disabled, '1' — enabled).
         :param api_version:

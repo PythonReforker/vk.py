@@ -13,7 +13,7 @@ class Leads(BaseMethod):
         country: str = None,
     ):
         """
-        Checks if the user can start the lead.
+        Check if the user can start the lead.
         :param lead_id: Lead ID.
         :param test_result: Value to be return in 'result' field when test mode is used.
         :param test_mode:
@@ -32,7 +32,7 @@ class Leads(BaseMethod):
         self, vk_sid: str = None, secret: str = None, comment: str = None
     ):
         """
-        Completes the lead started by user.
+        Complete the lead started by user.
         :param vk_sid: Session obtained as GET parameter when session started.
         :param secret: Secret key from the lead testing interface.
         :param comment: Comment text.
@@ -52,7 +52,7 @@ class Leads(BaseMethod):
         date_end: str = None,
     ):
         """
-        Returns lead stats data.
+        Return lead stats data.
         :param lead_id: Lead ID.
         :param secret: Secret key obtained from the lead testing interface.
         :param date_start: Day to start stats from (YYYY_MM_DD, e.g.2011-09-17).
@@ -75,7 +75,7 @@ class Leads(BaseMethod):
         reverse: bool = None,
     ):
         """
-        Returns a list of last user actions for the offer.
+        Return a list of last user actions for the offer.
         :param offer_id: Offer ID.
         :param secret: Secret key obtained in the lead testing interface.
         :param offset: Offset needed to return a specific subset of results.
@@ -92,7 +92,7 @@ class Leads(BaseMethod):
 
     async def metric_hit(self, data: str = None):
         """
-        Counts the metric event.
+        Count the metric event.
         :param data: Metric data obtained in the lead interface.
 
 
@@ -112,7 +112,7 @@ class Leads(BaseMethod):
         force: bool = None,
     ):
         """
-        Creates new session for the user passing the offer.
+        Create new session for the user passing the offer.
         :param lead_id: Lead ID.
         :param secret: Secret key from the lead testing interface.
         :param uid:

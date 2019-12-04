@@ -1,17 +1,6 @@
 import logging
 import typing
 
-from .blueprints import Blueprint
-from .extension import BaseExtension
-from .extension import ExtensionsManager
-from .handler import BaseHandler
-from .handler import Handler
-from .middleware import BaseMiddleware
-from .middleware import MiddlewareManager
-from .rule import BaseRule
-from .rule import RuleFactory
-from .storage import AbstractAsyncStorage
-from .storage import AbstractStorage
 from vk import VK
 from vk.bot_framework.dispatcher import data_
 from vk.constants import default_extensions
@@ -24,6 +13,17 @@ from vk.utils.deprecated import deprecated
 from vk.utils.deprecated import deprecated_argument
 from vk.utils.deprecated import warn_deprecated
 from vk.utils.get_event import get_event_object
+from .blueprints import Blueprint
+from .extension import BaseExtension
+from .extension import ExtensionsManager
+from .handler import BaseHandler
+from .handler import Handler
+from .middleware import BaseMiddleware
+from .middleware import MiddlewareManager
+from .rule import BaseRule
+from .rule import RuleFactory
+from .storage import AbstractAsyncStorage
+from .storage import AbstractStorage
 
 logger = logging.getLogger(__name__)
 
@@ -66,14 +66,14 @@ class Dispatcher(ContextInstanceMixin):
     @property
     def handlers(self) -> typing.List[BaseHandler]:
         """
-        Returns a list of registered handlers.
+        Return a list of registered handlers.
         :return:
         """
         return self._handlers
 
     def get_handler(self, handler_coro: typing.Callable):
         """
-        Get handler object by handler coroutine.
+        Get a handler object by the handler coroutine.
         :param handler_coro:
         :return:
         """
@@ -84,7 +84,7 @@ class Dispatcher(ContextInstanceMixin):
     @property
     def registered_blueprints(self) -> typing.List[Blueprint]:
         """
-        Returns a list of registered blueprints.
+        Return a list of registered blueprints.
         :return:
         """
         return self._registered_blueprints
@@ -97,7 +97,7 @@ class Dispatcher(ContextInstanceMixin):
     @property
     def vk(self):
         """
-        Returns a passed vk object.
+        Return a passed vk object.
         :return:
         """
         return self._vk
@@ -105,7 +105,7 @@ class Dispatcher(ContextInstanceMixin):
     @property
     def middlewares(self):
         """
-        Returns a list of registered middlewares.
+        Return a list of registered middlewares.
         :return:
         """
         return self._middleware_manager.middlewares
@@ -154,7 +154,7 @@ class Dispatcher(ContextInstanceMixin):
 
     def _register_handler(self, handler: BaseHandler):
         """
-        Append handler to handlers list
+        Append handler to the handlers list
         :param handler:
         :return:
         """
@@ -187,7 +187,7 @@ class Dispatcher(ContextInstanceMixin):
         **named_rules: typing.Dict[str, typing.Any],
     ):
         """
-        Register message handler with decorator.
+        Register message handler with a decorator.
 
         :param rules: other user rules
         :param named_rules: other user named rules
@@ -206,7 +206,7 @@ class Dispatcher(ContextInstanceMixin):
         self, coro: typing.Callable, event_type: Event, rules: typing.List
     ):
         """
-        Register event handler.
+        Register an event handler.
 
         >>> dp.register_event_hanlder(my_handler, Event.WallReplyNew, [])
 
@@ -220,7 +220,7 @@ class Dispatcher(ContextInstanceMixin):
 
     def event_handler(self, event_type: Event, *rules, **named_rules):
         """
-        Register event handler with decorator.
+        Register an event handler with the decorator.
 
         >>> @dp.event_handler(Event.WALL_REPLY_NEW)
         >>> async def my_func(event: eventobj.WallReplyNew, data: dict):
@@ -244,7 +244,7 @@ class Dispatcher(ContextInstanceMixin):
 
     def setup_middleware(self, middleware):
         """
-        Add middleware to middlewares list with middleware manager.
+        Append middleware to the middlewares list with middleware manager.
         :param middleware: some middleware
         :return:
         """
@@ -260,7 +260,7 @@ class Dispatcher(ContextInstanceMixin):
 
     def setup_extension(self, extension: typing.Type[BaseExtension]):
         """
-        Add extension to extensions list with extension manager.
+        Add extension to the extensions list with extension manager.
         :param extension: some extension
         :return:
         """
@@ -268,7 +268,7 @@ class Dispatcher(ContextInstanceMixin):
 
     def middleware(self):
         """
-        Add middleware to middlewares list with decorator.
+        Add middleware to the middlewares list with decorator.
         :return:
         """
 
@@ -296,7 +296,7 @@ class Dispatcher(ContextInstanceMixin):
 
     def run_extension(self, name: str, **extension_init_params):
         """
-        Run extensions with extension manager.
+        Run extensions with the extension manager.
         :param name: name of extension
         :param extension_init_params: params which accept extension constructor
         :return:
@@ -312,14 +312,14 @@ class Dispatcher(ContextInstanceMixin):
         """
         data = (
             {}
-        )  # dict for transfer data from middlewares to handlers and filters.
+        )  # dict to transfer data from middlewares to handlers and filters.
         # examples/bot_framework/simple_middleware.py
         event = get_event_object(event)  # get event pydantic model.
 
         _skip_handler, data = await self._middleware_manager.trigger_pre_process_middlewares(
             event, data
         )  # trigger pre_process_event funcs in middlewares.
-        # returns service value '_skip_handler' and data variable (check upper).
+        # return service value '_skip_handler' and data variable (check upper).
 
         data_.set(data)
         result = False
@@ -331,12 +331,12 @@ class Dispatcher(ContextInstanceMixin):
 
         if (
             not _skip_handler
-        ):  # if middlewares don`t skip this handler, dispatcher be check
+        ):  # if middlewares don`t skip this handler, dispatcher is gonna check
             # rules and execute handlers.
             for handler in self._handlers:  # check handlers
                 if (
                     handler.event_type.value == event.type
-                ):  # if hanlder type is equal event pydantic model.
+                ):  # if handler type is equal event pydantic model.
                     try:
                         if event.type == "message_new":
                             obj = event.object.message
@@ -345,7 +345,7 @@ class Dispatcher(ContextInstanceMixin):
                         result = await handler.execute_handler(
                             obj, data
                         )  # if execute hanlder func
-                        # return non-False value, other handlers doesn`t be executed.
+                        # return non-False value, other handlers isnt gonna be executed.
                         if result is not False:
                             logger.debug(
                                 f"Event handler ({handler.handler.__name__}) successfully executed. Other "

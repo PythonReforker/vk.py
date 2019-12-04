@@ -7,7 +7,7 @@ class Gifts(BaseMethod):
         self, user_id: int = None, count: int = None, offset: int = None
     ):
         """
-        Returns a list of user gifts.
+        Return a list of user gifts.
         :param user_id: User ID.
         :param count: Number of gifts to return.
         :param offset: Offset needed to return a specific subset of results.

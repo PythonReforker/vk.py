@@ -21,7 +21,7 @@ class AbstractStorage(ABC):
         self, key: typing.AnyStr, default: typing.Any = None
     ) -> typing.Optional[typing.Any]:
         """
-        Get value by key from storage or get default value.
+        Get value by the key from storage or get default value.
         :param key:
         :param default:
         :return:
@@ -38,7 +38,7 @@ class AbstractStorage(ABC):
     @abstractmethod
     def update(self, key: typing.AnyStr, value: typing.Any):
         """
-        Update value in storage by key.
+        Update value in storage by the key.
         :param key:
         :param value:
         :return:
@@ -68,7 +68,7 @@ class AbstractAsyncStorage(ABC):
         self, key: typing.AnyStr, default: typing.Any = None
     ) -> typing.Optional[typing.Any]:
         """
-        Get value by key from storage or get default value.
+        Get value by the key from storage or get default value.
         :param key:
         :param default:
         :return:
@@ -85,7 +85,7 @@ class AbstractAsyncStorage(ABC):
     @abstractmethod
     async def update(self, key: typing.AnyStr, value: typing.Any):
         """
-        Update value in storage by key.
+        Update value in storage by the key.
         :param key:
         :param value:
         :return:
@@ -94,7 +94,7 @@ class AbstractAsyncStorage(ABC):
     @abstractmethod
     async def exists(self, key: typing.AnyStr):
         """
-        Check value exists in storage
+        Check that value is exists in storage
         :param key:
         :return:
         """

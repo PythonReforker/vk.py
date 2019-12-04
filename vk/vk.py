@@ -39,7 +39,7 @@ class HTTPException(ClientError):  # TODO: move to vk/exceptions
 
 class VK(ContextInstanceMixin):
     """
-    The main object of VKAPI, have basically methods to access in API.
+    The main object of VKAPI, obtain basic methods to access the API.
     """
 
     def __init__(
@@ -53,10 +53,10 @@ class VK(ContextInstanceMixin):
 
         """
 
-        :param str access_token: access token of VK user/community for access to VK methods.
-        :param AbstractEventLoop loop: asyncio event loop, uses in Task manager/dispatcher extensions/etc.
-        :param ClientSession client: aiohttp client session
-        :param change_vk_context_object: change context of VK object (if is None then we change it, else - no).
+        :param str access_token: access token of VK user/community to access the VK methods.
+        :param AbstractEventLoop loop: asyncio event loop, used in Task manager/dispatcher extensions/etc.
+        :param ClientSession client: aiohttp client session.
+        :param change_vk_context_object: change context of VK object.
         """
         self.access_token: str = access_token
         self.loop: asyncio.AbstractEventLoop = loop if loop is not None else asyncio.get_event_loop()
@@ -80,10 +80,10 @@ class VK(ContextInstanceMixin):
     ) -> dict:
         """
 
-        :param str method_name: method of name when need to call
-        :param dict params: parameters with method
-        :param bool _raw_mode: signal of return 'raw' response, or not (basically, returns response["response"])
-        :param ignore_errors: signal of errors ignore
+        :param str method_name:
+        :param dict params: parameters of method
+        :param bool _raw_mode: signal to return 'raw' response, or not (basically, return response["response"])
+        :param ignore_errors: signal to ignore errors
         :return:
         """
         if params:
@@ -125,10 +125,10 @@ class VK(ContextInstanceMixin):
         ignore_errors: bool = False,
     ) -> dict:
         """
-        Send api request to VK server
+        Send api request to the VK server
         :param method_name: method to execute
         :param params: parameters of method
-        :param ignore_errors: signal of errors ignore
+        :param ignore_errors:
         :return:
         """
         return await self._api_request(
@@ -139,7 +139,7 @@ class VK(ContextInstanceMixin):
         """
         https://vk.com/dev/execute
 
-        :param code: code for execute. Example: return API.status.get();
+        :param code: code to execute. Example: return API.status.get();
         :return:
         """
         return await self.api_request("execute", params={"code": code})
@@ -189,7 +189,7 @@ class VK(ContextInstanceMixin):
 
     def __del__(self):
         """
-        Will call when python interpreter will try free memory.
+        Gonna call when python interpreter will try to free memory.
         :return:
         """
         if not self.loop.is_closed():

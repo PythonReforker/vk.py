@@ -7,7 +7,7 @@ class Docs(BaseMethod):
         self, owner_id: int = None, doc_id: int = None, access_key: str = None
     ):
         """
-        Copies a document to a user's or community's document list.
+        Copy a document to a user's or community's document list.
         :param owner_id: ID of the user or community that owns the document. Use a negative value to designate a community ID.
         :param doc_id: Document ID.
         :param access_key: Access key. This parameter is required if 'access_key' was returned with the document's data.
@@ -21,7 +21,7 @@ class Docs(BaseMethod):
 
     async def delete(self, owner_id: int = None, doc_id: int = None):
         """
-        Deletes a user or community document.
+        Delete a user or community document.
         :param owner_id: ID of the user or community that owns the document. Use a negative value to designate a community ID.
         :param doc_id: Document ID.
 
@@ -40,7 +40,7 @@ class Docs(BaseMethod):
         tags: list = None,
     ):
         """
-        Edits a document.
+        Edit a document.
         :param owner_id: User ID or community ID. Use a negative value to designate a community ID.
         :param doc_id: Document ID.
         :param title: Document title.
@@ -61,7 +61,7 @@ class Docs(BaseMethod):
         owner_id: int = None,
     ):
         """
-        Returns detailed information about user or community documents.
+        Return detailed information about user or community documents.
         :param count: Number of documents to return. By default, all documents.
         :param offset: Offset needed to return a specific subset of documents.
         :param type:
@@ -76,7 +76,7 @@ class Docs(BaseMethod):
 
     async def get_by_id(self, docs: list = None):
         """
-        Returns information about documents by their IDs.
+        Return information about documents by their IDs.
         :param docs: Document IDs. Example: , "66748_91488,66748_91455",
 
 
@@ -90,7 +90,7 @@ class Docs(BaseMethod):
         self, type: str = None, peer_id: int = None
     ):
         """
-        Returns the server address for document upload.
+        Return the server address for document upload.
         :param type: Document type.
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'Chat ID', e.g. '2000000001'. For community: '- Community ID', e.g. '-12345'. "
 
@@ -103,7 +103,7 @@ class Docs(BaseMethod):
 
     async def get_types(self, owner_id: int = None):
         """
-        Returns documents types available for current user.
+        Return documents types available for current user.
         :param owner_id: ID of the user or community that owns the documents. Use a negative value to designate a community ID.
 
 
@@ -115,7 +115,7 @@ class Docs(BaseMethod):
 
     async def get_upload_server(self, group_id: int = None):
         """
-        Returns the server address for document upload.
+        Return the server address for document upload.
         :param group_id: Community ID (if the document will be uploaded to the community).
 
 
@@ -127,7 +127,7 @@ class Docs(BaseMethod):
 
     async def get_wall_upload_server(self, group_id: int = None):
         """
-        Returns the server address for document upload onto a user's or community's wall.
+        Return the server address for document upload onto a user's or community's wall.
         :param group_id: Community ID (if the document will be uploaded to the community).
 
 
@@ -141,7 +141,7 @@ class Docs(BaseMethod):
         self, file: str = None, title: str = None, tags: str = None
     ):
         """
-        Saves a document after [vk.com/dev/upload_files_2|uploading it to a server].
+        Save a document after [vk.com/dev/upload_files_2|uploading it to a server].
         :param file: This parameter is returned when the file is [vk.com/dev/upload_files_2|uploaded to the server].
         :param title: Document title.
         :param tags: Document tags.
@@ -161,7 +161,7 @@ class Docs(BaseMethod):
         offset: int = None,
     ):
         """
-        Returns a list of documents matching the search criteria.
+        Return a list of documents matching the search criteria.
         :param q: Search query string.
         :param search_own:
         :param count: Number of results to return.

@@ -18,7 +18,7 @@ class BackgroundTask:
     ):
         """
         Run task in background.
-        If task is synchronous it will running in ThreadPoolExecutor.
+        If task is synchronous it will be started in ThreadPoolExecutor.
 
         Pretty works with blocking tasks, bad works with cpu-bound tasks.
 

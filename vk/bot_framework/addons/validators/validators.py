@@ -27,9 +27,9 @@ class Validator(ContextInstanceMixin):
     async def valid_vk_group_id(self, arg: str, message: Message):
         """
         Validate passed in message group_id or screenname.
-        Just like 'valid_vk_id', but with group_id or screenname.
+        Similar to 'valid_vk_id'.
 
-        If all good - append to data received response from VKAPI in field 'valid_vk_group_id_group'.
+        If everything is good, append a response from VKAPI to the field 'valid_vk_group_id_group'.
         :param arg:
         :param message:
         :return:
@@ -52,15 +52,16 @@ class Validator(ContextInstanceMixin):
     async def valid_vk_id(self, arg: str, message: Message):
         """
         Validate passed in message ID or screenname.
-        This validator just search user in VK which have this ID or screenname.
+        Search user that obtain that ID (screenname).
 
-        If all good - append to data received response from VKAPI in field 'valid_vk_id_user'.
-        Example:
+        If everything is good, append a response from VKAPI to the field 'valid_vk_id_user'.
+        Instance:
 
         @dp.message_handler(commands=["hello"], have_args=[validators.valid_vk_id])
         async def handle(message: types.Message, data: dict):
             usr: types.User = data["valid_vk_id_user"]
             await message.answer(usr.first_name)
+
         :param message:
         :param arg:
         :return:
@@ -81,11 +82,9 @@ class Validator(ContextInstanceMixin):
 
     async def positive_number(self, arg: str, message: Message):
         """
-        Validate passed in message digit.
-        If digit is positive - returns true.
         :param message:
         :param arg:
-        :return:
+        :return: str is number and it is positive
         """
         have_answer = self.validators_answers["positive_number"]
         if not arg.isdigit():

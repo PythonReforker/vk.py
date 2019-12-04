@@ -51,7 +51,7 @@ class MiddlewareManager:
                     f"Middleware {middleware.__class__.__name__} skip handler!"
                 )
                 _skip_handler = True
-                break  # skip other middlewares when middleware skip handler
+                break  # skip other middlewares if middleware skips handler
 
         return _skip_handler, data
 
@@ -71,7 +71,7 @@ class MiddlewareManager:
                 logger.debug(
                     f"Middleware {middleware.__class__.__name__} skip handler!"
                 )
-                break  # skip other middlewares when middleware skip handler
+                break  # skip other middlewares if middleware skips handler
 
 
 class AbstractMiddleware(ABC, MetaMixin):
@@ -81,7 +81,7 @@ class AbstractMiddleware(ABC, MetaMixin):
 
     async def pre_process_event(self, event: BaseEvent, data: dict) -> dict:
         """
-        Called before checking filters and execute handler
+        Called before check filters and execute handler
         :param self:
         :param event:
         :param data:
@@ -90,7 +90,7 @@ class AbstractMiddleware(ABC, MetaMixin):
 
     async def post_process_event(self, result: typing.Any) -> None:
         """
-        Called after handler
+        It is called after handler
         :return:
         """
 

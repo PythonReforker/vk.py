@@ -7,7 +7,7 @@ from vk.types.responses import messages as m
 class Messages(BaseMethod):
     async def add_chat_user(self, chat_id: int = None, user_id: int = None):
         """
-        Adds a new user to a chat.
+        Add a new user to a chat.
         :param chat_id: Chat ID.
         :param user_id: ID of the user to be added to the chat.
 
@@ -22,7 +22,7 @@ class Messages(BaseMethod):
         self, group_id: int = None, key: str = None
     ):
         """
-        Allows sending messages from community to the current user.
+        Allow sending messages from community to the current user.
         :param group_id: Group ID.
         :param key:
 
@@ -35,7 +35,7 @@ class Messages(BaseMethod):
 
     async def create_chat(self, user_ids: list = None, title: str = None):
         """
-        Creates a chat with several participants.
+        Create a chat with several participants.
         :param user_ids: IDs of the users to be added to the chat.
         :param title: Chat title.
 
@@ -54,7 +54,7 @@ class Messages(BaseMethod):
         delete_for_all: bool = None,
     ):
         """
-        Deletes one or more messages.
+        Delete one or more messages.
         :param message_ids: Message IDs.
         :param spam: '1' — to mark message as spam.
         :param group_id: Group ID (for group messages with user access token)
@@ -71,7 +71,7 @@ class Messages(BaseMethod):
         self, chat_id: int = None, group_id: int = None
     ):
         """
-        Deletes a chat's cover picture.
+        Delete a chat's cover picture.
         :param chat_id: Chat ID.
         :param group_id:
 
@@ -86,7 +86,7 @@ class Messages(BaseMethod):
         self, user_id: int = None, peer_id: int = None, group_id: int = None
     ):
         """
-        Deletes all private messages in a conversation.
+        Delete all private messages in a conversation.
         :param user_id: User ID. To clear a chat history use 'chat_id'
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
         :param group_id: Group ID (for group messages with user access token)
@@ -100,7 +100,7 @@ class Messages(BaseMethod):
 
     async def deny_messages_from_group(self, group_id: int = None):
         """
-        Denies sending message from community to the current user.
+        Deny to send message from community to the current user.
         :param group_id: Group ID.
 
 
@@ -124,7 +124,7 @@ class Messages(BaseMethod):
         dont_parse_links: bool = None,
     ):
         """
-        Edits the message.
+        Edit the message.
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
         :param message: (Required if 'attachments' is not set.) Text of the message.
         :param message_id:
@@ -145,7 +145,7 @@ class Messages(BaseMethod):
 
     async def edit_chat(self, chat_id: int = None, title: str = None):
         """
-        Edits the title of a chat.
+        Edit the title of a chat.
         :param chat_id: Chat ID.
         :param title: New title of the chat.
 
@@ -165,7 +165,7 @@ class Messages(BaseMethod):
         group_id: int = None,
     ):
         """
-        Returns messages by their IDs within the conversation.
+        Return messages by their IDs within the conversation.
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
         :param conversation_message_ids: Conversation message IDs.
         :param extended: Information whether the response should be extended
@@ -188,7 +188,7 @@ class Messages(BaseMethod):
         group_id: int = None,
     ):
         """
-        Returns messages by their IDs.
+        Return messages by their IDs.
         :param message_ids: Message IDs.
         :param preview_length: Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
         :param extended: Information whether the response should be extended
@@ -222,7 +222,7 @@ class Messages(BaseMethod):
         self, peer_id: int = None, fields: list = None, group_id: int = None
     ):
         """
-        Returns a list of IDs of users participating in a chat.
+        Return a list of IDs of users participating in a chat.
         :param peer_id: Peer ID.
         :param fields: Profile fields to return.
         :param group_id: Group ID (for group messages with group access token)
@@ -245,7 +245,7 @@ class Messages(BaseMethod):
         group_id: int = None,
     ):
         """
-        Returns a list of the current user's conversations.
+        Return a list of the current user's conversations.
         :param offset: Offset needed to return a specific subset of conversations.
         :param count: Number of conversations to return.
         :param filter: Filter to apply: 'all' — all conversations, 'unread' — conversations with unread messages, 'important' — conversations, marked as important (only for community messages), 'unanswered' — conversations, marked as unanswered (only for community messages)
@@ -269,7 +269,7 @@ class Messages(BaseMethod):
         group_id: int = None,
     ):
         """
-        Returns conversations by their IDs
+        Return conversations by their IDs
         :param peer_ids: Destination IDs. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
         :param extended: Return extended properties
         :param fields: Profile and communities fields to return.
@@ -295,7 +295,7 @@ class Messages(BaseMethod):
         group_id: int = None,
     ):
         """
-        Returns message history for the specified user or group chat.
+        Return message history for the specified user or group chat.
         :param offset: Offset needed to return a specific subset of messages.
         :param count: Number of messages to return.
         :param user_id: ID of the user whose message history you want to return.
@@ -326,7 +326,7 @@ class Messages(BaseMethod):
         max_forwards_level: int = None,
     ):
         """
-        Returns media files from the dialog or group chat.
+        Return media files from the dialog or group chat.
         :param peer_id: Peer ID. ", For group chat: '2000000000 + chat ID' , , For community: '-community ID'"
         :param media_type: Type of media files to return: *'photo',, *'video',, *'audio',, *'doc',, *'link'.,*'market'.,*'wall'.,*'share'
         :param start_from: Message ID to start return results from.
@@ -362,7 +362,7 @@ class Messages(BaseMethod):
 
     async def get_last_activity(self, user_id: int = None):
         """
-        Returns a user's current status and date of last activity.
+        Return a user's current status and date of last activity.
         :param user_id: User ID.
 
 
@@ -388,7 +388,7 @@ class Messages(BaseMethod):
         credentials: bool = None,
     ):
         """
-        Returns updates in user's private messages.
+        Return updates in user's private messages.
         :param ts: Last value of the 'ts' parameter returned from the Long Poll server or by using [vk.com/dev/messages.getLongPollHistory|messages.getLongPollHistory] method.
         :param pts: Lsat value of 'pts' parameter returned from the Long Poll server or by using [vk.com/dev/messages.getLongPollHistory|messages.getLongPollHistory] method.
         :param preview_length: Number of characters after which to truncate a previewed message. To preview the full message, specify '0'. "NOTE: Messages are not truncated by default. Messages are truncated by words."
@@ -416,7 +416,7 @@ class Messages(BaseMethod):
         lp_version: int = None,
     ):
         """
-        Returns data required for connection to a Long Poll server.
+        Return data required for connection to a Long Poll server.
         :param need_pts: '1' — to return the 'pts' field, needed for the [vk.com/dev/messages.getLongPollHistory|messages.getLongPollHistory] method.
         :param group_id: Group ID (for group messages with user access token)
         :param lp_version: Long poll version
@@ -432,7 +432,7 @@ class Messages(BaseMethod):
         self, group_id: int = None, user_id: int = None
     ):
         """
-        Returns information whether sending messages from the community to current user is allowed.
+        Return information whether sending messages from the community to current user is allowed.
         :param group_id: Group ID.
         :param user_id: User ID.
 
@@ -459,7 +459,7 @@ class Messages(BaseMethod):
         self, peer_id: int = None, answered: bool = None, group_id: int = None
     ):
         """
-        Marks and unmarks conversations as unanswered.
+        Mark and unmarks conversations as unanswered.
         :param peer_id: ID of conversation to mark as important.
         :param answered: '1' — to mark as answered, '0' — to remove the mark
         :param group_id: Group ID (for group messages with group access token)
@@ -475,7 +475,7 @@ class Messages(BaseMethod):
         self, message_ids: list = None, important: int = None
     ):
         """
-        Marks and unmarks messages as important (starred).
+        Mark and unmarks messages as important (starred).
         :param message_ids: IDs of messages to mark as important.
         :param important: '1' — to add a star (mark as important), '0' — to remove the star
 
@@ -490,7 +490,7 @@ class Messages(BaseMethod):
         self, peer_id: int = None, important: bool = None, group_id: int = None
     ):
         """
-        Marks and unmarks conversations as important.
+        Mark and unmarks conversations as important.
         :param peer_id: ID of conversation to mark as important.
         :param important: '1' — to add a star (mark as important), '0' — to remove the star
         :param group_id: Group ID (for group messages with group access token)
@@ -510,7 +510,7 @@ class Messages(BaseMethod):
         group_id: int = None,
     ):
         """
-        Marks messages as read.
+        Mark messages as read.
         :param message_ids: IDs of messages to mark as read.
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
         :param start_message_id: Message ID to start from.
@@ -540,7 +540,7 @@ class Messages(BaseMethod):
         self, chat_id: int = None, user_id: int = None, member_id: int = None
     ):
         """
-        Allows the current user to leave a chat or, if the current user started the chat, allows the user to remove another user from the chat.
+        Allow the current user to leave a chat or, if the current user started the chat, allows the user to remove another user from the chat.
         :param chat_id: Chat ID.
         :param user_id: ID of the user to be removed from the chat.
         :param member_id:
@@ -554,7 +554,7 @@ class Messages(BaseMethod):
 
     async def restore(self, message_id: int = None, group_id: int = None):
         """
-        Restores a deleted message.
+        Restore a deleted message.
         :param message_id: ID of a previously-deleted message to restore.
         :param group_id: Group ID (for group messages with user access token)
 
@@ -578,7 +578,7 @@ class Messages(BaseMethod):
         group_id: int = None,
     ):
         """
-        Returns a list of the current user's private messages that match search criteria.
+        Return a list of the current user's private messages that match search criteria.
         :param q: Search query string.
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
         :param date: Date to search message before in Unixtime.
@@ -605,7 +605,7 @@ class Messages(BaseMethod):
         group_id: int = None,
     ):
         """
-        Returns a list of the current user's conversations that match search criteria.
+        Return a list of the current user's conversations that match search criteria.
         :param q: Search query string.
         :param count: Maximum number of results.
         :param extended: '1' — return extra information about users and communities
@@ -642,7 +642,7 @@ class Messages(BaseMethod):
         disable_mentions: bool = None,
     ):
         """
-        Sends a message.
+        Send a message.
         :param user_id: User ID (by default — current user).
         :param random_id: Unique identifier to avoid resending the message.
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
@@ -678,7 +678,7 @@ class Messages(BaseMethod):
         group_id: int = None,
     ):
         """
-        Changes the status of a user as typing in a conversation.
+        Change the status of a user as typing in a conversation.
         :param user_id: User ID.
         :param type: 'typing' — user has started to type.
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "
@@ -693,7 +693,7 @@ class Messages(BaseMethod):
 
     async def set_chat_photo(self, file: str = None):
         """
-        Sets a previously-uploaded picture as the cover picture of a chat.
+        Set a previously-uploaded picture as the cover picture of a chat.
         :param file: Upload URL from the 'response' field returned by the [vk.com/dev/photos.getChatUploadServer|photos.getChatUploadServer] method upon successfully uploading an image.
 
 

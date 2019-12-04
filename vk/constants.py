@@ -47,7 +47,7 @@ del _json_decode_errors
 
 def default_rules() -> dict:
     """
-    Build and return dict of default handlers rules.
+    Build and return dict of default handler rules.
     :return:
     """
     from vk.bot_framework.rules.rules import (

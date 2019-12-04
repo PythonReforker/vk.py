@@ -41,8 +41,8 @@ class Cooldown(ContextInstanceMixin):
 
         :param cooldown_message:
         :param storage:
-        :param cooldown_time: standart cooldown time: 3 seconds
-        :param for_specify_user: cooldown for specify user
+        :param cooldown_time: standard cooldown time: 3 seconds
+        :param for_specify_user: cooldown to specify user
         :return:
         """
 

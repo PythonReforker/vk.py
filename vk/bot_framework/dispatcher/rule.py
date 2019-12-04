@@ -11,11 +11,11 @@ class AbstractRule(ABC, MetaMixin):
     @abstractmethod
     async def check(self, event, data: dict):
         """
-        This method will call when rules check.
+        This method is gonna be called in the rules check.
 
         :param data:
         :param event:
-        :return: True or False. If return 'True' - check next rules or execute handler
+        :return: True or False. True -> check next rules or execute handler
         """
 
 
@@ -27,8 +27,8 @@ class BaseRule(AbstractRule, ABC):
 
 class NamedRule(BaseRule, ABC):
     """
-    May be add to list rules with RuleFactory and
-    will call in handlers by unique key;
+    Can be added to the list of rules with RuleFactory and
+    is going to be called in handlers by unique key;
 
     >>> @dp.message_handler(unique_key = value)
 
@@ -38,12 +38,12 @@ class NamedRule(BaseRule, ABC):
     required = False  # include to all handlers rules.
     default = (
         None
-    )  # default value for rule (needed if included as default rule (standart - None)
+    )  # default value for the rule
 
 
 class RuleFactory:
     """
-    RuleFactory manage your rules.
+    Manage your rules.
     """
 
     def __init__(self, config: dict):

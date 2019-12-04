@@ -11,7 +11,7 @@ class Auth(BaseMethod):
         auth_by_phone: bool = None,
     ):
         """
-        Checks a user's phone number for correctness.
+        Check a user's phone number for correctness.
         :param phone: Phone number.
         :param client_id: User ID.
         :param client_secret:
@@ -26,7 +26,7 @@ class Auth(BaseMethod):
 
     async def restore(self, phone: str = None, last_name: str = None):
         """
-        Allows to restore account access using a code received via SMS. " This method is only available for apps with [vk.com/dev/auth_direct|Direct authorization] access. "
+        Allow to restore account access using a code received via SMS. " This method is only available for apps with [vk.com/dev/auth_direct|Direct authorization] access. "
         :param phone: User phone number.
         :param last_name: User last name.
 

@@ -39,7 +39,7 @@ class APIErrorDispatcher:
 
         self._handlers.append(
             APIErrorHandler(6, self._to_many_requests_handler)
-        )  # standart to many request handler
+        )  # standard to many request handler
 
     async def _to_many_requests_handler(
         self, error: typing.Dict

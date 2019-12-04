@@ -27,7 +27,7 @@ class BaseHandler(abc.ABC, MetaMixin):
     @abc.abstractmethod
     async def execute_handler(self, *args) -> typing.Union[typing.Any, bool]:
         """
-        Execute handler (after handler rules.)
+        Execute handler (after performing handler rules).
         args - (event, data)
         If return False - check next handlers.
         """
@@ -35,7 +35,7 @@ class BaseHandler(abc.ABC, MetaMixin):
 
 class SkipHandler(Exception):
     """
-    Raise this when you want skip handlers.
+    Raise this if you want to skip handlers.
     """
 
 
@@ -48,9 +48,9 @@ class Handler(BaseHandler):
     ):
         """
 
-        :param event_type: type of event which this handler accepted
+        :param event_type: type of receiving event
         :param handler: coroutine
-        :param rules: list of rules which be executed
+        :param rules: list of rules which is gonna be executed
         """
         self._event_type: Event = event_type
         self._handler: typing.Callable = handler

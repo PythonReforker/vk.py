@@ -15,10 +15,10 @@ def cached_handler(
     storage: AbstractAsyncExpiredStorage, expire=10, for_specify_user=False
 ):
     """
-    Standart caching time: 10 seconds
-    :param for_specify_user: cache this response for specify users
-    :param storage: storage for cache
-    :param expire: time in seconds for cache
+    Standard caching time: 10 seconds
+    :param for_specify_user: used to specify users
+    :param storage: storage of cache
+    :param expire: time in seconds to cache
     :return:
     """
 
@@ -28,7 +28,7 @@ def cached_handler(
             message: Message = args[0]
             if not isinstance(message, Message):
                 raise RuntimeError(
-                    "Now caching only message handlers is supported."
+                    "Now caching is supported only for message handlers."
                 )
             if for_specify_user:
                 cache_name = f"__coro_tocache:{func.__name__}:user:{message.from_id}_{message.peer_id}__"
@@ -49,7 +49,7 @@ def cached_handler(
                 result = await func(*args, **kwargs)
                 if not isinstance(result, CachedResponse):
                     raise ValueError(
-                        "Unexpected Response. Please return 'CachedResponse' for use this decorator"
+                        "Unexpected Response. Please return 'CachedResponse' to use this decorator"
                     )
                 try:
                     await storage.place(

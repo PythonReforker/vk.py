@@ -17,14 +17,14 @@ class AbstractExtension(ABC, MetaMixin):
     @abstractmethod
     async def get_events(self) -> typing.List:
         """
-        Get events from any resource and returns list of events.
+        Get events from any resource and return list of events.
         :return: list of coming events.
         """
 
     @abstractmethod
     async def run(self, dp: "Dispatcher"):
         """
-        In endless cycle get events from self.get_events function
+        Get events from self.get_events function in the endless of the cycle
         and call dispatcher method dp._process_events.
         :param dp: dispatcher
         :return:
@@ -33,13 +33,13 @@ class AbstractExtension(ABC, MetaMixin):
 
 class BaseExtension(AbstractExtension, ABC):
     """
-    May be added to extensions with ExtensionsManager and
-    used for get events.
+    Can be added to extensions with ExtensionsManager and
+    used to get events.
 
     >>> extension_manager.run_extension(name=unique_key)
     """
 
-    key = None  # unique key for access to extension
+    key = None  # unique key to access the extension
 
 
 class ExtensionsManager:
@@ -62,8 +62,8 @@ class ExtensionsManager:
     def run_extension(self, name: str, **extension_init_params) -> None:
         """
 
-        :param name: name of extension
-        :param extension_init_params: params which accept extension constructor
+        :param name: name of the extension
+        :param extension_init_params: params which accept the extension constructor
         :return:
         """
         if typing.TYPE_CHECKING:

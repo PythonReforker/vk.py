@@ -11,7 +11,7 @@ class Likes(BaseMethod):
         access_key: str = None,
     ):
         """
-        Adds the specified object to the 'Likes' list of the current user.
+        Add the specified object to the 'Likes' list of the current user.
         :param type: Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion, 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
         :param owner_id: ID of the user or community that owns the object.
         :param item_id: Object ID.
@@ -28,7 +28,7 @@ class Likes(BaseMethod):
         self, type: str = None, owner_id: int = None, item_id: int = None
     ):
         """
-        Deletes the specified object from the 'Likes' list of the current user.
+        Delete the specified object from the 'Likes' list of the current user.
         :param type: Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion, 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
         :param owner_id: ID of the user or community that owns the object.
         :param item_id: Object ID.
@@ -54,7 +54,7 @@ class Likes(BaseMethod):
         skip_own: bool = None,
     ):
         """
-        Returns a list of IDs of users who added the specified object to their 'Likes' list.
+        Return a list of IDs of users who added the specified object to their 'Likes' list.
         :param type: , Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion, 'sitepage' — page of the site where the [vk.com/dev/Like|Like widget] is installed
         :param owner_id: ID of the user, community, or application that owns the object. If the 'type' parameter is set as 'sitepage', the application ID is passed as 'owner_id'. Use negative value for a community id. If the 'type' parameter is not set, the 'owner_id' is assumed to be either the current user or the same application ID as if the 'type' parameter was set to 'sitepage'.
         :param item_id: Object ID. If 'type' is set as 'sitepage', 'item_id' can include the 'page_id' parameter value used during initialization of the [vk.com/dev/Like|Like widget].
@@ -81,7 +81,7 @@ class Likes(BaseMethod):
         item_id: int = None,
     ):
         """
-        Checks for the object in the 'Likes' list of the specified user.
+        Check for the object in the 'Likes' list of the specified user.
         :param user_id: User ID.
         :param type: Object type: 'post' — post on user or community wall, 'comment' — comment on a wall post, 'photo' — photo, 'audio' — audio, 'video' — video, 'note' — note, 'photo_comment' — comment on the photo, 'video_comment' — comment on the video, 'topic_comment' — comment in the discussion
         :param owner_id: ID of the user or community that owns the object.

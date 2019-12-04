@@ -38,7 +38,7 @@ class Account(BaseMethod):
 
     async def get_active_offers(self, offset: int = None, count: int = None):
         """
-        Returns a list of active ads (offers) which executed by the user will bring him/her respective number of votes to his balance in the application.
+        Return a list of active ads (offers) which are executed by the user.
         :param offset:
         :param count: Number of results to return.
 
@@ -51,7 +51,7 @@ class Account(BaseMethod):
 
     async def get_app_permissions(self, user_id: int = None):
         """
-        Gets settings of the user in this application.
+        Get settings of the user in this application.
         :param user_id: User ID whose settings information shall be got. By default: current user.
 
 
@@ -63,7 +63,7 @@ class Account(BaseMethod):
 
     async def get_banned(self, offset: int = None, count: int = None):
         """
-        Returns a user's blacklist.
+        Return a user's blacklist.
         :param offset: Offset needed to return a specific subset of results.
         :param count: Number of results to return.
 
@@ -76,7 +76,7 @@ class Account(BaseMethod):
 
     async def get_counters(self, filter: list = None):
         """
-        Returns non-null values of user counters.
+        Return non-null values of user counters.
         :param filter: Counters to be returned.
 
 
@@ -88,7 +88,7 @@ class Account(BaseMethod):
 
     async def get_info(self, fields: list = None):
         """
-        Returns current account info.
+        Return current account info.
         :param fields: Fields to return. Possible values: *'country' — user country,, *'https_required' — is "HTTPS only" option enabled,, *'own_posts_default' — is "Show my posts only" option is enabled,, *'no_wall_replies' — are wall replies disabled or not,, *'intro' — is intro passed by user or not,, *'lang' — user language. By default: all.
 
 
@@ -100,7 +100,7 @@ class Account(BaseMethod):
 
     async def get_profile_info(self,):
         """
-        Returns the current account info.
+        Return the current account info.
 
 
         """
@@ -111,7 +111,7 @@ class Account(BaseMethod):
 
     async def get_push_settings(self, device_id: str = None):
         """
-        Gets settings of push notifications.
+        Get settings to push notifications.
         :param device_id: Unique device ID.
 
 
@@ -191,7 +191,7 @@ class Account(BaseMethod):
 
     async def set_info(self, name: str = None, value: str = None):
         """
-        Allows to edit the current account info.
+        Allow to edit the current account info.
         :param name: Setting name.
         :param value: Setting value.
 
@@ -204,7 +204,7 @@ class Account(BaseMethod):
 
     async def set_name_in_menu(self, user_id: int = None, name: str = None):
         """
-        Sets an application screen name (up to 17 characters), that is shown to the user in the left menu.
+        Set an application screen name (up to 17 characters), this is shown in the left menu.
         :param user_id: User ID.
         :param name: Application screen name.
 
@@ -217,7 +217,7 @@ class Account(BaseMethod):
 
     async def set_offline(self,):
         """
-        Marks a current user as offline.
+        Mark a current user as offline.
 
 
         """
@@ -228,7 +228,7 @@ class Account(BaseMethod):
 
     async def set_online(self, voip: bool = None):
         """
-        Marks the current user as online for 15 minutes.
+        Mark a current user as online up to 15 minutes.
         :param voip: '1' if videocalls are available for current device.
 
 
@@ -267,7 +267,7 @@ class Account(BaseMethod):
         sound: int = None,
     ):
         """
-        Mutes push notifications for the set period of time.
+        Mute push notifications for the set period of time.
         :param device_id: Unique device ID.
         :param time: Time in seconds for what notifications should be disabled. '-1' to disable forever.
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'Chat ID', e.g. '2000000001'. For community: '- Community ID', e.g. '-12345'. "
@@ -296,7 +296,7 @@ class Account(BaseMethod):
         self, device_id: str = None, sandbox: bool = None
     ):
         """
-        Unsubscribes a device from push notifications.
+        Unsubscribe device from push notifications.
         :param device_id: Unique device ID.
         :param sandbox:
 

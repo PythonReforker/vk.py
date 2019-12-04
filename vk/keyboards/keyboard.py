@@ -28,7 +28,7 @@ class ButtonType(Enum):
 class Keyboard:
     def __init__(self, one_time: bool, inline: bool = False):
         """
-
+        Create a keyboard object
         :param one_time:
         """
         self.one_time = one_time
@@ -162,9 +162,8 @@ class Keyboard:
 
     def get_keyboard(self) -> typing.AnyStr:
         """
-        Get keyboard json for send.
-        Advice: don't call this function always you want to send keyboard.
-        If keyboard is 'static', you can generate json once and send every time.
+        Get keyboard json to send.
+        If keyboard is 'static', you can generate json once and send it every time.
         :return:
         """
         return JSON_LIBRARY.dumps(self.keyboard)
