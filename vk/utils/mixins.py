@@ -48,7 +48,7 @@ class _MetaObjectType(Enum):
 class _MetaModel(BaseModel):
     name: str = str
     description: str = str
-    deprecated: bool = str
+    deprecated: bool = False
     type: _MetaObjectType = _MetaObjectType.UNKNOWN
 
     class Config:
@@ -96,7 +96,7 @@ class MetaMixin:
     # "description": "Oh... i don't know..",
     # "deprecated": False,
     # }
-    # it's will be converted to `_MetaModel` with `dot-access` to attributes.
+    # it will be converted to `_MetaModel` with `dot-access` to attributes.
 
     meta: Union[
         dict, _MetaModel
