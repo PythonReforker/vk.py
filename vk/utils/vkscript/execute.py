@@ -2,9 +2,13 @@ import ast
 import functools
 import inspect
 import types
+import typing
 
 from vk.utils.vkscript.converter import Scope
 from vk.utils.vkscript.converter import VKScriptConverter
+
+if typing.TYPE_CHECKING:
+    from vk import VK
 
 
 # import once
