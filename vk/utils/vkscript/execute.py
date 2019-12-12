@@ -64,7 +64,7 @@ class Execute:
     async def execute(self, *args, **kwargs):
         vk = _get_vk().get_current()
         code = self.build(*args, **kwargs)
-        response = await vk.api_request("execute", {"code": code})
+        response = await vk.execute_api_request(code)
         return response
 
     e = execute
