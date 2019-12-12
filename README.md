@@ -1,6 +1,9 @@
 ![vk.py](https://user-images.githubusercontent.com/28061158/63603699-cd51b980-c5d2-11e9-8a8f-06e1eef20afe.jpg)
 
 
+# WARNING:
+> Dev branch was merged to master but 1.0.0 hasn't still been completed. Check `dev` branch.
+
 
 # Welcome to vk.py 👋
 
