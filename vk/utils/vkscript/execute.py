@@ -13,7 +13,7 @@ if typing.TYPE_CHECKING:
 
 # import once
 @functools.lru_cache()
-def _get_vk() -> typing.Type[VK]:
+def _get_vk() -> typing.Type["VK"]:
     from vk import VK
 
     return VK
