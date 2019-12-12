@@ -71,6 +71,7 @@ class VK(ContextInstanceMixin):
     async def _api_request(
         self,
         method_name: typing.AnyStr,
+        override_token: bool = True,
         params: dict = None,
         _raw_mode: bool = False,
         ignore_errors: bool = False,
@@ -78,6 +79,7 @@ class VK(ContextInstanceMixin):
         """
 
         :param str method_name:
+        :param override_token: override token by default (passed to _constructor_) or no
         :param dict params: parameters of method
         :param bool _raw_mode: signal to return 'raw' response, or not (basically, return response["response"])
         :param ignore_errors: signal to ignore errors
@@ -89,7 +91,9 @@ class VK(ContextInstanceMixin):
         elif params is None or not isinstance(params, dict):
             params = {}
 
-        params.update({"v": API_VERSION, "access_token": self.access_token})
+        if override_token:
+            params.update({"access_token": self.access_token})
+        params.update({"v": API_VERSION})
         logger.debug(f"Params to send: {params}")
         async with self.client.post(
             API_LINK + method_name, data=params
@@ -119,17 +123,22 @@ class VK(ContextInstanceMixin):
         self,
         method_name: str,
         params: dict = None,
+        override_token: bool = True,
         ignore_errors: bool = False,
     ) -> dict:
         """
         Send api request to the VK server
         :param method_name: method to execute
+        :param override_token: override token by default (passed to _constructor_) or no
         :param params: parameters of method
         :param ignore_errors:
         :return:
         """
         return await self._api_request(
-            method_name=method_name, params=params, ignore_errors=ignore_errors
+            method_name=method_name,
+            params=params,
+            ignore_errors=ignore_errors,
+            override_token=override_token,
         )
 
     async def execute_api_request(self, code: str) -> dict:
