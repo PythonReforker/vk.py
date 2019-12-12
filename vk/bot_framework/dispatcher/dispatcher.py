@@ -1,6 +1,17 @@
 import logging
 import typing
 
+from .blueprints import Blueprint
+from .extension import BaseExtension
+from .extension import ExtensionsManager
+from .handler import BaseHandler
+from .handler import Handler
+from .middleware import BaseMiddleware
+from .middleware import MiddlewareManager
+from .rule import BaseRule
+from .rule import RuleFactory
+from .storage import AbstractAsyncStorage
+from .storage import AbstractStorage
 from vk import VK
 from vk.bot_framework.dispatcher import data_
 from vk.constants import default_extensions
@@ -13,17 +24,6 @@ from vk.utils.deprecated import deprecated
 from vk.utils.deprecated import deprecated_argument
 from vk.utils.deprecated import warn_deprecated
 from vk.utils.get_event import get_event_object
-from .blueprints import Blueprint
-from .extension import BaseExtension
-from .extension import ExtensionsManager
-from .handler import BaseHandler
-from .handler import Handler
-from .middleware import BaseMiddleware
-from .middleware import MiddlewareManager
-from .rule import BaseRule
-from .rule import RuleFactory
-from .storage import AbstractAsyncStorage
-from .storage import AbstractStorage
 
 logger = logging.getLogger(__name__)
 
@@ -60,8 +60,6 @@ class Dispatcher(ContextInstanceMixin):
         ] = None
 
         self._registered_blueprints: typing.List[Blueprint] = []
-
-        self.set_current(self)
 
     @property
     def handlers(self) -> typing.List[BaseHandler]:
@@ -310,6 +308,10 @@ class Dispatcher(ContextInstanceMixin):
         :param event: 1 event coming from extensions/vk
         :return:
         """
+        # place objects to context
+        self.vk.set_current(self.vk)
+        self.set_current(self)
+
         data = (
             {}
         )  # dict to transfer data from middlewares to handlers and filters.
