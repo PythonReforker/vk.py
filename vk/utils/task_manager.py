@@ -28,8 +28,8 @@ class TaskManager:
         Method which run event loop
 
         :param auto_reload: auto reload code when changes
-        :param on_shutdown: coroutine which runned after complete tasks
-        :param on_startup: coroutine which runned before start main tasks
+        :param on_shutdown: coroutine which will run after complete tasks
+        :param on_startup: coroutine which will run before start main tasks
         :param asyncio_debug_mode: asyncio debug mode state
         :return:
         """
@@ -37,20 +37,30 @@ class TaskManager:
             raise RuntimeError("Count of tasks - 0. Add tasks.")
         try:
             if on_startup is not None:
+                logger.debug(
+                    "On startup coroutine is passed. It will be running now."
+                )
                 self.loop.run_until_complete(on_startup())
 
             if asyncio_debug_mode:
                 self.loop.set_debug(True)
+                logger.debug("Asyncio debug mode is enabled.")
             if auto_reload:
+                logger.debug("Auto reload is enabled.")
                 self.loop.create_task(_auto_reload())
 
+            logger.debug("Start creating tasks....")
             [self.loop.create_task(task) for task in self.tasks]
+            logger.debug("Tasks succesfully are created!")
 
             logger.info("Loop started!")
             self.loop.run_forever()
 
         finally:
             if on_shutdown is not None:
+                logger.debug(
+                    "On shutdown coroutine is passed. It will be running now."
+                )
                 self.loop.run_until_complete(on_shutdown())
 
     def close(self):
@@ -60,6 +70,7 @@ class TaskManager:
         >>> task_manager.close()
         :return:
         """
+        logger.debug("Loop is closing...")
         self.loop.close()
 
     def add_task(self, task: typing.Union[typing.Coroutine, typing.Callable]):
@@ -77,7 +88,7 @@ class TaskManager:
             self.tasks.append(task)
         else:
             raise RuntimeError(
-                "Unexpected task. Tasks may be only coroutine functions"
+                "Unexpected task. Tasks may be only coroutine or coroutine function"
             )
 
     def run_task(self, task: typing.Callable):
