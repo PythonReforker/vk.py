@@ -1,6 +1,6 @@
 import ast
 
-from ..converter import VKScriptConverter
+from vk.utils.vkscript.converter import VKScriptConverter
 
 
 @VKScriptConverter.register(ast.Call)

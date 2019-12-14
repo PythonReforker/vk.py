@@ -1,6 +1,6 @@
 import ast
 
-from ..converter import VKScriptConverter
+from vk.utils.vkscript.converter import VKScriptConverter
 
 WHILE_TEMPLATE = "while(%(test)s){%(body)s};"
 IF_TEMPLATE = "if(%(test)s){%(content)s}%(other)s;"

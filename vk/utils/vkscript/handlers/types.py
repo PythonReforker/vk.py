@@ -1,6 +1,6 @@
 import ast
 
-from ..converter import VKScriptConverter
+from vk.utils.vkscript.converter import VKScriptConverter
 
 
 CONSTANTS = {None: "null", True: "true", False: "false"}

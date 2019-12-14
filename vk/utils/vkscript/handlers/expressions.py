@@ -1,7 +1,7 @@
 import ast
 import string
 
-from ..converter import VKScriptConverter
+from vk.utils.vkscript.converter import VKScriptConverter
 
 
 @VKScriptConverter.register(ast.Expr)
