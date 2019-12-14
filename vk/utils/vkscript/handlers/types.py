@@ -3,6 +3,9 @@ import ast
 from ..converter import VKScriptConverter
 
 
+CONSTANTS = {None: "null", True: "true", False: "false"}
+
+
 @VKScriptConverter.register(ast.Dict)
 def dict_handler(node: ast.Dict):
     converter = VKScriptConverter.get_current()
@@ -37,7 +40,6 @@ def str_handler(node: ast.Str):
 
 @VKScriptConverter.register(ast.NameConstant)
 def name_constant_handler(node: ast.NameConstant):
-    constants = {None: "null", True: "true", False: "false"}
-    if node.value not in constants:
+    if node.value not in CONSTANTS:
         raise NotImplementedError(f"constant {node.value} not implemented")
-    return constants[node.value]
+    return CONSTANTS[node.value]
