@@ -1,4 +1,4 @@
-# How to contribute to `mongo.py`
+# How to contribute to `vk.py`
 
 > changes types: `bugfix`, `feature`, `doc`, `misc`, `remove`.
 

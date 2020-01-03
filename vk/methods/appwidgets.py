@@ -11,7 +11,7 @@ class AppWidgets(BaseMethod):
 
 
         """
-        method = self.get_method_name(self.update)
+        method = "appWidgets.update"
         params = self.create_params(locals())
         r = await self.api_request(method, params)
         return m.Update(**r)

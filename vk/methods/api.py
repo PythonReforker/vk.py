@@ -28,7 +28,7 @@ class API(ContextInstanceMixin):
         self.account = Account(vk, category="account")
         self.messages = Messages(vk, category="messages")
         self.apps = Apps(vk, category="apps")
-        self.appwidgets = AppWidgets(vk, category="appwidgets")
+        self.appWidgets = AppWidgets(vk, category="appwidgets")
         self.auth = Auth(vk, category="auth")
         self.board = Board(vk, category="board")
         self.database = Database(vk, category="database")
