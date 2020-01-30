@@ -7,9 +7,8 @@
 
 # Welcome to vk.py 👋
 
-![Version](https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/kesha1225/vk.py/blob/master/LICENSE) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkesha1225%2Fvk.py.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkesha1225%2Fvk.py?ref=badge_shield)
+![Version](https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/kesha1225/vk.py/blob/master/LICENSE)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/kesha1225/vk.py?utm_source=github.com&utm_medium=referral&utm_content=prostomarkeloff/vk.py&utm_campaign=Badge_Grade_Dashboard)
-[![Build Status](https://travis-ci.org/kesha1225/vk.py.svg?branch=master)](https://travis-ci.org/prostomarkeloff/vk.py)
 
 > Extremely-fast, easy-to-use, ready for production. The asyncio based library for Python and Humans written to be efficient and reliable.
 
@@ -20,7 +19,7 @@
 
 ## Install
 
-Install package from PyPi: (current version is 4 alpha of 1.0.0)
+Install package from github (soon at PyPi):
 
 ```sh
 pip install https://github.com/kesha1225/vk.py/archive/master.zip --upgrade
