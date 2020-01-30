@@ -34,15 +34,15 @@ A simple example
 ```python
 from vk import VK
 from vk.utils.task_manager import TaskManager
-from vk.utils.auth_manager import AuthManager
 import logging
 
 logging.basicConfig(level="INFO")
-auth = AuthManager("7999123456", "my-password")
-vk = VK(access_token=auth.get_token())
+vk = VK(access_token="token")
+
 
 async def status_get():
-    resp = await vk.api_request("status.get")
+    api = vk.get_api()
+    resp = await api.status.get()
     print(resp)
 
 if __name__ == "__main__":
