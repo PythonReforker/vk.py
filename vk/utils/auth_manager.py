@@ -1,156 +1,15 @@
-import asyncio
-from urllib.parse import parse_qsl, urlencode, urljoin
+"""
+Author: https://github.com/Fahreeve/aiovk/blob/master/aiovk/sessions.py
+"""
+from urllib.parse import parse_qsl, urljoin
 import typing
 from html.parser import HTMLParser
 
 import aiohttp
 from yarl import URL
 
+from vk.exceptions import VkAuthError, VkTwoFactorCodeNeeded, VkCaptchaNeeded
 from vk.constants import JSON_LIBRARY
-
-try:
-    import aiosocksy
-    from aiosocksy.connector import ProxyConnector
-except ImportError as e:
-    ProxyConnector = None
-
-
-class BaseDriver:
-    def __init__(self, timeout: int = 10, loop=None):
-        self.timeout = timeout
-        self._loop = loop
-
-    async def json(self, url, params, timeout=None):
-        """
-        :param url:
-        :param timeout:
-        :param params: dict of query params
-        :return: dict from json response
-        """
-        raise NotImplementedError
-
-    async def get_text(self, url, params, timeout=None):
-        """
-        :param url:
-        :param timeout:
-        :param params: dict of query params
-        :return: http status code, text body of response
-        """
-        raise NotImplementedError
-
-    async def get_bin(self, url, params, timeout=None):
-        """
-        :param url:
-        :param timeout:
-        :param params: dict of query params
-        :return: http status code, binary body of response
-        """
-        raise NotImplementedError
-
-    async def post_text(self, url, data, timeout=None):
-        """
-        :param url:
-        :param timeout:
-        :param data: dict pr string
-        :return: redirect url and text body of response
-        """
-        raise NotImplementedError
-
-    async def close(self):
-        raise NotImplementedError
-
-
-class HttpDriver(BaseDriver):
-    def __init__(self, timeout=10, loop=None, session=None):
-        super().__init__(timeout, loop)
-        if not session:
-            self.session = aiohttp.ClientSession(loop=loop)
-        else:
-            self.session = session
-
-    async def json(self, url, params, timeout=None):
-        async with self.session.get(
-            url, params=params, timeout=timeout or self.timeout
-        ) as response:
-            return await response.json(loads=JSON_LIBRARY.loads)
-
-    async def get_text(self, url, params, timeout=None):
-        async with self.session.get(
-            url, params=params, timeout=timeout or self.timeout
-        ) as response:
-            return response.status, await response.text()
-
-    async def get_bin(self, url, params, timeout=None):
-        async with self.session.get(
-            url, params=params, timeout=timeout or self.timeout
-        ) as response:
-            return await response.read()
-
-    async def post_text(self, url, data, timeout=None):
-        async with self.session.post(
-            url, data=data, timeout=timeout or self.timeout
-        ) as response:
-            return response.real_url, await response.text()
-
-    async def close(self):
-        await self.session.close()
-
-
-if ProxyConnector:
-
-    class Socks5Driver(HttpDriver):
-        connector = ProxyConnector
-
-        def __init__(
-            self,
-            address,
-            port,
-            login=None,
-            password=None,
-            timeout=10,
-            loop=None,
-        ):
-            addr = aiosocksy.Socks5Addr(address, port)
-            if login and password:
-                auth = aiosocksy.Socks5Auth(login, password=password)
-            else:
-                auth = None
-            conn = self.connector(proxy=addr, proxy_auth=auth, loop=loop)
-            session = aiohttp.ClientSession(connector=conn)
-            super().__init__(timeout, loop, session)
-
-
-class VkException(Exception):
-    pass
-
-
-class VkAuthError(VkException):
-    def __init__(
-        self, error, description, url: str = "", params: typing.Any = ""
-    ):
-        self.error = error
-        self.description = description
-        self.url = "{}?{}".format(url, urlencode(params))
-
-    def __str__(self):
-        return self.description
-
-
-class VkCaptchaNeeded(VkException):
-    def __init__(self, url, sid):
-        self.url = url
-        self.sid = sid
-
-    def __str__(self):
-        return "You must enter the captcha"
-
-
-class VkTwoFactorCodeNeeded(VkException):
-    def __str__(self):
-        return (
-            "In order to confirm that you are the owner of this page "
-            "please enter the code provided by the code generating app."
-        )
 
 
 class AuthPageParser(HTMLParser):
@@ -252,19 +111,14 @@ class AuthManager:
         password: str,
         app_id: int = 2685278,
         scope: str or int or list = None,
-        timeout: int = 10,
         num_of_attempts: int = 5,
-        driver=None,
-        loop=None,
     ):
         """
         :param login: user login
         :param password: user password
         :param app_id: application id. More details in `Application registration` block in `https://vk.com/dev/first_guide`
         :param scope: access rights. See `Access rights` block in `https://vk.com/dev/first_guide`
-        :param timeout: default time out for any request in current session
         :param num_of_attempts: number of authorization attempts
-        :param driver:
         """
 
         self.login = login
@@ -272,13 +126,7 @@ class AuthManager:
         self.app_id = app_id
         self.num_of_attempts = num_of_attempts
         self._access_token = None
-        self.driver = (
-            driver
-            if driver
-            else HttpDriver(
-                timeout, loop if loop else asyncio.get_event_loop()
-            )
-        )
+        self.session = aiohttp.ClientSession()
         if isinstance(scope, (str, int, type(None))):
             self.scope = scope
         elif isinstance(scope, list):
@@ -314,7 +162,7 @@ class AuthManager:
             if url.path == "/blank.html":
                 parsed_fragments = dict(parse_qsl(url.fragment))
                 self.access_token = parsed_fragments["access_token"]
-                await self.driver.close()
+                await self.session.close()
                 return None
         raise VkAuthError(
             "Something went wrong", "Exceeded the number of attempts to log in"
@@ -335,7 +183,9 @@ class AuthManager:
         if self.scope:
             params["scope"] = self.scope
 
-        status, response = await self.driver.get_text(self.AUTH_URL, params)
+        async with self.session.get(url=self.AUTH_URL, params=params) as resp:
+            response = await resp.text()
+            status = resp.status
 
         if status != 200:
             error_dict = JSON_LIBRARY.loads(response)
@@ -347,7 +197,11 @@ class AuthManager:
             )
         return response
 
-    async def _process_auth_form(self, html: str) -> typing.Tuple[str, str]:
+    async def _get_data_from_form(self, form_url: str, form_data: dict):
+        async with self.session.post(url=form_url, data=form_data) as resp:
+            return resp.real_url, await resp.text()
+
+    async def _process_auth_form(self, html: str) -> typing.Tuple[URL, str]:
         """
         Parsing data from authorization page and filling the form and submitting the form
 
@@ -373,10 +227,10 @@ class AuthManager:
             )
             form_url = "https://m.vk.com{}".format(form_url)
 
-        url, html = await self.driver.post_text(form_url, form_data)
+        url, html = await self._get_data_from_form(form_url, form_data)
         return url, html
 
-    async def _process_2auth_form(self, html: str) -> typing.Tuple[str, str]:
+    async def _process_2auth_form(self, html: str) -> typing.Tuple[URL, str]:
         """
         Parsing two-factor authorization page and filling the code
 
@@ -394,10 +248,10 @@ class AuthManager:
             raise VkAuthError("invalid_data", parser.message, form_url, form_data)
         form_data["code"] = await self.enter_confirmation_code()
 
-        url, html = await self.driver.post_text(form_url, form_data)
+        url, html = await self._get_data_from_form(form_url, form_data)
         return url, html
 
-    async def _process_access_form(self, html: str) -> typing.Tuple[str, str]:
+    async def _process_access_form(self, html: str) -> typing.Tuple[URL, str]:
         """
         Parsing page with access rights
 
@@ -411,7 +265,7 @@ class AuthManager:
         form_url = parser.url
         form_data = dict(parser.inputs)
 
-        url, html = await self.driver.post_text(form_url, form_data)
+        url, html = await self._get_data_from_form(form_url, form_data)
         return url, html
 
     async def enter_confirmation_code(self) -> str:
