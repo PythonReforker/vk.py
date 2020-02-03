@@ -637,12 +637,14 @@ class Messages(BaseMethod):
         sticker_id: int = None,
         group_id: int = None,
         keyboard: str = None,
+        template: dict = None,
         payload: str = None,
         dont_parse_links: bool = None,
         disable_mentions: bool = None,
     ):
         """
         Send a message.
+        :param template: Templates carousel
         :param user_id: User ID (by default — current user).
         :param random_id: Unique identifier to avoid resending the message.
         :param peer_id: Destination ID. "For user: 'User ID', e.g. '12345'. For chat: '2000000000' + 'chat_id', e.g. '2000000001'. For community: '- community ID', e.g. '-12345'. "

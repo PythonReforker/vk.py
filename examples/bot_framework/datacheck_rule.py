@@ -1,6 +1,6 @@
 from vk import VK
 from vk.utils import TaskManager
-from vk.bot_framework import Dispatcher, rules
+from vk.bot_framework import Dispatcher, get_group_id
 from vk.bot_framework import BaseMiddleware, SkipHandler
 from vk import types
 
@@ -10,17 +10,16 @@ logging.basicConfig(level="INFO")
 
 bot_token = "token"
 vk = VK(bot_token)
-gid = 123
 task_manager = TaskManager(vk.loop)
 api = vk.get_api()
 
-dp = Dispatcher(vk, gid)
+dp = Dispatcher(vk)
 
 
 class MyMiddleware(BaseMiddleware):
     async def pre_process_event(self, event, data: dict):
         print("Called before handlers!")
-        if event["type"] != "message_new":
+        if event.type != "message_new":
             raise SkipHandler
         data["my_message"] = "hello, handler!"
         return data
@@ -36,7 +35,7 @@ async def handle(message: types.Message, data: dict):
 
 
 async def run():
-    dp.run_polling()
+    dp.run_polling(await get_group_id(vk))
 
 
 if __name__ == "__main__":

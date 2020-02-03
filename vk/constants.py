@@ -64,6 +64,7 @@ def default_rules() -> dict:
         WithReplyMessage,
         WithFwdMessages,
         CountFwdMessages,
+        TextContainsMessage,
         Regex,
         VBML,
     )
@@ -82,6 +83,7 @@ def default_rules() -> dict:
         "with_reply_message": WithReplyMessage,
         "with_fwd_messages": WithFwdMessages,
         "count_fwd_messages": CountFwdMessages,
+        "text_contains": TextContainsMessage,
         "regex": Regex,
         "vbml": VBML,
     }
