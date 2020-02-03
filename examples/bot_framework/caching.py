@@ -2,7 +2,7 @@ import logging
 
 from vk import types
 from vk import VK
-from vk.bot_framework import Dispatcher
+from vk.bot_framework import Dispatcher, get_group_id
 from vk.bot_framework import Storage
 from vk.bot_framework.addons.caching import cached_handler
 from vk.bot_framework.storages import RedisStorage
@@ -12,11 +12,10 @@ logging.basicConfig(level="INFO")
 
 bot_token = "123"
 vk = VK(bot_token)
-gid = 123
 task_manager = TaskManager(vk.loop)
 api = vk.get_api()
 
-dp = Dispatcher(vk, gid)
+dp = Dispatcher(vk)
 redis_storage: RedisStorage = RedisStorage("redis://localhost", vk.loop)  # create redis
 storage = Storage()  # create base storage for place any
 
@@ -33,7 +32,7 @@ async def test(msg: types.Message, data):
 
 async def run():
     dp.storage.place("redis", redis_storage)  # best practice
-    dp.run_polling()
+    dp.run_polling(await get_group_id(vk))
 
 
 if __name__ == "__main__":

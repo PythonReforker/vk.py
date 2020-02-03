@@ -15,6 +15,7 @@ from vk.methods import Leads
 from vk.methods import Likes
 from vk.methods import Market
 from vk.methods import Messages
+from vk.methods import Status
 from vk.utils import ContextInstanceMixin
 
 if TYPE_CHECKING:
@@ -40,3 +41,4 @@ class API(ContextInstanceMixin):
         self.leads = Leads(vk, category="leads")
         self.likes = Likes(vk, category="likes")
         self.market = Market(vk, category="market")
+        self.status = Status(vk, category="status")

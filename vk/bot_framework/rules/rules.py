@@ -358,6 +358,21 @@ class CountFwdMessages(NamedRule):
         return result
 
 
+class TextContainsMessage(NamedRule):
+    key = "text_contains"
+    meta = {
+        "name": "TextContainsMessage",
+        "description": "A simple rule for checking contains word in message",
+        "deprecated": False,
+    }
+
+    def __init__(self, text: str):
+        self.text: str = text
+
+    async def check(self, message: types.Message, data: dict):
+        return self.text in message.text.split()
+
+
 class Regex(NamedRule):
     key = "regex"
     meta = {
