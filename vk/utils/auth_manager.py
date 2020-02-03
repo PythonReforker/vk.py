@@ -16,10 +16,10 @@ class AuthPageParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.inputs = []
-        self.url: str = ""
-        self.message: str = ""
-        self.recording: int = 0
-        self.captcha_url: str = ""
+        self.url = None
+        self.message = None
+        self.recording = None
+        self.captcha_url = None
 
     def handle_starttag(self, tag, attrs):
         if tag == "input":
@@ -52,9 +52,9 @@ class TwoFactorCodePageParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.inputs = []
-        self.url = ""
-        self.message = ""
-        self.recording = 0
+        self.url = None
+        self.message = None
+        self.recording = None
 
     def handle_starttag(self, tag, attrs):
         if tag == "input":
@@ -83,7 +83,7 @@ class AccessPageParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.inputs = []
-        self.url = ""
+        self.url = None
 
     def handle_starttag(self, tag, attrs):
         if tag == "input":
@@ -110,7 +110,7 @@ class AuthManager:
         login: str,
         password: str,
         app_id: int = 2685278,
-        scope: str or int or list = None,
+        scope: typing.Union[str, int, list] = None,
         num_of_attempts: int = 5,
     ):
         """
