@@ -1,10 +1,9 @@
 import asyncio
 from yarl import URL
 from urllib.parse import parse_qsl, urlencode, urljoin
-import json
+from vk.constants import JSON_LIBRARY as json
 from html.parser import HTMLParser
 import aiohttp
-
 try:
     import aiosocksy
     from aiosocksy.connector import ProxyConnector
