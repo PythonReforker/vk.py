@@ -30,11 +30,39 @@ Warning: this version really unstable and not recommended to use in production.
 
 ## Usage
 
-A simple example
+Simple example with AuthManager
+
 ```python
+import asyncio
+import logging
+
+from vk import VK
+from vk.utils.auth_manager import AuthManager
+
+logging.basicConfig(level="INFO")
+
+
+async def main():
+    session = AuthManager(login="login", password="password")
+    await session.authorize()
+    token = session.access_token
+    vk = VK(access_token=token).get_api()
+    print(await vk.status.get())
+
+
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
+
+```
+
+
+A simple example with token
+```python
+import logging
+
 from vk import VK
 from vk.utils.task_manager import TaskManager
-import logging
 
 logging.basicConfig(level="INFO")
 vk = VK(access_token="token")
