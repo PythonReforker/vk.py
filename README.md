@@ -19,8 +19,6 @@
 
 ## Install
 
-Install package from github (soon at PyPi):
-
 ```sh
 pip install https://github.com/kesha1225/vk.py/archive/master.zip --upgrade
 ```
