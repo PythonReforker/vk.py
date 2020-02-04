@@ -9,7 +9,7 @@ import aiohttp
 from yarl import URL
 
 from vk.exceptions import VkAuthError, VkTwoFactorCodeNeeded, VkCaptchaNeeded
-from vk.constants import JSON_LIBRARY
+from vk.constants import JSON_LIBRARY, API_VERSION
 
 
 class AuthPageParser(HTMLParser):
@@ -103,7 +103,7 @@ class AuthManager:
     """
 
     AUTH_URL = "https://oauth.vk.com/authorize"
-    API_VERSION = "5.103"
+    API_VERSION = API_VERSION
 
     def __init__(
         self,
