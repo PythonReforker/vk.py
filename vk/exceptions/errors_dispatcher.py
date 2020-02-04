@@ -29,6 +29,8 @@ if typing.TYPE_CHECKING:
 
 
 class APIErrorDispatcher:
+    DELAY = 0.34
+
     def __init__(self, vk: "VK"):
         """
 
@@ -41,11 +43,9 @@ class APIErrorDispatcher:
             APIErrorHandler(6, self._to_many_requests_handler)
         )  # standard to many request handler
 
-    async def _to_many_requests_handler(
-        self, error: typing.Dict
-    ) -> typing.Dict:
-        logger.debug("To many requests error handle..")
-        await asyncio.sleep(0.34)
+    def _repeat_request(
+        self, error: typing.Dict, additional={}
+    ) -> typing.Coroutine:
         params = {}
         method_name = None
         for param in error["request_params"]:
@@ -56,10 +56,17 @@ class APIErrorDispatcher:
                 continue
 
             params.update({key: value})
-
-        return await self.vk.api_request(
+        params.update(additional)
+        return self.vk.api_request(
             method_name=method_name, params=params
         )
+
+    async def _to_many_requests_handler(
+        self, error: typing.Dict
+    ) -> typing.Dict:
+        logger.debug("To many requests error handle..")
+        await asyncio.sleep(self.DELAY)
+        return await self._repeat_request(error)
 
     def error_handler(self, error_code: int):
         def decorator(coro: typing.Callable):
