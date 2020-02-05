@@ -1,12 +1,14 @@
 import asyncio
 import logging
 import typing
+from pydantic import BaseModel
 
 from vk import VK
 from vk.constants import API_VERSION
 from vk.constants import JSON_LIBRARY
 from vk.utils import mixins
 
+from functools import reduce
 from datetime import datetime
 from enum import IntEnum
 logger = logging.getLogger(__name__)
@@ -141,6 +143,9 @@ class VkEventType(IntEnum):
 class VkPlatform(IntEnum):
     """ Идентификаторы платформ """
 
+    #: Неопознанный объект
+    UNKNOWN = 0
+
     #: Мобильная версия сайта или неопознанное мобильное приложение
     MOBILE = 1
 
@@ -211,7 +216,10 @@ class VkMessageFlag(IntEnum):
     HIDDEN = 2**16
 
     #: Сообщение удалено для всех получателей.
-    DELETED_ALL = 2**17
+    DELETED_ALL = 2 ** 17
+
+    #: Входящее сообщение не доставлено.
+    NOT_DELIVERED = 2 ** 18
 
 
 class VkPeerFlag(IntEnum):
@@ -222,6 +230,21 @@ class VkPeerFlag(IntEnum):
 
     #: Неотвеченный диалог
     UNANSWERED = 2
+
+
+class VkChatSettings(IntEnum):
+    """Пункты настроек в чате"""
+    #: Могут приглашать только администраторы, иначе все участники
+    INVITE_PERMISSION = 1
+
+    #: Могут изменять закрепленное сообщение только администратор, иначе все участники
+    PIN_PERMISSION = 4
+
+    #: Могут редактировать заголовок только администратор, иначе все участники
+    EDIT_TITLE_PERMISSION = 8
+
+    #: Могут добавлять администраторов только администрация, иначе только создатель
+    ADD_ADMIN_PERMISSION = 16
 
 
 class VkChatEventType(IntEnum):
@@ -259,7 +282,7 @@ class VkChatEventType(IntEnum):
 
 
 MESSAGE_EXTRA_FIELDS = [
-    'peer_id', 'timestamp', 'text', 'extra_values', 'attachments', 'random_id'
+    'peer_id', 'timestamp', 'extra_values', 'text', 'attachments', 'random_id'
 ]
 MSGID = 'message_id'
 
@@ -293,183 +316,75 @@ EVENT_ATTRS_MAPPING = {
     VkEventType.USER_CALL: ['user_id', 'call_id'],
 
     VkEventType.MESSAGES_COUNTER_UPDATE: ['count'],
-    VkEventType.NOTIFICATION_SETTINGS_UPDATE: ['values']
+    VkEventType.NOTIFICATION_SETTINGS_UPDATE: ['sound', 'disabled_until']
 }
 
 
-def get_all_event_attrs():
-    keys = set()
-
-    for l in EVENT_ATTRS_MAPPING.values():
-        keys.update(l)
-
-    return tuple(keys)
+def map_list_to_dict(lst: list, map_rule: typing.List[str]) -> dict:
+    map_rule = map_rule[:len(lst)]
+    return reduce(lambda acc, x: {**acc, x: lst.pop(0)}, map_rule, dict())
 
 
-ALL_EVENT_ATTRS = get_all_event_attrs()
+class Event(BaseModel):
+    event_type: VkEventType
+    user_id: int = None
+    count: int = None
+    peer_id: int = None
+    timestamp: int = None
+    offline_status: VkOfflineType = None
+    messageflags: typing.Set[VkMessageFlag] = None
+    peerflags: typing.Set[VkPeerFlag] = None
+    chat_event_type: VkChatEventType = None
+    chat_settings: typing.Set[VkChatSettings] = None
+    platform: VkPlatform = None
+    text: str = None
+    extra_values: str = None
+    attachments: dict = None
+    random_id: int = None
+    message_id: int = None
+    sound: int = None
+    disabled_until: int = None
+    local_id: int = None
+    chat_id: int = None
 
-PARSE_PEER_ID_EVENTS = [
-    k for k, v in EVENT_ATTRS_MAPPING.items() if 'peer_id' in v
-]
-PARSE_MESSAGE_FLAGS_EVENTS = [
-    VkEventType.MESSAGE_FLAGS_REPLACE,
-    VkEventType.MESSAGE_NEW
-]
-
-
-class Event(object):
-    """ Событие, полученное от longpoll-сервера.
-
-    Имеет поля в соответствии с `документацией
-    <https://vk.com/dev/using_longpoll_2?f=3.%2BСтруктура%2Bсобытий>`_.
-
-    События `MESSAGE_NEW` и `MESSAGE_EDIT` имеют (среди прочих) такие поля:
-        - `text` - `экранированный <https://ru.wikipedia.org/wiki/Мнемоники_в_HTML>`_ текст
-        - `message` - оригинальный текст сообщения.
-
-    События с полем `timestamp` также дополнительно имеют поле `datetime`.
-    """
-
-    def __init__(self, raw):
-        self.raw = raw
-
-        self.from_user: bool = False
-        self.from_chat: bool = False
-        self.from_group: bool = False
-        self.from_me: bool = False
-        self.to_me: bool = False
-
-        self.attachments: dict = {}
-        self.message_data = None
-
-        self.message_id: int = None
-        self.timestamp: int = None
-        self.peer_id: int = None
-        self.flags = None
-        self.extra = None
-        self.extra_values: dict = {}
-        self.type_id = None
-
-        try:
-            self.type = VkEventType(self.raw[0])
-            self._list_to_attr(self.raw[1:], EVENT_ATTRS_MAPPING[self.type])
-        except ValueError:
-            self.type = self.raw[0]
-
-        if self.extra_values:
-            if isinstance(self.extra_values, str):
-                # print(self.raw)
+    @classmethod
+    def parse_list(cls, raw_list: list):
+        event_type = VkEventType(raw_list.pop(0))
+        map_rule = EVENT_ATTRS_MAPPING[event_type]
+        obj = map_list_to_dict(raw_list, map_rule)
+        if event_type in [VkEventType.USER_ONLINE, VkEventType.USER_OFFLINE]:
+            obj['user_id'] *= -1
+        if event_type == VkEventType.NOTIFICATION_SETTINGS_UPDATE:
+            obj = obj.pop('sound')
+        if "flags" in obj:
+            flags = obj.pop("flags")
+            if event_type == VkEventType.USER_OFFLINE:
+                obj["offline_status"] = VkOfflineType(flags)
+            elif event_type == VkEventType.PEER_FLAGS_REPLACE:
+                obj["peerflags"] = set(x for x in VkPeerFlag if flags & x)
             else:
-                self._dict_to_attr(self.extra_values)
-
-        if self.type in PARSE_PEER_ID_EVENTS:
-            self._parse_peer_id()
-
-        if self.type in PARSE_MESSAGE_FLAGS_EVENTS:
-            self._parse_message_flags()
-
-        if self.type is VkEventType.CHAT_UPDATE:
-            self._parse_chat_info()
-            try:
-                self.update_type = VkChatEventType(self.type_id)
-            except ValueError:
-                self.update_type = self.type_id
-
-        elif self.type is VkEventType.NOTIFICATION_SETTINGS_UPDATE:
-            self._dict_to_attr(self.values)
-            self._parse_peer_id()
-
-        elif self.type is VkEventType.PEER_FLAGS_REPLACE:
-            self._parse_peer_flags()
-
-        elif self.type in [VkEventType.MESSAGE_NEW, VkEventType.MESSAGE_EDIT]:
-            self._parse_message()
-
-        elif self.type in [VkEventType.USER_ONLINE, VkEventType.USER_OFFLINE]:
-            self.user_id = abs(self.user_id)
-            self._parse_online_status()
-
-        elif self.type is VkEventType.USER_RECORDING_VOICE:
-            if isinstance(self.user_id, list):
-                self.user_id = self.user_id[0]
-
-        if self.timestamp:
-            self.datetime = datetime.utcfromtimestamp(self.timestamp)
-
-    def _list_to_attr(self, raw, attrs):
-        for i in range(min(len(raw), len(attrs))):
-            self.__setattr__(attrs[i], raw[i])
-
-    def _dict_to_attr(self, values):
-        for k, v in values.items():
-            self.__setattr__(k, v)
-
-    def _parse_peer_id(self):
-        if self.peer_id < 0:  # Сообщение от/для группы
-            self.from_group = True
-            self.group_id = abs(self.peer_id)
-
-        elif self.peer_id > CHAT_START_ID:  # Сообщение из беседы
-            self.from_chat = True
-            self.chat_id = self.peer_id - CHAT_START_ID
-
-            if self.extra_values and 'from' in self.extra_values:
-                self.user_id = int(self.extra_values['from'])
-
-        else:  # Сообщение от/для пользователя
-            self.from_user = True
-            self.user_id = self.peer_id
-
-    def _parse_message_flags(self):
-        self.message_flags = set(
-            x for x in VkMessageFlag if self.flags & x
-        )
-
-    def _parse_peer_flags(self):
-        self.peer_flags = set(
-            x for x in VkPeerFlag if self.flags & x
-        )
-
-    def _parse_message(self):
-        if self.type is VkEventType.MESSAGE_NEW:
-            if self.flags & VkMessageFlag.OUTBOX:
-                self.from_me = True
-            else:
-                self.to_me = True
-
-        # ВК возвращает сообщения в html-escaped виде,
-        # при этом переводы строк закодированы как <br> и не экранированы
-
-        self.text = self.text.replace('<br>', '\n')
-        self.message = self.text \
-            .replace('&lt;', '<') \
-            .replace('&gt;', '>') \
-            .replace('&quot;', '"') \
-            .replace('&amp;', '&')
-
-    def _parse_online_status(self):
-        try:
-            if self.type is VkEventType.USER_ONLINE:
-                self.platform = VkPlatform(self.extra & 0xFF)
-
-            elif self.type is VkEventType.USER_OFFLINE:
-                self.offline_type = VkOfflineType(self.flags)
-
-        except ValueError:
-            pass
-
-    def _parse_chat_info(self):
-        if self.type_id == VkChatEventType.ADMIN_ADDED.value:
-            self.info = {'admin_id': self.info}
-
-        elif self.type_id == VkChatEventType.MESSAGE_PINNED.value:
-            self.info = {'conversation_message_id': self.info}
-
-        elif self.type_id in [VkChatEventType.USER_JOINED.value,
-                              VkChatEventType.USER_LEFT.value,
-                              VkChatEventType.USER_KICKED.value,
-                              VkChatEventType.ADMIN_REMOVED.value]:
-            self.info = {'user_id': self.info}
+                obj["messageflags"] = set(x for x in VkMessageFlag if flags & x)
+        if "mask" in obj:
+            mask = obj.pop("mask")
+            obj["messageflags"] = set(x for x in VkMessageFlag if mask & x)
+        if "extra" in obj:
+            obj["platform"] = VkPlatform(obj.pop("extra"))
+        if "type_id" in obj:
+            type_id = VkChatEventType(obj.pop("type_id"))
+            info = obj.pop("info")
+            obj["chat_event_type"] = type_id
+            if type_id == VkChatEventType.ADMIN_ADDED:
+                obj["admin_id"] = info
+            elif type_id == VkChatEventType.SETTINGS_CHANGED:
+                obj["chat_settings"] = set(x for x in VkChatSettings if info & x)
+            elif type_id == VkChatEventType.MESSAGE_PINNED:
+                obj["pinned_message_id"] = info
+            elif type_id in [VkChatEventType.USER_JOINED,
+                             VkChatEventType.USER_KICKED,
+                             VkChatEventType.USER_LEFT,
+                             VkChatEventType.ADMIN_REMOVED]:
+                obj["user_id"] = info
+        return cls(event_type=event_type, **obj)
 
 
 class UserLongPoll(mixins.ContextInstanceMixin):
@@ -524,7 +439,7 @@ class UserLongPoll(mixins.ContextInstanceMixin):
         :return:
         """
         async with self.vk.client.post(
-            f"https://{server}?act=a_check&key={key}&ts={ts}&wait=20"
+            f"https://{server}?act=a_check&key={key}&ts={ts}&wait=20&mode={sum(VkLongpollMode)}"
         ) as response:
             resp = await response.json(loads=JSON_LIBRARY.loads)
             logger.debug(f"Response from polling: {resp}")
@@ -572,7 +487,7 @@ class UserLongPoll(mixins.ContextInstanceMixin):
 
             return []
 
-    async def run(self) -> typing.AsyncGenerator[None, Event]:
+    async def run(self) -> typing.AsyncGenerator[None, dict]:
         """
 
         :return: last update coming from VK
@@ -586,4 +501,4 @@ class UserLongPoll(mixins.ContextInstanceMixin):
             events = await self.listen()
             while events:
                 event = events.pop()
-                yield Event(event)
+                yield Event.parse_list(event)
