@@ -21,7 +21,7 @@ class Kafka(BaseExtension):
         group_id: str,
         bootstrap_servers: str = "localhost"
     ):
-        if aiokafka:
+        if aiokafka is not None:
             self._vk = vk
             self.consumer = aiokafka.AIOKafkaConsumer(
                 *topics,
@@ -44,9 +44,9 @@ class Kafka(BaseExtension):
             async for msg in self.consumer:
                 events = JSON_LIBRARY.loads(msg.value.decode())
                 if isinstance(events, list):
-                    dp._process_events(events)
+                    await dp._process_events(events)
                 else:
-                    dp._process_events([events])
+                    await dp._process_events([events])
         finally:
             # Leave consumer group; perform autocommit if it is enabled.
             await self.consumer.stop()
