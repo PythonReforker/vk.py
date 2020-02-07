@@ -1,3 +1,4 @@
+yarl
 watchgod
 aiohttp
 pydantic

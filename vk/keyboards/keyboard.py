@@ -20,6 +20,7 @@ class ButtonColor(Enum):
 
 class ButtonType(Enum):
     TEXT = "text"
+    LINK = "open_link"
     LOCATION = "location"
     VKPAY = "vkpay"
     VKAPPS = "open_app"
@@ -117,6 +118,20 @@ class Keyboard:
 
         self._add_button(action)
 
+    def add_link_button(self, text: str, link: str, payload: dict = None):
+        payload = self.generate_payload(payload)
+
+        action = {
+            "action": {
+                "type": ButtonType.LINK.value,
+                "label": text,
+                "link": link,
+                "payload": payload,
+            }
+        }
+
+        self._add_button(action)
+
     def add_vkpay_button(self, hash: str, payload: dict = None):  # noqa
         """
         :param hash:
@@ -177,3 +192,39 @@ class Keyboard:
         keyboard = cls(one_time=True)  # noqa
         keyboard.keyboard["buttons"] = []
         return keyboard.get_keyboard()
+
+
+class Template:
+    def __init__(self, title, description, photo_id, buttons):
+        """
+        create template object
+        :param title:
+        :param description:
+        :param photo_id: have to have ratio 13/8 and png format
+        :param buttons:
+        """
+        self.title: str = title
+        self.description: str = description
+        self.photo_id: str = photo_id
+        self.buttons: typing.List[dict] = buttons
+
+    @classmethod
+    def generate_template(cls, *templates: "Template"):
+        """
+        templates have to contains identical Templates (same buttons value at least)
+        :param templates:
+        :return:
+        """
+        elements = []
+
+        for template in templates:
+            elements.append(
+                {
+                    "title": template.title,
+                    "description": template.description,
+                    "photo_id": template.photo_id,
+                    "buttons": template.buttons,
+                }
+            )
+
+        return JSON_LIBRARY.dumps({"type": "carousel", "elements": elements})

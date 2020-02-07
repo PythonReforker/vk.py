@@ -80,10 +80,12 @@ class Message(BaseModel):
         message: str,
         attachment: str = None,
         keyboard: dict = None,
+        template: dict = None,
         **kwargs,
     ):
         """
         Answer to message with reply.
+        :param template:
         :param message:
         :param attachment:
         :param keyboard:
@@ -101,6 +103,7 @@ class Message(BaseModel):
             attachment=attachment,
             reply_to=self.id,
             keyboard=keyboard,
+            template=template,
             random_id=0,
             **kwargs,
         )
@@ -110,10 +113,12 @@ class Message(BaseModel):
         message: str,
         attachment: str = None,
         keyboard: dict = None,
+        template: dict = None,
         **kwargs,
     ):
         """
         Answer to message without reply.
+        :param template:
         :param message:
         :param attachment:
         :param keyboard:
@@ -130,6 +135,7 @@ class Message(BaseModel):
             peer_id=self.peer_id,
             attachment=attachment,
             keyboard=keyboard,
+            template=template,
             random_id=0,
             **kwargs,
         )
@@ -139,22 +145,25 @@ class Message(BaseModel):
         message: str,
         attachment: str = None,
         keyboard: dict = None,
+        template: dict = None,
         **kwargs,
     ):
-        from vk.bot_framework.addons.caching import CachedResponse
-
         """
         Answer to message without reply.
+        :param template:
         :param message:
         :param attachment:
         :param keyboard:
         :return: cached object
         """
+        from vk.bot_framework.addons.caching import CachedResponse
+
         await self.api.messages.send(
             message=message,
             peer_id=self.peer_id,
             attachment=attachment,
             keyboard=keyboard,
+            template=template,
             random_id=0,
             **kwargs,
         )
@@ -164,6 +173,7 @@ class Message(BaseModel):
                 "message": message,
                 "attachment": attachment,
                 "keyboard": keyboard,
+                "template": template,
                 "random_id": 0,
                 **kwargs,
             },

@@ -1,8 +1,11 @@
+import typing
+
 from vk import VK
 from vk.utils import TaskManager
-from vk.bot_framework import Dispatcher, rules
+from vk.bot_framework import Dispatcher, rules, get_group_id
 from vk.bot_framework import BaseRule, BaseMiddleware
 from vk import types
+from vk.types.events.community.event import BaseEvent, MessageNew
 
 import logging
 
@@ -10,11 +13,10 @@ logging.basicConfig(level="INFO")
 
 bot_token = "token"
 vk = VK(bot_token)
-gid = 123
 task_manager = TaskManager(vk.loop)
 api = vk.get_api()
 
-dp = Dispatcher(vk, gid)
+dp = Dispatcher(vk)
 
 
 USERS = {}  # schema - id: status
@@ -25,15 +27,13 @@ class RegistrationMiddleware(BaseMiddleware):
     Register users in bot.
     """
 
-    async def pre_process_event(self, event, data: dict):
-        if event["type"] == "message_new":
-            from_id = event["object"]["from_id"]
+    async def pre_process_event(self, event: typing.Type[BaseEvent], data: dict):
+        if event.type == "message_new":
+            event: MessageNew
+            from_id = event.object.message.from_id
             if from_id not in USERS:
                 USERS[from_id] = "user"
         return data
-
-    async def post_process_event(self):
-        pass
 
 
 class IsAdmin(BaseRule):
@@ -73,7 +73,7 @@ async def get_admin_rights(message: types.Message, data: dict):
 
 
 async def run():
-    dp.run_polling()
+    dp.run_polling(await get_group_id(vk))
 
 
 if __name__ == "__main__":

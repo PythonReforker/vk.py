@@ -13,5 +13,6 @@ from .groups import Groups
 from .leads import Leads
 from .likes import Likes
 from .market import Market
+from .status import Status
 
 from .api import API

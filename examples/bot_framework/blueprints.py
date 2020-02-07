@@ -2,7 +2,7 @@ import logging
 
 from vk import types
 from vk import VK
-from vk.bot_framework import Dispatcher
+from vk.bot_framework import Dispatcher, get_group_id
 from vk.bot_framework.dispatcher import Blueprint
 from vk.types import BotEvent
 from vk.utils import TaskManager
@@ -11,10 +11,9 @@ logging.basicConfig(level="DEBUG")
 
 bot_token = "token"
 vk = VK(bot_token)
-gid = 123
 task_manager = TaskManager(vk.loop)
 
-dp = Dispatcher(vk, gid)
+dp = Dispatcher(vk)
 
 bp = Blueprint()
 
@@ -39,7 +38,7 @@ async def handler_reply_new(event, data: dict):
 async def run():
     dp.setup_blueprint(bp)
     dp.setup_blueprint(other_bp)
-    dp.run_polling()
+    dp.run_polling(await get_group_id(vk))
 
 
 if __name__ == "__main__":
