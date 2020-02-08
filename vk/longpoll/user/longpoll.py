@@ -109,6 +109,9 @@ class VkEventType(IntEnum):
     #: идентификаторами вплоть до $local_id.
     PEER_RESTORE_ALL = 14
 
+    #: Сообщение из кеша
+    MESSAGE_FROM_CACHE = 19
+
     #: Один из параметров (состав, тема) беседы $chat_id были изменены.
     #: $self — 1 или 0 (вызваны ли изменения самим пользователем).
     CHAT_EDIT = 51
@@ -124,6 +127,9 @@ class VkEventType(IntEnum):
     #: Пользователь $user_id набирает текст в беседе $chat_id.
     USER_TYPING_IN_CHAT = 62
 
+    #: Статус набора сообщения
+    USER_TYPING_STATUS = 63
+
     #: Пользователь $user_id записывает голосовое сообщение в диалоге/беседе $peer_id
     USER_RECORDING_VOICE = 64
 
@@ -138,6 +144,9 @@ class VkEventType(IntEnum):
     #: $sound — 1/0, включены/выключены звуковые оповещения,
     #: $disabled_until — выключение оповещений на необходимый срок.
     NOTIFICATION_SETTINGS_UPDATE = 114
+
+    # TODO
+    CALL = 115
 
 
 class VkPlatform(IntEnum):
@@ -297,7 +306,7 @@ class VkChatEventType(IntEnum):
 
 
 MESSAGE_EXTRA_FIELDS = [
-    'peer_id', 'timestamp', 'title', 'text', 'attachments', 'random_id'
+    'peer_id', 'timestamp', 'text', 'extra_values', 'attachments', 'random_id', 'conversation_msg_id', 'edit_time'
 ]
 MSGID = 'message_id'
 
@@ -307,9 +316,10 @@ EVENT_ATTRS_MAPPING = {
     VkEventType.MESSAGE_FLAGS_RESET: [MSGID, 'mask'] + MESSAGE_EXTRA_FIELDS,
     VkEventType.MESSAGE_NEW: [MSGID, 'flags'] + MESSAGE_EXTRA_FIELDS,
     VkEventType.MESSAGE_EDIT: [MSGID, 'mask'] + MESSAGE_EXTRA_FIELDS,
+    VkEventType.MESSAGE_FROM_CACHE: [MSGID],
 
-    VkEventType.READ_ALL_INCOMING_MESSAGES: ['peer_id', 'local_id'],
-    VkEventType.READ_ALL_OUTGOING_MESSAGES: ['peer_id', 'local_id'],
+    VkEventType.READ_ALL_INCOMING_MESSAGES: ['peer_id', 'local_id', 'count'],
+    VkEventType.READ_ALL_OUTGOING_MESSAGES: ['peer_id', 'local_id', 'count'],
 
     VkEventType.USER_ONLINE: ['user_id', 'extra', 'timestamp', "app_id"],
     VkEventType.USER_OFFLINE: ['user_id', 'flags', 'timestamp', 'app_id'],
@@ -326,11 +336,12 @@ EVENT_ATTRS_MAPPING = {
 
     VkEventType.USER_TYPING: ['user_id', 'flags'],
     VkEventType.USER_TYPING_IN_CHAT: ['user_id', 'chat_id'],
+    VkEventType.USER_TYPING_STATUS: ['peer_id', 'from_ids', 'from_ids_count', 'timestamp'],
     VkEventType.USER_RECORDING_VOICE: ['peer_id', 'user_id', 'flags', 'timestamp'],
 
     VkEventType.USER_CALL: ['user_id', 'call_id'],
 
-    VkEventType.MESSAGES_COUNTER_UPDATE: ['count'],
+    VkEventType.MESSAGES_COUNTER_UPDATE: ['count', 'count_with_notifications'],
     VkEventType.NOTIFICATION_SETTINGS_UPDATE: ['sound', 'disabled_until']
 }
 
@@ -353,7 +364,6 @@ class Event(BaseModel):
     chat_settings: VkChatSettings = None
     platform: VkPlatform = None
     text: str = None
-    title: str = None
     attachments: dict = None
     random_id: int = None
     message_id: int = None
@@ -362,6 +372,11 @@ class Event(BaseModel):
     local_id: int = None
     chat_id: int = None
     app_id: int = None
+    extra_values: dict = None
+    conversation_msg_id: int = None
+    edit_time: int = None
+    from_ids_count: int = None
+    from_ids: typing.List[int] = None
 
     @classmethod
     def parse_list(cls, raw_list: list):
@@ -400,6 +415,19 @@ class Event(BaseModel):
                              VkChatEventType.USER_LEFT,
                              VkChatEventType.ADMIN_REMOVED]:
                 obj["user_id"] = info
+
+        # Logging events
+        if logger.level == logging.INFO:
+            if event_type not in [VkEventType.USER_OFFLINE, VkEventType.USER_ONLINE]:
+                logger.log(logging.INFO, f"{repr(event_type)}:")
+                for k, v in obj.items():
+                    logger.log(logging.INFO, f"\t{k} = {repr(v)}")
+                if len(raw_list):
+                    logger.log(logging.INFO, "Raw Values:")
+                    for k in raw_list:
+                        logger.log(logging.INFO, f"\t{repr(k)}")
+                logger.log(logging.INFO, "\n")
+
         return cls(event_type=event_type, **obj)
 
 
@@ -455,7 +483,7 @@ class UserLongPoll(mixins.ContextInstanceMixin):
         :return:
         """
         async with self.vk.client.post(
-            f"https://{server}?act=a_check&key={key}&ts={ts}&wait=20&mode={sum(VkLongpollMode)}"
+            f"https://{server}?act=a_check&key={key}&ts={ts}&wait=20&mode={sum(VkLongpollMode)}&version=10"
         ) as response:
             resp = await response.json(loads=JSON_LIBRARY.loads)
             logger.debug(f"Response from polling: {resp}")
