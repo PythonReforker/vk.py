@@ -43,11 +43,11 @@ class VK(ContextInstanceMixin):
     """
 
     def __init__(
-        self,
-        access_token: str,
-        *,
-        loop: AbstractEventLoop = None,
-        client: ClientSession = None,
+            self,
+            access_token: str,
+            *,
+            loop: AbstractEventLoop = None,
+            client: ClientSession = None,
     ):
 
         """
@@ -69,12 +69,12 @@ class VK(ContextInstanceMixin):
         self.__api_object = self.__get_api()
 
     async def _api_request(
-        self,
-        method_name: typing.AnyStr,
-        override_token: bool = True,
-        params: dict = None,
-        _raw_mode: bool = False,
-        ignore_errors: bool = False,
+            self,
+            method_name: typing.AnyStr,
+            override_token: bool = True,
+            params: dict = None,
+            _raw_mode: bool = False,
+            ignore_errors: bool = False,
     ) -> dict:
         """
 
@@ -96,7 +96,7 @@ class VK(ContextInstanceMixin):
         params.update({"v": API_VERSION})
         logger.debug(f"Params to send: {params}")
         async with self.client.post(
-            API_LINK + method_name, data=params
+                API_LINK + method_name, data=params
         ) as response:
             try:
                 json: typing.Dict[str, typing.Any] = await response.json(
@@ -111,7 +111,7 @@ class VK(ContextInstanceMixin):
             )
             if "error" in json:
                 return await self.error_dispatcher.error_handle(
-                    json, ignore_errors
+                    json, ignore_errors, params
                 )
 
             if _raw_mode:
@@ -120,11 +120,11 @@ class VK(ContextInstanceMixin):
             return json["response"]
 
     async def api_request(
-        self,
-        method_name: str,
-        params: dict = None,
-        override_token: bool = True,
-        ignore_errors: bool = False,
+            self,
+            method_name: str,
+            params: dict = None,
+            override_token: bool = True,
+            ignore_errors: bool = False,
     ) -> dict:
         """
         Send api request to the VK server

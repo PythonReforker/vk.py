@@ -12,14 +12,15 @@ class APIErrorHandler:
         self.handler: typing.Callable = handler
         self.error_code: int = error_code
 
-    async def execute(self, error: typing.Dict):
+    async def execute(self, error: typing.Dict, request_params: typing.Dict):
         """
         Execute error handler
+        :param request_params:
         :param error:
         :return:
         """
         try:
-            return await self.handler(error)
+            return await self.handler(error, request_params)
         except Exception:  # noqa
             logging.exception("Exception occured in error handler...: ")
 
@@ -44,25 +45,22 @@ class APIErrorDispatcher:
         )  # standard to many request handler
 
     def _repeat_request(
-        self, error: typing.Dict, additional={}
+            self, error: typing.Dict, additional: typing.Dict = None
     ) -> typing.Coroutine:
-        params = {}
+        additional = {} or additional
         method_name = None
         for param in error["request_params"]:
             key = param["key"]
             value = param["value"]
             if key == "method":
                 method_name = value
-                continue
-
-            params.update({key: value})
-        params.update(additional)
+                break
         return self.vk.api_request(
-            method_name=method_name, params=params
+            method_name=method_name, params=additional
         )
 
     async def _to_many_requests_handler(
-        self, error: typing.Dict
+            self, error: typing.Dict
     ) -> typing.Dict:
         logger.debug("To many requests error handle..")
         await asyncio.sleep(self.DELAY)
@@ -79,7 +77,7 @@ class APIErrorDispatcher:
         self._handlers.append(handler)
 
     async def error_handle(
-        self, json: typing.Dict, ignore_errors: bool = False
+            self, json: typing.Dict, ignore_errors: bool = False, request_params: dict = None
     ) -> typing.Union[typing.Dict, typing.NoReturn]:
         logger.debug("Some error from API handle..")
         error: dict = json["error"]
@@ -89,7 +87,7 @@ class APIErrorDispatcher:
         if not ignore_errors:
             for handler in self._handlers:
                 if handler.error_code == code:
-                    return await handler.execute(error)
+                    return await handler.execute(error, request_params)
 
         msg: str = error["error_msg"]
         raise APIException(code, msg)
