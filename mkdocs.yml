@@ -12,5 +12,5 @@ markdown_extensions:
   - admonition
   - codehilite
 
-repo_name: 'prostomarkeloff/vk.py'
-repo_url: 'https://github.com/prostomarkeloff/vk.py'
+repo_name: 'PythonReforker/vk.py'
+repo_url: 'https://github.com/PythonReforker/vk.py'

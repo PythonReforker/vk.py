@@ -2,11 +2,11 @@
 name = "vk.py"
 version = "1.0.0a6"
 description = "Extremely-fast, easy-to-use, ready for production. The asyncio based library for Python and Humans written to be efficient and reliable."
-authors = ["prostomarkeloff"]
+authors = ["PythonReforker"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/prostomarkeloff/vk.py"
-repository = "https://github.com/prostomarkeloff/vk.py"
+homepage = "https://github.com/PythonReforker/vk.py"
+repository = "https://github.com/PythonReforker/vk.py"
 keywords = ["vk-api", "asyncio", "vkbot", "vk", "vk-bot"]
 classifiers = [
     "Framework :: AsyncIO",

@@ -7,20 +7,20 @@
 
 # Welcome to vk.py 👋
 
-![Version](https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/kesha1225/vk.py/blob/master/LICENSE)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/kesha1225/vk.py?utm_source=github.com&utm_medium=referral&utm_content=prostomarkeloff/vk.py&utm_campaign=Badge_Grade_Dashboard)
+![Version](https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/PythonReforker1225/vk.py/blob/master/LICENSE)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/PythonReforker1225/vk.py?utm_source=github.com&utm_medium=referral&utm_content=PythonReforker/vk.py&utm_campaign=Badge_Grade_Dashboard)
 
 > Extremely-fast, easy-to-use, ready for production. The asyncio based library for Python and Humans written to be efficient and reliable.
 
 
 
-### 🏠 [Homepage](github.com/kesha1225/vk.py)
+### 🏠 [Homepage](github.com/PythonReforker1225/vk.py)
 
 
 ## Install
 
 ```sh
-pip install https://github.com/kesha1225/vk.py/archive/master.zip --upgrade
+pip install https://github.com/PythonReforker1225/vk.py/archive/master.zip --upgrade
 ```
 
 Warning: this version really unstable and not recommended to use in production.
@@ -108,7 +108,7 @@ And many other libraries...
 
 This is only bot library? - No, this library could be used for acessing userapi or botapi without any troubles.
 
-Where i can find the docs? - [Check it](https://kesha1225.github.io/vk.py).
+Where i can find the docs? - [Check it](https://PythonReforker1225.github.io/vk.py).
 
 How to use it? - You may check docs or see our [examples](./examples).
 
@@ -118,14 +118,14 @@ When `1.0.0` will be released? - We don't know. We hope that it's moment will co
 
 ## Author
 
-👤 **prostomarkeloff**
+👤 **PythonReforker**
 
-* Github: [@prostomarkeloff](https://github.com/prostomarkeloff)
+* Github: [@PythonReforker](https://github.com/PythonReforker)
 
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/prostomarkeloff/vk.py/issues).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/PythonReforker/vk.py/issues).
 Also you can check your [contributors guide](./CONTRIBUTING.md).
 
 [Our contributors](./CONTRIBUTORS.txt).
@@ -136,6 +136,6 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2019 [prostomarkeloff](https://github.com/prostomarkeloff).<br />
-This project is [MIT](https://github.com/kesha1225/vk.py/blob/master/LICENSE) licensed.
+Copyright © 2019 [PythonReforker](https://github.com/PythonReforker).<br />
+This project is [MIT](https://github.com/PythonReforker1225/vk.py/blob/master/LICENSE) licensed.
 
