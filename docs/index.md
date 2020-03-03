@@ -7,20 +7,20 @@
 
 # Welcome to vk.py 👋
 
-![Version](https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/PythonReforker1225/vk.py/blob/master/LICENSE)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/PythonReforker1225/vk.py?utm_source=github.com&utm_medium=referral&utm_content=PythonReforker/vk.py&utm_campaign=Badge_Grade_Dashboard)
+![Version](https://img.shields.io/badge/version-0.6.0-blue.svg?cacheSeconds=2592000) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ](https://github.com/PythonReforker/vk.py/blob/master/LICENSE)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cac2f27aab0a41f993660a525c054bb5)](https://app.codacy.com/app/PythonReforker/vk.py?utm_source=github.com&utm_medium=referral&utm_content=PythonReforker/vk.py&utm_campaign=Badge_Grade_Dashboard)
 
 > Extremely-fast, easy-to-use, ready for production. The asyncio based library for Python and Humans written to be efficient and reliable.
 
 
 
-### 🏠 [Homepage](github.com/PythonReforker1225/vk.py)
+### 🏠 [Homepage](github.com/PythonReforker/vk.py)
 
 
 ## Install
 
 ```sh
-pip install https://github.com/PythonReforker1225/vk.py/archive/master.zip --upgrade
+pip install https://github.com/PythonReforker/vk.py/archive/master.zip --upgrade
 ```
 
 Warning: this version really unstable and not recommended to use in production.
@@ -108,7 +108,7 @@ And many other libraries...
 
 This is only bot library? - No, this library could be used for acessing userapi or botapi without any troubles.
 
-Where i can find the docs? - [Check it](https://PythonReforker1225.github.io/vk.py).
+Where i can find the docs? - [Check it](https://PythonReforker.github.io/vk.py).
 
 How to use it? - You may check docs or see our [examples](./examples).
 
@@ -137,5 +137,5 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2019 [PythonReforker](https://github.com/PythonReforker).<br />
-This project is [MIT](https://github.com/PythonReforker1225/vk.py/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/PythonReforker/vk.py/blob/master/LICENSE) licensed.
 
