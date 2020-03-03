@@ -126,5 +126,5 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2019 [PythonReforker](https://github.com/PythonReforker).<br />
+Copyright © 2020 [PythonReforker](https://github.com/PythonReforker).<br />
 This project is [MIT](https://github.com/PythonReforker/vk.py/blob/master/LICENSE) licensed.
