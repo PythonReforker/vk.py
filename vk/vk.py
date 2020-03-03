@@ -17,7 +17,6 @@ from aiohttp.client_exceptions import ClientError
 from vk.constants import API_LINK
 from vk.constants import API_VERSION
 from vk.constants import JSON_LIBRARY
-from vk.exceptions import APIErrorDispatcher
 from vk.methods import API
 from vk.utils import ContextInstanceMixin
 
@@ -57,6 +56,7 @@ class VK(ContextInstanceMixin):
         :param ClientSession client: aiohttp client session.
         :param change_vk_context_object: change context of VK object.
         """
+        from vk.exceptions import APIErrorDispatcher
         self.access_token: str = access_token
         self.loop: asyncio.AbstractEventLoop = loop if loop is not None else asyncio.get_event_loop()
         self.client: ClientSession = (
@@ -111,7 +111,7 @@ class VK(ContextInstanceMixin):
             )
             if "error" in json:
                 return await self.error_dispatcher.error_handle(
-                    json, ignore_errors, params
+                    json, ignore_errors, method_name, params
                 )
 
             if _raw_mode:
